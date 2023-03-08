@@ -33,11 +33,6 @@
 </head>
 
 <body style="background-color: rgb(181, 228, 255);">
-  <script>$(document).ready(function(){
-    console.log("Loaded.")
-  })
-
-  </script>
   <script type="text/javascript">
     function testy(){
         alert("hi")
@@ -53,7 +48,7 @@
     <option value="Hard">Hard</option>
   </select>
 </form>
-<button class="button3" id="startgame" onclick="console.log('Game Started.')">START GAME</button>
+<button class="button3" id="startgame">START GAME</button>
 </div>
 
 
@@ -215,9 +210,7 @@ function loseheart(){
   else{
     lives--
     document.getElementById("playerlives").textContent = "💔💔💔";
-    lost()}
-  console.log("lives: " + lives)
-}
+    lost()}}
 
 function playstartsfx(){
   //startsfx.play()
@@ -228,7 +221,6 @@ function playrightsfx(){
 
 function playscoresfx(){
   var ended = document.getElementById("scoremp3").ended;
-  console.log(ended)
   var scoresfx = document.getElementById("scoremp3");
   var scoresfx2 = document.getElementById("score2mp3");
   if(ended=="true"){
@@ -249,12 +241,10 @@ function playloseheartsfx(){
   loseheartsfx.play()}
 
 function disableb(){
-  $(".button1, .button2").prop('disabled', true);
-  console.log('DISABLED')}
+  $(".button1, .button2").prop('disabled', true);}
 
 function enableb(){
-  $(".button1, button2").prop('disabled', false);
-  console.log('ENABLED')}
+  $(".button1, button2").prop('disabled', false);}
 
 function changedb(x){
   document.getElementById(x).setAttribute("class", "button2");
@@ -285,22 +275,17 @@ function ogbar(){
 
   function start(a){
     b = rng(0, a)
-    console.log(b)
     c = "b"+b
-    console.log(c)
     setTimeout(changedb, 1000, c)
     right.push(c)
-    console.log(right)
     setTimeout(originalb, 2000, c)}
 
   function rngs(n){
     disableb()
     for (let i = 0; i<n; i++){
-      setTimeout(start, 2000*i, diff)
-      console.log('Try no.' + (1 + i))}
+      setTimeout(start, 2000*i, diff)}
     setTimeout(enableb, 2050*n)
     wait = ((2050*n)/100)
-    console.log(wait)
     prog()
     function prog() {
     const xx = document.getElementById("bar");   
@@ -332,8 +317,7 @@ function ogbar(){
     won()
     right.shift()
     disableb()
-    setTimeout(rngs, 2500, level)
-    console.log("goal: "+goal)}}
+    setTimeout(rngs, 2500, level)}}
 
   function begin(){
     document.getElementById("playerscore").textContent = "Score: " + score + " | Level: " + level;
@@ -375,8 +359,7 @@ $(document).ready(function(){
         break;}})})
 
       function goals(){
-        goal = (level/2)*(level+1)
-        console.log(goal)}
+        goal = (level/2)*(level+1)}
 
 $(document).ready(function(){$("#b10, #b11, #b12, #b13, #b14, #b15, #b16, #b17, #b18, #b19, #b20, #b21, #b22, #b23, #b24, #b25").hide()})
 
@@ -395,12 +378,10 @@ $(document).ready(function(){$("#b10, #b11, #b12, #b13, #b14, #b15, #b16, #b17, 
         $("#b10, #b11, #b12, #b13, #b14, #b15, #b16").show()
         $("#b17, #b18, #b19, #b20, #b21, #b22, #b23, #b24, #b25").show()
         break;}
-    console.log("diff is "+setdiff)
     rngs(level)
     $("#difficulty").prop('disabled', true);
     $(this).hide()
-    begin()
-    console.log("goal: "+goal)})
+    begin()})
 
 let right = []
 let goal = 0
@@ -417,29 +398,20 @@ var loseheartsfx = document.getElementById("loseheartmp3");
 
 
 
-console.log(right)
-
-
   $(document).ready(function(){
     $(".button1, .button2").on("click", function(){
 
     if(right[0] == (this.id)){
       goals()
-      console.log('win')
       right.shift()
-      console.log(right)
       scored()
-      console.log("goal: "+goal)
       checkgoal()
       correct()
       setTimeout(ogbar, 220)}
       
 
       else{
-        console.log('lose')
         loseheart()
-        console.log("goal: "+goal)
-        console.log(right)
         incorrect()
         setTimeout(ogbar, 220)}})})
 
@@ -493,7 +465,7 @@ console.log(right)
   <br>
   
   <button  id="reset" onclick="location.reload()">RESET</button>
-  <button onclick="console.log(xy)">TEST</button>
+  <button>TEST</button>
 
 <div id="progress">
   <div id="bar"></div>
