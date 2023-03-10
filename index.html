@@ -161,15 +161,17 @@ document.querySelector('meta[name="viewport"]').setAttribute('content', 'height=
       border-width: 1px;
       position: relative;}
 
-    #playerlives{
-      background-color: white;
-      font-size: 50px;
-      width: 100%;
-      position: top;
-      text-align: center;
-      display: inline-block;}
+  #playerlives{
+    background-color: white;
+    font-size: 50px;
+    width: 100%;
+    position: top;
+    text-align: center;
+    display: inline-block;}
 
-
+  #gamesound{
+    width: 18%;
+  }
   </style>
 <h id="playerlives">❤️❤️❤️</h>
 <audio id="startmp3">
@@ -219,7 +221,8 @@ function loseheart(){
     lost()}}
 
 function playstartsfx(){
-  //startsfx.play()
+  startsfx.volume = sound
+  startsfx.play()
 }
 function flip(){
     console.log(onetwo)
@@ -229,24 +232,30 @@ function flip(){
         onetwo--}}
 
 function playrightsfx(){
+  rightsfx.volume = sound
   rightsfx.play()}
 
 function playscoresfx(){
+  
   if(onetwo==2){
+    scoresfx.volume = sound
     scoresfx.play()
   }
   else{
-    
+    scoresfx2.volume = sound
     scoresfx2.play()
   }}
 
 function playwinsfx(){
+  winsfx.volume = sound
   winsfx.play()}
 
 function playlosesfx(){
+  losesfx.volume = sound
   losesfx.play()}
 
 function playloseheartsfx(){
+  loseheartsfx.volume = sound
   loseheartsfx.play()}
 
 function disableb(){
@@ -400,6 +409,7 @@ let setdiff = null
 let diff = null
 let lives = 3
 let onetwo = 2
+
 var rightsfx = document.getElementById("rightmp3");
 var scoresfx = document.getElementById("scoremp3");
 var scoresfx2 = document.getElementById("score2mp3");
@@ -408,7 +418,11 @@ var winsfx = document.getElementById("winmp3");
 var losesfx = document.getElementById("losemp3");
 var loseheartsfx = document.getElementById("loseheartmp3");
 
-
+$(document).ready(function(){
+  $("#gamesound").change(function(){
+  sound = document.getElementById("gamesound").value/100
+  console.log(sound)
+  })})
 
   $(document).ready(function(){
     $(".button1, .button2").on("click", function(){
@@ -474,10 +488,12 @@ var loseheartsfx = document.getElementById("loseheartmp3");
   </div>
 
   <br>
-  <br>
-  
+  <div>
+  <i class="fa fa-headphones"></i>
+  <input width="50%" id="gamesound" type="range" min="0" max="100" value="50">
+  </div>
   <button  id="reset" onclick="location.reload()">RESET</button>
-  <button onclick="playlosesfx(), playrightsfx()">TEST</button>
+  <button onclick="console.log()">TEST</button>
 
 <div id="progress">
   <div id="bar"></div>
