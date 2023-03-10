@@ -181,7 +181,7 @@ document.querySelector('meta[name="viewport"]').setAttribute('content', 'height=
 </audio>
 
 <audio id="score2mp3">
-  <source src="Audio/score.mp3">
+  <source src="Audio/score.wav">
 </audio>
 
 <audio id="winmp3">
@@ -201,6 +201,7 @@ document.querySelector('meta[name="viewport"]').setAttribute('content', 'height=
 </audio>
 
 <link id="textfile" type="text/txt" href="test.txt">
+
 <script>
 
 function loseheart(){
@@ -220,20 +221,23 @@ function loseheart(){
 function playstartsfx(){
   //startsfx.play()
 }
+function flip(){
+    console.log(onetwo)
+    if(onetwo<2){
+        onetwo++}
+      else{
+        onetwo--}}
 
 function playrightsfx(){
   rightsfx.play()}
 
 function playscoresfx(){
-  var ended = document.getElementById("scoremp3").ended;
-  var scoresfx = document.getElementById("scoremp3");
-  var scoresfx2 = document.getElementById("score2mp3");
-  if(ended=="true"){
-    scoresfx2.play()
+  if(onetwo==2){
+    scoresfx.play()
   }
   else{
     
-    scoresfx.play()
+    scoresfx2.play()
   }}
 
 function playwinsfx(){
@@ -395,7 +399,10 @@ let score = 0
 let setdiff = null
 let diff = null
 let lives = 3
+let onetwo = 2
 var rightsfx = document.getElementById("rightmp3");
+var scoresfx = document.getElementById("scoremp3");
+var scoresfx2 = document.getElementById("score2mp3");
 var startsfx = document.getElementById("startmp3");
 var winsfx = document.getElementById("winmp3");
 var losesfx = document.getElementById("losemp3");
@@ -405,7 +412,7 @@ var loseheartsfx = document.getElementById("loseheartmp3");
 
   $(document).ready(function(){
     $(".button1, .button2").on("click", function(){
-
+    flip()
     if(right[0] == (this.id)){
       goals()
       right.shift()
@@ -470,7 +477,7 @@ var loseheartsfx = document.getElementById("loseheartmp3");
   <br>
   
   <button  id="reset" onclick="location.reload()">RESET</button>
-  <button>TEST</button>
+  <button onclick="playlosesfx(), playrightsfx()">TEST</button>
 
 <div id="progress">
   <div id="bar"></div>
