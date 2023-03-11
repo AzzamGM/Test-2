@@ -262,7 +262,34 @@
       border-style: solid;
       border-width: 1px;
       position: relative;}
+  
+  #gamesound{
+    width: 18%;}
 </style>
+
+<audio id="scoremp3">
+  <source src="Audio/score.mp3">
+</audio>
+
+<audio id="score2mp3">
+  <source src="Audio/score.wav">
+</audio>
+
+<audio id="winmp3">
+  <source src="Audio/won.mp3">
+</audio>
+
+<audio id="losemp3">
+  <source src="Audio/lose.mp3 ">
+</audio>
+
+<audio id="loseheartmp3">
+  <source src="Audio/loseheart.mp3 ">
+</audio>
+
+<audio id="rightmp3">
+  <source src="Audio/right.mp3 ">
+</audio>
 
 
 <div align="center">
@@ -270,7 +297,7 @@
   <button class="startbutton" onclick="disablebb()">TEST</button>
 </div>
 <div align="center">
-  <h2 class="scoreboard" id="clickcounter">Clicks: 0!</h2>
+  <h2 class="scoreboard" id="clickcounter">WAITING FOR GAME TO START...</h2>
   </div>
 
 <div align="center" background-color="lightblue">
@@ -297,11 +324,24 @@
     <button class="coveredbutton" id="bb18"></button>
     <button class="coveredbutton" id="bb19"></button>
     <button class="coveredbutton" id="bb20"></button>
+    <br>
+    <br>
+    <i class="fa fa-headphones"></i>
+    <input width="50%" id="gamesound" type="range" min="0" max="100" value="50">
+
   </div>
 <script>
-
+ var sound = 0.5
+  var rightsfx = document.getElementById("rightmp3");
+  var scoresfx = document.getElementById("scoremp3");
+  var rightsfx2 = document.getElementById("rightsfxmp3");
+  var startsfx = document.getElementById("startmp3");
+  var winsfx = document.getElementById("winmp3");
+  var losesfx = document.getElementById("losemp3");
+  var loseheartsfx = document.getElementById("loseheartmp3");
   let a = null
   let b = null
+  let scores = 0
   let clicks = 0
   let onetwo = 2
   let bcyan = []
@@ -319,6 +359,29 @@
   let width = 0
 
 
+  function playscoresfx(){
+  
+    if(onetwo==2){
+      rightsfx.volume = sound
+      rightsfxplay()
+    }
+    else{
+      rightsfx2.volume = sound
+      rightsfx2.play()
+    }}
+
+  function playrightsfx(){
+    scoresfx.volume = sound
+    scoresfx.play()}
+
+
+
+  
+  function scoreplus(){
+    scores++
+    document.getElementById("clickcounter").textContent = "Clicks: " + clicks + " | Score: " + scores;
+    playrightsfx()
+  }
 
   function rngnum(min, max) {
     return Math.ceil(Math.random() * (max - min) + min)}
@@ -342,6 +405,7 @@
   
   function rngcolor(){
     $("#startgamebutton").hide()
+    document.getElementById("clickcounter").textContent = "Clicks: " + clicks + " | Score: " + scores;
     enablebb()
     onetwo = 2
     for (i=20; i>18; i--){
@@ -447,10 +511,16 @@
       console.log('orange '+borange)}
 
   $(document).ready(function(){
+    $("#gamesound").change(function(){
+    sound = document.getElementById("gamesound").value/100
+    console.log(sound)
+    })})
+
+  $(document).ready(function(){
     $(".coveredbutton").on("click", function(){
       flip()
       clicks++
-      document.getElementById("clickcounter").textContent = "Clicks: " + clicks + "!";
+      document.getElementById("clickcounter").textContent = "Clicks: " + clicks + " | Score: " + scores;
 
       console.log(onetwo)
       if(onetwo==1){
@@ -514,45 +584,57 @@
         else if(bred.includes(a)&&bred.includes(b)){
           console.log("red right")
           document.getElementById(a).setAttribute("class", "redbutton")
-          document.getElementById(b).setAttribute("class", "redbutton")}
+          document.getElementById(b).setAttribute("class", "redbutton")
+          scoreplus()}
         else if(bblue.includes(a)&&bblue.includes(b)){
           console.log("blue right")
           document.getElementById(a).setAttribute("class", "bluebutton")
-          document.getElementById(b).setAttribute("class", "bluebutton")}
+          document.getElementById(b).setAttribute("class", "bluebutton")
+          scoreplus()}
         else if(bgreen.includes(a)&&bgreen.includes(b)){
           console.log("green right")
           document.getElementById(a).setAttribute("class", "greenbutton")
-          document.getElementById(b).setAttribute("class", "greenbutton")}
+          document.getElementById(b).setAttribute("class", "greenbutton")
+          scoreplus()}
         else if(byellow.includes(a)&&byellow.includes(b)){
           console.log("yellow right")
           document.getElementById(a).setAttribute("class", "yellowbutton")
-          document.getElementById(b).setAttribute("class", "yellowbutton")}
+          document.getElementById(b).setAttribute("class", "yellowbutton")
+          scoreplus()}
         else if(borange.includes(a)&&borange.includes(b)){
           console.log("orange right")
           document.getElementById(a).setAttribute("class", "orangebutton")
-          document.getElementById(b).setAttribute("class", "orangebutton")}
+          document.getElementById(b).setAttribute("class", "orangebutton")
+          scoreplus()}
           else if(bcyan.includes(a)&&bcyan.includes(b)){
           console.log("cyan right")
           document.getElementById(a).setAttribute("class", "cyanbutton")
-          document.getElementById(b).setAttribute("class", "cyanbutton")}
+          document.getElementById(b).setAttribute("class", "cyanbutton")
+          scoreplus()}
         else if(bbrown.includes(a)&&bbrown.includes(b)){
           console.log("brown right")
           document.getElementById(a).setAttribute("class", "brownbutton")
-          document.getElementById(b).setAttribute("class", "brownbutton")}
+          document.getElementById(b).setAttribute("class", "brownbutton")
+          scoreplus()}
         else if(bdarkgreen.includes(a)&&bdarkgreen.includes(b)){
           console.log("darkgreen right")
           document.getElementById(a).setAttribute("class", "darkgreenbutton")
-          document.getElementById(b).setAttribute("class", "darkgreenbutton")}
+          document.getElementById(b).setAttribute("class", "darkgreenbutton")
+          scoreplus()}
         else if(bpink.includes(a)&&bpink.includes(b)){
           console.log("pink right")
           document.getElementById(a).setAttribute("class", "pinkbutton")
-          document.getElementById(b).setAttribute("class", "pinkbutton")}
+          document.getElementById(b).setAttribute("class", "pinkbutton")
+          scoreplus()}
         else if(bpurple.includes(a)&&bpurple.includes(b)){
           console.log("purple right")
           document.getElementById(a).setAttribute("class", "purplebutton")
-          document.getElementById(b).setAttribute("class", "purplebutton")}
-        else(
-          setTimeout(ogcolor, 600))}
+          document.getElementById(b).setAttribute("class", "purplebutton")
+          scoreplus()}
+        else{
+          disablebb()
+          setTimeout(enablebb, 700)
+          setTimeout(ogcolor, 600)}}
 
 
 
@@ -573,7 +655,6 @@
 
 disablebb()
 </script>
-<br>
 <div align="center">
   <button align="center" id="reset" onclick="location.reload()">RESET</button>
 </div>
