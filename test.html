@@ -256,7 +256,7 @@
 
   #bar {
       background-color: #a60093;
-      width: 10px;
+      width: 4px;
       border: solid;
       height: 38px;
       border-style: solid;
@@ -294,13 +294,12 @@
 
 <div align="center">
   <button class="startbutton" id="startgamebutton" onclick="rngcolor()">START GAME</button>
-  <button class="startbutton" onclick="disablebb()">TEST</button>
 </div>
 <div align="center">
   <h2 class="scoreboard" id="clickcounter">WAITING FOR GAME TO START...</h2>
   </div>
 
-<div align="center" background-color="lightblue">
+<div id="playboard" align="center" background-color="lightblue">
     <button class="coveredbutton" id="bb1"></button>
     <button class="coveredbutton" id="bb2"></button>
     <button class="coveredbutton" id="bb3"></button>
@@ -331,7 +330,7 @@
 
   </div>
 <script>
- var sound = 0.5
+  var sound = 0.5
   var rightsfx = document.getElementById("rightmp3");
   var scoresfx = document.getElementById("scoremp3");
   var rightsfx2 = document.getElementById("rightsfxmp3");
@@ -357,29 +356,26 @@
   let rndclr = ['bb1', 'bb2', 'bb3', 'bb4', 'bb5', 'bb6', 'bb7', 'bb8', 'bb9', 'bb10', 'bb11', 'bb12', 'bb13', 'bb14', 'bb15', 'bb16', 'bb17', 'bb18', 'bb19', 'bb20']
   let answer
   let width = 0
+  let barprog = 0
 
-
-  function playscoresfx(){
-  
-    if(onetwo==2){
-      rightsfx.volume = sound
-      rightsfxplay()
-    }
-    else{
-      rightsfx2.volume = sound
-      rightsfx2.play()
-    }}
+  function playclicksfx(){
+    rightsfx.volume = sound
+    rightsfx.play()}
 
   function playrightsfx(){
     scoresfx.volume = sound
     scoresfx.play()}
 
+  function playwinsfx(){
+    winsfx.volume = sound
+    winsfx.play()
+    document.getElementById("clickcounter").textContent = "Total Clicks: " + clicks + "! | You win!"}
 
 
   
   function scoreplus(){
     scores++
-    document.getElementById("clickcounter").textContent = "Clicks: " + clicks + " | Score: " + scores;
+    document.getElementById("clickcounter").textContent = "Clicks: " + clicks + " | Score: " + scores + "/10";
     playrightsfx()
   }
 
@@ -398,14 +394,14 @@
     document.getElementById(b).setAttribute("class", "coveredbutton")}
     
   function enablebb(){
-    $(".coveredbutton").prop('disabled', false);}
+    $(":button").prop('disabled', false);}
   
   function disablebb(){
-    $(".coveredbutton").prop('disabled', true);}
+    $(":button").prop('disabled', true);}
   
   function rngcolor(){
     $("#startgamebutton").hide()
-    document.getElementById("clickcounter").textContent = "Clicks: " + clicks + " | Score: " + scores;
+    document.getElementById("clickcounter").textContent = "Clicks: " + clicks + " | Score: " + scores + "/10";
     enablebb()
     onetwo = 2
     for (i=20; i>18; i--){
@@ -520,7 +516,8 @@
     $(".coveredbutton").on("click", function(){
       flip()
       clicks++
-      document.getElementById("clickcounter").textContent = "Clicks: " + clicks + " | Score: " + scores;
+      playclicksfx()
+      document.getElementById("clickcounter").textContent = "Clicks: " + clicks + " | Score: " + scores + "/10";
 
       console.log(onetwo)
       if(onetwo==1){
@@ -638,7 +635,15 @@
 
 
 
-      else{console.log("error")}})})
+      else{console.log("error")}
+      barprog = scores*10+"%"
+      if(barprog == "100%"){
+        playwinsfx()
+      }
+      else{
+        console.log('yep')
+      }
+      $("#bar").width(barprog)})})
 
 
   
@@ -654,9 +659,12 @@
 
 
 disablebb()
+$("#startgamebutton").prop('disabled', false)
 </script>
 <div align="center">
   <button align="center" id="reset" onclick="location.reload()">RESET</button>
+  <a href="https://azzamgm.github.io/Test-2/" target="_blank">CLICK ME</a>
+  <button onclick="disablebb()">TEST</button>
 </div>
 
 <div id="progress">
