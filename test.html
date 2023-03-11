@@ -358,6 +358,18 @@
   let width = 0
   let barprog = 0
 
+  function correct(){
+  document.getElementById("clickcounter").style.backgroundColor = "#00ff2f"
+  document.getElementById("bar").style.backgroundColor = "#00ff2f"}
+
+function incorrect(){
+  document.getElementById("clickcounter").style.backgroundColor = "#f60905"
+  document.getElementById("bar").style.backgroundColor = "#f60905"}
+
+function ogbar(){
+  document.getElementById("clickcounter").style.backgroundColor = "#7e0034"
+  document.getElementById("bar").style.backgroundColor = "#a60093"}
+
   function playclicksfx(){
     rightsfx.volume = sound
     rightsfx.play()}
@@ -375,6 +387,8 @@
   
   function scoreplus(){
     scores++
+    correct()
+    setTimeout(ogbar, 600)
     document.getElementById("clickcounter").textContent = "Clicks: " + clicks + " | Score: " + scores + "/10";
     playrightsfx()
   }
@@ -409,27 +423,21 @@
         xx = rndclr[y]
         bcyan.push(xx)
         delete rndclr[y]
-        rndclr.sort()
-        console.log('rnd is '+y+' removed '+xx)
-        console.log(rndclr)}
+        rndclr.sort()}
 
     for (i=18; i>16; i--){
         y = rngnum(0, i-1)
         xx = rndclr[y]
         bdarkgreen.push(xx)
         delete rndclr[y]
-        rndclr.sort()
-        console.log('rnd is '+y+' removed '+xx)
-        console.log(rndclr)}
+        rndclr.sort()}
 
     for (i=16; i>14; i--){
         y = rngnum(0, i-1)
         xx = rndclr[y]
         bpurple.push(xx)
         delete rndclr[y]
-        rndclr.sort()
-        console.log('rnd is '+y+' removed '+xx)
-        console.log(rndclr)}
+        rndclr.sort()}
 
 
     for (i=14; i>12; i--){
@@ -437,79 +445,54 @@
         xx = rndclr[y]
         bpink.push(xx)
         delete rndclr[y]
-        rndclr.sort()
-        console.log('rnd is '+y+' removed '+xx)
-        console.log(rndclr)}
+        rndclr.sort()}
 
     for (i=12; i>10; i--){
         y = rngnum(0, i-1)
         xx = rndclr[y]
         bbrown.push(xx)
         delete rndclr[y]
-        rndclr.sort()
-        console.log('rnd is '+y+' removed '+xx)
-        console.log(rndclr)}
+        rndclr.sort()}
 
     for (i=10; i>8; i--){
         y = rngnum(0, i-1)
         xx = rndclr[y]
         bred.push(xx)
         delete rndclr[y]
-        rndclr.sort()
-        console.log('rnd is '+y+' removed '+xx)
-        console.log(rndclr)}
+        rndclr.sort()}
         
     for (i=8; i>6; i--){
       y = rngnum(0, i-1)
       xx = rndclr[y]
       bblue.push(xx)
       delete rndclr[y]
-      rndclr.sort()
-      console.log('rnd is '+y+' removed '+xx)
-      console.log(rndclr)}
+      rndclr.sort()}
       
     for (i=6; i>4; i--){
       y = rngnum(0, i-1)
       xx = rndclr[y]
       bgreen.push(xx)
       delete rndclr[y]
-      rndclr.sort()
-      console.log('rnd is '+y+' removed '+xx)
-      console.log(rndclr)}
+      rndclr.sort()}
       
     for (i=4; i>2; i--){
       y = rngnum(0, i-1)
       xx = rndclr[y]
       byellow.push(xx)
       delete rndclr[y]
-      rndclr.sort()
-      console.log('rnd is '+y+' removed '+xx)
-      console.log(rndclr)}
+      rndclr.sort()}
 
     for (i=2; i>0; i--){
       y = rngnum(0, i-1)
       xx = rndclr[y]
       borange.push(xx)
       delete rndclr[y]
-      rndclr.sort()
-      console.log('rnd is '+y+' removed '+xx)
-      console.log(rndclr)}
-
-      console.log('purple '+bpurple)
-      console.log('cyan '+bcyan)
-      console.log('darkgreen '+bdarkgreen)
-      console.log('pink '+bpink)
-      console.log('brown '+bbrown)
-      console.log('red '+bred)
-      console.log('blue '+bblue)
-      console.log('green '+bgreen)
-      console.log('yellow '+byellow)
-      console.log('orange '+borange)}
+      rndclr.sort()}
+    }
 
   $(document).ready(function(){
     $("#gamesound").change(function(){
     sound = document.getElementById("gamesound").value/100
-    console.log(sound)
     })})
 
   $(document).ready(function(){
@@ -630,7 +613,9 @@
           scoreplus()}
         else{
           disablebb()
-          setTimeout(enablebb, 700)
+          incorrect()
+          setTimeout(ogbar, 600)
+          setTimeout(enablebb, 620)
           setTimeout(ogcolor, 600)}}
 
 
@@ -639,6 +624,8 @@
       barprog = scores*10+"%"
       if(barprog == "100%"){
         playwinsfx()
+        disablebb()
+        $("#reset").prop('disabled', false)
       }
       else{
         console.log('yep')
@@ -654,8 +641,7 @@
   
   
 
-  console.log(bred)
-  console.log(rndclr)
+
 
 
 disablebb()
