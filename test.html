@@ -381,7 +381,8 @@ function ogbar(){
   function playwinsfx(){
     winsfx.volume = sound
     winsfx.play()
-    document.getElementById("clickcounter").textContent = "Total Clicks: " + clicks + "! | You win!"}
+    document.getElementById("clickcounter").textContent = "Total Clicks: " + clicks + "! | You win!"
+    correct()}
 
 
   
@@ -419,21 +420,21 @@ function ogbar(){
     enablebb()
     onetwo = 2
     for (i=20; i>18; i--){
-        y = rngnum(0, i-1)
+        y = rngnum(-1, i-1)
         xx = rndclr[y]
         bcyan.push(xx)
         delete rndclr[y]
         rndclr.sort()}
 
     for (i=18; i>16; i--){
-        y = rngnum(0, i-1)
+        y = rngnum(-1, i-1)
         xx = rndclr[y]
         bdarkgreen.push(xx)
         delete rndclr[y]
         rndclr.sort()}
 
     for (i=16; i>14; i--){
-        y = rngnum(0, i-1)
+        y = rngnum(-1, i-1)
         xx = rndclr[y]
         bpurple.push(xx)
         delete rndclr[y]
@@ -441,49 +442,49 @@ function ogbar(){
 
 
     for (i=14; i>12; i--){
-        y = rngnum(0, i-1)
+        y = rngnum(-1, i-1)
         xx = rndclr[y]
         bpink.push(xx)
         delete rndclr[y]
         rndclr.sort()}
 
     for (i=12; i>10; i--){
-        y = rngnum(0, i-1)
+        y = rngnum(-1, i-1)
         xx = rndclr[y]
         bbrown.push(xx)
         delete rndclr[y]
         rndclr.sort()}
 
     for (i=10; i>8; i--){
-        y = rngnum(0, i-1)
+        y = rngnum(-1, i-1)
         xx = rndclr[y]
         bred.push(xx)
         delete rndclr[y]
         rndclr.sort()}
         
     for (i=8; i>6; i--){
-      y = rngnum(0, i-1)
+      y = rngnum(-1, i-1)
       xx = rndclr[y]
       bblue.push(xx)
       delete rndclr[y]
       rndclr.sort()}
       
     for (i=6; i>4; i--){
-      y = rngnum(0, i-1)
+      y = rngnum(-1, i-1)
       xx = rndclr[y]
       bgreen.push(xx)
       delete rndclr[y]
       rndclr.sort()}
       
     for (i=4; i>2; i--){
-      y = rngnum(0, i-1)
+      y = rngnum(-1, i-1)
       xx = rndclr[y]
       byellow.push(xx)
       delete rndclr[y]
       rndclr.sort()}
 
     for (i=2; i>0; i--){
-      y = rngnum(0, i-1)
+      y = rngnum(-1, i-1)
       xx = rndclr[y]
       borange.push(xx)
       delete rndclr[y]
