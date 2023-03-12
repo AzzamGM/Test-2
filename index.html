@@ -513,7 +513,10 @@ $(document).ready(function(){
 
 
 
-
+function resethighscores(){
+  localStorage.clear(localStorage.highscores)
+  document.getElementById("highscoreboard").innerHTML = "🏆No Highscore... yet!!🏆"
+}
 
 </script>
 
@@ -569,7 +572,7 @@ $(document).ready(function(){
   <input width="50%" id="gamesound" type="range" min="0" max="100" value="50">
   </div>
   <button  id="reset" onclick="location.reload()">RESTART</button>
-  <button id="clearhighscores" onclick="localStorage.clear(localStorage.highscores)">Clear Highscores</button>
+  <button id="clearhighscores" onclick="resethighscores()">Clear Highscores</button>
 
 <div id="progress">
   <div id="bar"></div>
