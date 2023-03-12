@@ -31,7 +31,7 @@
   <link href="static/vendor/font-awesome/css/all.min.css" rel="stylesheet" type="text/css">
 
 </head>
-
+<a href="test.html" target="_blank">GAME 2</a>
 <body style="background-color: rgb(181, 228, 255);">
   <script type="text/javascript">
     function testy(){
@@ -64,8 +64,19 @@ document.querySelector('meta[name="viewport"]').setAttribute('content', 'height=
     background-color: aliceblue;
     align-content: center;}
 
+  .instructions{
+    margin-left: 50px;
+    position: fixed;
+    text-align: left;
+    width: 350px;
+    height: 500px;
+  }
+
   .text1{
     color: white;
+    border-radius: 9px;
+    border: #48001e;
+    border-style: solid;
     padding: 32px 64px;
     text-align: center;
     display: inline-block;
@@ -74,6 +85,16 @@ document.querySelector('meta[name="viewport"]').setAttribute('content', 'height=
     height: 100px;
     width: 550px;
     background-color: #7e0034;} 
+
+  .highscoreclass{
+    padding: 16px 32px;
+    color: rgb(189, 161, 0);
+    text-align: center;
+    font-size: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px 10px;
+    position: center;} 
 
   .text2{
     padding: 16px 32px;
@@ -218,7 +239,8 @@ function loseheart(){
   else{
     lives--
     document.getElementById("playerlives").textContent = "💔💔💔";
-    lost()}}
+    lost()
+    checkhighscore()}}
 
 /*function playstartsfx(){
   startsfx.volume = sound
@@ -344,7 +366,8 @@ function ogbar(){
   function scored(){
     score = score+1
     document.getElementById("playerscore").textContent = "Score: " + score + " | Level: " + level;
-    playscoresfx()}
+    playscoresfx()
+    checkhighscore()}
 
   function lost(){
     right = []
@@ -353,10 +376,38 @@ function ogbar(){
 
   function won(){
     document.getElementById("playerscore").textContent = "You won! Score: " + score + " | Level: " + level;
-    playwinsfx()}
+    playwinsfx()
+    checkhighscore()}
 
+    
+  function checkhighscore(){
+    highscore = Number(localStorage.highscores)
+    localStorage.highscores = Number(localStorage.highscores)
+    if(score>highscore){
+      highscore = score
+      localStorage.highscores = highscore
+      localStorage.diffi = setdiff
+      document.getElementById("highscoreboard").innerHTML = "🏆New Personal Highscore: " + highscore + "!🏆" + "("+localStorage.diffi+")"
+    }
+    else if(score<=highscore){
+    console.log('same')
+    }
+    else{
+      highscore = score
+      localStorage.highscores = highscore
+      localStorage.diffi = setdiff
+      document.getElementById("highscoreboard").innerHTML = "🏆New Personal Highscore: " + highscore + "!🏆" + "("+localStorage.diffi+")"
+    }
+    console.log("highscore is "+highscore)
+    console.log("local is "+localStorage.highscores)
+  }
 
 $(document).ready(function(){
+  if(localStorage.highscores==undefined){
+        document.getElementById("highscoreboard").innerHTML = "🏆No Highscore... yet!!🏆"
+      }
+  else{
+  document.getElementById("highscoreboard").innerHTML = "🏆Personal Highscore: " + localStorage.highscores + "🏆" + "("+localStorage.diffi+")"}
   $("#difficulty").change(function(){
     setdiff = this.value
     switch(setdiff){
@@ -399,6 +450,7 @@ $(document).ready(function(){$("#b10, #b11, #b12, #b13, #b14, #b15, #b16, #b17, 
     rngs(level)
     $("#difficulty").prop('disabled', true);
     $(this).hide()
+    $("#clearhighscores").hide()
     begin()})
 
 let right = []
@@ -409,7 +461,7 @@ let setdiff = null
 let diff = null
 let lives = 3
 let onetwo = 2
-
+let highscore = 0
 var sound = 0.5
 var rightsfx = document.getElementById("rightmp3");
 var scoresfx = document.getElementById("scoremp3");
@@ -457,6 +509,12 @@ $(document).ready(function(){
   <br>
   <br>
   <div class="testdiv" align="center" background-color="lightblue">
+ <!--*<div align="left" class="instructions">
+    <h2 align="center">How-to-play:</h2>
+    <p>Memorize the patterns and click the buttons in the same order<p>
+    
+  </div>-->
+    <h1 id="highscoreboard" class="highscoreclass"></h1>
     <button class="button1" id="b1"></button>
     <button class="button1" id="b2"></button>
     <button class="button1" id="b3"></button>
@@ -493,9 +551,8 @@ $(document).ready(function(){
   <i class="fa fa-headphones"></i>
   <input width="50%" id="gamesound" type="range" min="0" max="100" value="50">
   </div>
-  <button  id="reset" onclick="location.reload()">RESET</button>
-  <a href="test.html" target="_blank">CLICK ME</a>
-  <button onclick="console.log()">TEST</button>
+  <button  id="reset" onclick="location.reload()">RESTART</button>
+  <button id="clearhighscores" onclick="localStorage.clear(localStorage.highscores)">Clear Highscores</button>
 
 <div id="progress">
   <div id="bar"></div>
