@@ -31,8 +31,35 @@
   <link href="static/vendor/font-awesome/css/all.min.css" rel="stylesheet" type="text/css">
 
   </head>
-<body>
+<body style="background-color: rgb(181, 228, 255);">
+  <header>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar navbar-dark bg-primary" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">Azzam's Arcade</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          Menu
+          <i class="fa fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Memory Pattern</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="test.html">Color Pairs</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
 <style>
+  .testdiv{
+    background-color: aliceblue;
+    align-content: center;}
+
   .scoreboard{
     color: white;
     padding: 32px 64px;
@@ -299,7 +326,7 @@
   <h2 class="scoreboard" id="clickcounter">WAITING FOR GAME TO START...</h2>
   </div>
 
-<div id="playboard" align="center" background-color="lightblue">
+<div class="testdiv" id="playboard" align="center" background-color="lightblue">
     <button class="coveredbutton" id="bb1"></button>
     <button class="coveredbutton" id="bb2"></button>
     <button class="coveredbutton" id="bb3"></button>
@@ -338,6 +365,7 @@
   var winsfx = document.getElementById("winmp3");
   var losesfx = document.getElementById("losemp3");
   var loseheartsfx = document.getElementById("loseheartmp3");
+  let highscore = 0
   let a = null
   let b = null
   let scores = 0
@@ -670,7 +698,6 @@ $("#startgamebutton").prop('disabled', false)
 </script>
 <div align="center">
   <button align="center" id="reset" onclick="location.reload()">RESET</button>
-  <a href="https://azzamgm.github.io/Test-2/" target="_blank">CLICK ME</a>
   <button onclick="disablebb()">TEST</button>
 </div>
 
