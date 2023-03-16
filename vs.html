@@ -553,8 +553,8 @@
 
     let enemydead = 1
 
-    let levelatkcost = 5
-    let levelblkcost = 5
+    let levelatkcost = 4
+    let levelblkcost = 3
 
 
     let playeratkstat = 1
@@ -584,10 +584,10 @@
     let enemyblkmax = 3
 
     let enemyhpmin = 2
-    let enemyhpmax = 3
+    let enemyhpmax = 4
 
     let enemygoldmin = 1
-    let enemygoldmax = 3
+    let enemygoldmax = 2
 
     let playernextattack = 0
     let enemynextattack = 0
@@ -1042,28 +1042,22 @@
         dblhealchance = Math.ceil(Math.random() * (100 - 0))
         $("#afterlogs").before("<p class='temp'>"+localStorage.usernames + " used heal.</p>")
         if(dblhealchance <=50){
-            $("#afterlogs").before("<p class='temp'>"+localStorage.usernames  + " healed for 1x❤️ Health.</p>")
-            if((playercurrenthp+1)<=playermaxhp){
-                playercurrenthp++
-            }
-            else {
-                $("#afterlogs").before("<p class='temp'>"+localStorage.usernames  + " tried to heal, but is full hp???</p>")
+            $("#afterlogs").before("<p class='temp'>"+localStorage.usernames  + " ❤️healed for half Health.❤️</p>")
+            playercurrenthp = playercurrenthp + Math.ceil(playermaxhp/2)
+            if (playercurrenthp>playermaxhp){
+                playercurrenthp = playermaxhp
             }
             refreshstats()
         }
         else{
-            $("#afterlogs").before("<p class='temp'>"+localStorage.usernames  + " got lucky and healed for 2x❤️ Health! </p>")
-            if((playercurrenthp+2)<=playermaxhp){
-                playercurrenthp = playercurrenthp+2
-            }
-            else{
-                playercurrenthp = playermaxhp
-                console.log("what")
-            }}
-            refreshstats()
+            $("#afterlogs").before("<p class='temp'>"+localStorage.usernames  + " ❤️got lucky and healed to full Health!❤️ </p>")            
+            
+            playercurrenthp = playermaxhp
+            refreshstats()}
+
+            
             if(enemycurrenthp>0){
-            setTimeout(enemyturn, 2000)
-        }
+                setTimeout(enemyturn, 2000)}
         enemynextblk = 0}
     
 
@@ -1162,23 +1156,19 @@
         dblhealchance = Math.ceil(Math.random() * (100 - 0))
         $("#afterlogs").before("<p class='temp'>"+deadname + " used heal.</p>")
         if(dblhealchance <=50){
-            $("#afterlogs").before("<p class='temp'>"+deadname + " healed for 1x❤️ Health.</p>")
-            if((enemycurrenthp+1)<=enemymaxhp){
-                enemycurrenthp++
+            $("#afterlogs").before("<p class='temp'>"+deadname + " ❤️healed for to half Health.❤️</p>")
+            enemycurrenthp = enemycurrenthp + Math.ceil(enemymaxhp/2)
+            if (enemycurrenthp>enemymaxhp){
+                enemycurrenthp = enemymaxhp
             }
-            else {
+            
                 $("#afterlogs").before("<p class='temp'>"+deadname  + " tried to heal, but is full hp???</p>")
-            }
+            
             refreshstats()
         }
         else{
-            $("#afterlogs").before("<p class='temp'>"+deadname  + " got lucky and healed for 2x❤️ Health! </p>")
-            if((enemycurrenthp+2)<=enemymaxhp){
-                enemycurrenthp = enemycurrenthp+2
-            }
-            else{
-                enemycurrenthp = enemymaxhp
-            }}
+            $("#afterlogs").before("<p class='temp'>"+deadname  + " ❤️got lucky and healed to full Health!❤️ </p>")
+            enemycurrenthp = enemymaxhp}
             refreshstats()
             playernextblk = 0}
     
