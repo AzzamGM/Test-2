@@ -284,7 +284,7 @@
             width: 150px;
             height: 60px;
             background-color: #9ce35e;
-            margin-left: 75px;
+            margin: auto;
             margin-top: 160px;
             border: 3px solid black;
             border-radius: 6px;
@@ -366,9 +366,9 @@
         <div class="grid-empty">
             <h class="charactername" id="gamename">...</h>
         </div>
+        
         <div class="grid-empty">
-            <input style="position: absolute;margin-top: 0%;width: 350px;height: 100px;"  id="gamesound" type="range" min="0" max="100" value="50">
-            <label stlye="position: absolute;margin-left:3px"  class="nametextbox"> Sound </label>
+           
             <button onclick="$(document).ready(function(){openshop()})" id="shopbutton">|🛒|</button>
         </div>  
         <div class="grid-empty">
@@ -583,7 +583,8 @@
     let playerkills = 0
     let scaling = 0
     
-
+    enemybosschar = ["1b.png", "2b.png", "3b.png", "4b.png", "5b.png"]
+    enemybossname = ["WHATizLOVE", "Azzam", "Scarlet", "oSHaRKz", "Handm", "7asoon", "Cakelock"]
     enemychar = ["1.png", "2.png", "3.png", "4.png", "5.png", "6.png", "7.png", "8.png", "9.png", "10.png", "11.png", "12.png", "13.png", "14.png", "15.png", "16.png", "17.png", "18.png", "19.png", "20.png", "21.png", "22.png", "23.png", "24.png", "25.png", "26.png", "27.png", "28.png", "29.png", "30.png", "31.png", "32.png", "33.png", "34.png", "35.png", "36.png", "37.png", "38.png", "39.png", "40.png", "41.png", "42.png", "43.png", "44.png", "45.png", "46.png", "47.png", "48.png", "49.png", "50.png", "51.png", "52.png", "53.png", "54.png", "55.png", "56.png", "57.png", "58.png", "59.png", "60.png", "61.png", "62.png", "63.png", "64.png", "65.png", "66.png", "67.png", "68.png", "69.png", "70.png"]
     enemyname = ["Cruz", "Espinoza", "Zubair", "Sutherland", "Zoe", "Krankry", "Husna","Easwith", "Ruthbald", "Claceol", "Rahe", "Fride", "Reginu", "Nethdic", "Pheradel", "Burred", "Isenwig", "Sonkim", "Viagorma", "Betca", "Lintom", "Nethtine", "Robcyn", "Ciane", "Riwig", "Dajack", "Thysa" ,"Brooks", "Isobel", "Mccormick", "Zackary", "Allen", "Oliver", "Keller", "Jago", "Rollins", "Ty", "Hart", "Gabriela", "Valencia", "Phillip", "Grant", "Aine", "Holder", "Edmund", "Gilmore", "Nevaeh", "zYashi", "Sultan", "Glass", "BluXice", "Levine", "Ella", "Chan", "Edwin", "Preston", "Stop3ndk", "Clark", "Albert", "Bates", "Azzam", "oShaRkz", "WhatIzLove", "Scar", "Cakelock", "Sharo", "Eddga", "West", "Handm", "7asoon", "Jack", "Sett", "MrM7md", "Crocodile", "7toom", "AMM", "AvengingPoro", "Ner0"]
     enemysurname = ["the Omen", "the Loner", "the Titan", "the Illuminator", "the Valiant", "the Omen", "the Poet", "the Ghost", "the Reckless", "the Gentleman", "son of Ragnar", "the III", "the IV", "Tall", "Waterside", "Lordbreaker", "Flarethunder", "Breezemace", "Ironelvenarrow", "Gazeautumn", "Paladinspear", "Ramboar", "Runner", "Ramwater", "Red", "Lordpicker", "Spearshadow", "Wallside", "Bearhame", "Greenautumngaze", "Wyrmmagenta", "Tallwarg", "Greenelven","Lightgreen", "Starelven", "Breakerhunter", "Lipswalk", "Rageblood", "Bullblood", "Manehilt", "Eyeforce", "Cyanman", "Fullquiver", "Bloodman", "Breakstorm", "Gazewarrior","the Beast", "of the Light", "the Champion", "the Chaotic", "the Guard", "the Shield", "the Lionheart", "the Turbulent", "the Loyal", "the Reckless", "the Tarnished", "Bulwark of the Weak", "the Weakling", "the Strong", "the Masterbaiter", "Bronzeman", "AlShareef", "your Long Lost Brother", "your Stepmom", "your Stepdad", "Obama", "the Slayer", "the Destroyer", "the Pussy Magnet", "the Whore", "the Darksider", "the Musician", "the Pediatrician", "the Child Molester", "the Pedophile", "the Furry", "the Meta Slave", "of the Darkness", "the Firekeeper", "the Light Fixer", "the Imposter", "the Hardstuck", "the Math Teacher", "the Professor", "the Singer", "the Pianist", "the Doctor", "the Warrior", "the Barbarian", "the Lover", "the Horny", "the Beekeeper", "the Businessman", "the Rich", "the Poor", "the Dwarf", "the Goblin", "the Orc" ,"Breakhammer", "Forcetongue", "Wargdragonbreeze", "Hawkram", "Noseore", "Treesandbright", "Falconfall","the II", "the V", "son of Donald Trump", "Trump", "Twaim", "Scarlet", "the Frenchman", "the Challenger", "the Duelist", "the Escapist", "the Thief", "the Guardian", "the Malicious", "the Dominant", "the Submissive", "the Sexy", "the First", "the Jokester", "the Magnificent", "Baroum", "the Zoo Keeper", "the Pharmacist", "the Assassin", "the Monk", "the Rapist", "the Law Maker", "the Abandoned", "son of Sylvanas", "son of Ragnarok", "son of Vereth", "the Fucker"]
@@ -670,7 +671,8 @@
         else{
             onetwo--
             $(".abilities2").prop('disabled', true)
-            $(".abilities").prop('disabled', false)
+            if(playercurrenthp>0){
+            $(".abilities").prop('disabled', false)}
             console.log(onetwo)
 }}
 
@@ -700,7 +702,7 @@
     }
 
     function enemyturn(){
-        if(enemycurrenthp> enemymaxhp){
+        if(enemycurrenthp=enemymaxhp){
             let rndability = (Math.ceil(Math.random() * (4 - 0)))
         console.log(rndability)
         switch(rndability){
@@ -733,17 +735,17 @@
             case rndability = 1:
                 enemyattack1()
                 clickatk1()
-                setTimeout(ogabilities, 2500)
+                setTimeout(ogabilities, 2000)
                 break;
             case rndability = 2:
                 enemyattack2()
                 clickatk2()
-                setTimeout(ogabilities, 2500)
+                setTimeout(ogabilities, 2000)
                 break;
             case rndability = 3:
                 enemydefend1()
                 clickblk()
-                setTimeout(ogabilities, 2500)
+                setTimeout(ogabilities, 2000)
                 break;}}
             
             }
@@ -780,6 +782,39 @@
         $("#battlebutton").prop('disabled', true)
         flip()}
 
+    function generateenemy(){
+        $("#shopbutton").prop('disabled', true)
+        let rndchar = (Math.ceil(Math.random() * (enemychar.length - 0) + 0)) - 1
+        let rndname = (Math.ceil(Math.random() * (enemyname.length - 0) + 0)) - 1
+        let rndsurname = (Math.ceil(Math.random() * (enemysurname.length - 0) + 0)) - 1
+        let rndenemyatk = (Math.ceil(Math.random() * (enemyatkmax - (enemyatkmin-1)) + (enemyatkmin-1))) 
+        let rndenemyblk = (Math.ceil(Math.random() * (enemyblkmax - (enemyblkmin-1)) + (enemyblkmin-1)))
+        let rndenemyhp = (Math.ceil(Math.random() * (enemyhpmax - (enemyhpmin-1)) + (enemyhpmin-1)))
+        let rndenemygold = (Math.ceil(Math.random() * (enemyhpmax - (enemygoldmin-1)) + (enemygoldmin-1)))
+
+        enemymaxhp = rndenemyhp
+        enemycurrenthp = rndenemyhp
+        enemyatkstat = rndenemyatk
+        enemyblkstat = rndenemyblk
+        enemyhpstat = hp.repeat(enemycurrenthp)
+        enemygoldstat = rndenemygold
+
+        document.getElementById("enemygamename").innerHTML = enemyname[rndname] + " " + enemysurname[rndsurname]
+        deadname = document.getElementById("enemygamename").innerHTML
+        document.getElementById("enemygamepfp").setAttribute("src", "Pictures/"+enemychar[rndchar])
+        document.getElementById("enemystats").innerHTML = "⚔️"+enemyatkstat+" | 🪙"+enemygoldstat+" | 🛡️"+enemyblkstat
+        document.getElementById("enemygamehp").innerHTML = enemyhpstat
+
+        console.log("Pictures/"+enemychar[rndchar])
+        console.log("rndname "+rndname)
+        console.log("rndsurname "+rndsurname)
+        console.log("rndenemyatk "+rndenemyatk)
+        console.log("rndenemyblk "+rndenemyblk)
+        console.log("rndenemyhp "+rndenemyhp)
+        $("#battlebutton").prop('disabled', true)
+        flip()}
+
+
 
     function refreshstats(){
     if(enemycurrenthp<0){
@@ -801,13 +836,16 @@
         document.getElementById("userhp").innerHTML = losthp.repeat(playermaxhp)
         $("#afterlogs").before("<p class='temp' style='color: red'>"+localStorage.usernames+" died.</p>")
         refreshstats()
-        $(":button").prop('disabled', true)
+        $(".abilities").prop('disabled', true)
+        setTimeout(endgame, 6000)
     }
         else{
         refreshstats()
     }
     }
-    
+    function endgame(){
+        $(".abilities").prop('disabled', true)
+    }
 
     function updateplayerstats(){
         
@@ -1047,7 +1085,7 @@
         $("#afterlogs").before("<p class='temp'>"+deadname + " used Lucky Attack. </p>")
         if(enemyatkchance<=10){
             attack2sfx()
-            enemynextattack = enemyatkstat*3-playnextblk
+            enemynextattack = enemyatkstat*3-playernextblk
             if(enemynextattack<0){
                 enemynextattack = 0
             }
