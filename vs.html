@@ -342,11 +342,11 @@
 
  <!--------------------------SHOP WINDOW---------------------->
     <div id="shopwindow">
-        <p style="background-color: black;margin-left: 302.5px;margin-top: -3px;width: 80px;height: 50px;" id="shopplayergold" class="shopitems">🪙</p>
+        <p style="background-color: black;margin-left: 302.5px;margin-top: -3px;width: 80px;height: 50px;" id="shopplayergold" class="shopitems">💰</p>
         <p style="color: black;border: none;background-color: rgba(47, 46, 46, 0);margin-left: 270px;margin-top: 60px;width: 150px;height: 45px" class="shopitems">Level Up (⚔️)</p>
-        <p style="border-radius:2px;background-color: rgb(47, 46, 46);margin-left: 270px;margin-top: 100px;width: 150px;height: 45px" id="shopatkcost" class="shopitems">Cost: 🪙</p>
-        <p  style="color: black;border: none;background-color: rgb(47, 46, 46, 0);margin-left: 270px;margin-top: 270px;width: 150px;height: 45px"  class="shopitems">Level Up (🛡️)</p> 
-        <p style="border-radius:2px;background-color: rgb(47, 46, 46);margin-left: 270px;margin-top: 310px;width: 150px;height: 45px" class="shopitems" id="shopblkcost">Cost: 🪙</p>
+        <p style="border-radius:2px;background-color: rgb(47, 46, 46);margin-left: 270px;margin-top: 100px;width: 150px;height: 45px" id="shopatkcost" class="shopitems">Cost: 💰</p>
+        <p  style="color: black;border: none;background-color: rgb(47, 46, 46, 0);margin-left: 270px;margin-top: 270px;width: 150px;height: 45px"  class="shopitems">Level Up (🛡️) And (💖)</p> 
+        <p style="border-radius:2px;background-color: rgb(47, 46, 46);margin-left: 270px;margin-top: 310px;width: 150px;height: 45px" class="shopitems" id="shopblkcost">Cost: 💰</p>
         <button style="margin-top: 100px;margin-left: 100px" class="levelup">➖</button>
         <button style="margin-top: 100px;margin-left: 490px" onclick="levelatk()" class="levelup">➕</button>
         <button style="margin-top: 310px;margin-left: 100px" class="levelup">➖</button>
@@ -540,9 +540,9 @@
     $("#shopbutton").prop('disabled', true)
     function refreshshop(){
         $(document).ready(function() {
-        document.getElementById("shopatkcost").innerHTML = "Cost: "+levelatkcost+"🪙"
-        document.getElementById("shopblkcost").innerHTML = "Cost: "+levelblkcost+"🪙"    
-        document.getElementById("shopplayergold").innerHTML = playergoldstat + "🪙"})
+        document.getElementById("shopatkcost").innerHTML = "Cost: "+levelatkcost+"💰"
+        document.getElementById("shopblkcost").innerHTML = "Cost: "+levelblkcost+"💰"    
+        document.getElementById("shopplayergold").innerHTML = playergoldstat + "💰"})
     }
     let profile = {}
     let hp = "❤️"
@@ -605,7 +605,7 @@
     enemysurname = ["the Omen", "the Loner", "the Titan", "the Illuminator", "the Valiant", "the Omen", "the Poet", "the Ghost", "the Reckless", "the Gentleman", "son of Ragnar", "the III", "the IV", "Tall", "Waterside", "Lordbreaker", "Flarethunder", "Breezemace", "Ironelvenarrow", "Gazeautumn", "Paladinspear", "Ramboar", "Runner", "Ramwater", "Red", "Lordpicker", "Spearshadow", "Wallside", "Bearhame", "Greenautumngaze", "Wyrmmagenta", "Tallwarg", "Greenelven","Lightgreen", "Starelven", "Breakerhunter", "Lipswalk", "Rageblood", "Bullblood", "Manehilt", "Eyeforce", "Cyanman", "Fullquiver", "Bloodman", "Breakstorm", "Gazewarrior","the Beast", "of the Light", "the Champion", "the Chaotic", "the Guard", "the Shield", "the Lionheart", "the Turbulent", "the Loyal", "the Reckless", "the Tarnished", "Bulwark of the Weak", "the Weakling", "the Strong", "the Masterbaiter", "Bronzeman", "AlShareef", "your Long Lost Brother", "your Stepmom", "your Stepdad", "Obama", "the Slayer", "the Destroyer", "the Pussy Magnet", "the Whore", "the Darksider", "the Musician", "the Pediatrician", "the Child Molester", "the Pedophile", "the Furry", "the Meta Slave", "of the Darkness", "the Firekeeper", "the Light Fixer", "the Imposter", "the Hardstuck", "the Math Teacher", "the Professor", "the Singer", "the Pianist", "the Doctor", "the Warrior", "the Barbarian", "the Lover", "the Horny", "the Beekeeper", "the Businessman", "the Rich", "the Poor", "the Dwarf", "the Goblin", "the Orc" ,"Breakhammer", "Forcetongue", "Wargdragonbreeze", "Hawkram", "Noseore", "Treesandbright", "Falconfall","the II", "the V", "son of Donald Trump", "Trump", "Twaim", "Scarlet", "the Frenchman", "the Challenger", "the Duelist", "the Escapist", "the Thief", "the Guardian", "the Malicious", "the Dominant", "the Submissive", "the Sexy", "the First", "the Jokester", "the Magnificent", "Baroum", "the Zoo Keeper", "the Pharmacist", "the Assassin", "the Monk", "the Rapist", "the Law Maker", "the Abandoned", "son of Sylvanas", "son of Ragnarok", "son of Vereth", "the Fucker"]
 
     console.log(enemysurname.length)
-    document.getElementById("userstats").innerHTML = "⚔️"+playeratkstat+" | 🪙"+playergoldstat+" | 🛡️"+playerblkstat
+    document.getElementById("userstats").innerHTML = "⚔️"+playeratkstat+" | 💰"+playergoldstat+" | 🛡️"+playerblkstat
     document.getElementById("userhp").innerHTML = playerhp
     $(document).ready(function(){
         if(localStorage.username=undefined){
@@ -654,9 +654,9 @@
         $(document).ready(function(){
             refreshshop()
             $("#shopwindow").show()
-        document.getElementById("blklevelcost").innerHTML = "Cost: "+levelblkcost+"🪙"    
-        document.getElementById("atklevelupcost").innerHTML = "Cost: "+levelatkcost+"🪙"
-        document.getElementById("shopplayergold").innerHTML = playergoldstat + "🪙"
+        document.getElementById("blklevelcost").innerHTML = "Cost: "+levelblkcost+"💰"    
+        document.getElementById("atklevelupcost").innerHTML = "Cost: "+levelatkcost+"💰"
+        document.getElementById("shopplayergold").innerHTML = playergoldstat + "💰"
         $("#battlestart").prop("disabled", true)
         })
 
@@ -791,7 +791,7 @@
         document.getElementById("enemygamename").innerHTML = enemyname[rndname] + " " + enemysurname[rndsurname]
         deadname = document.getElementById("enemygamename").innerHTML
         document.getElementById("enemygamepfp").setAttribute("src", "Pictures/"+enemychar[rndchar])
-        document.getElementById("enemystats").innerHTML = "⚔️"+enemyatkstat+" | 🪙"+enemygoldstat+" | 🛡️"+enemyblkstat
+        document.getElementById("enemystats").innerHTML = "⚔️"+enemyatkstat+" | 💰"+enemygoldstat+" | 🛡️"+enemyblkstat
         document.getElementById("enemygamehp").innerHTML = enemyhpstat
 
         console.log("Pictures/"+enemychar[rndchar])
@@ -823,7 +823,7 @@
         document.getElementById("enemygamename").innerHTML = enemyname[rndname] + " " + enemysurname[rndsurname]
         deadname = document.getElementById("enemygamename").innerHTML
         document.getElementById("enemygamepfp").setAttribute("src", "Pictures/"+enemychar[rndchar])
-        document.getElementById("enemystats").innerHTML = "⚔️"+enemyatkstat+" | 🪙"+enemygoldstat+" | 🛡️"+enemyblkstat
+        document.getElementById("enemystats").innerHTML = "⚔️"+enemyatkstat+" | 💰"+enemygoldstat+" | 🛡️"+enemyblkstat
         document.getElementById("enemygamehp").innerHTML = enemyhpstat
 
         console.log("Pictures/"+enemychar[rndchar])
@@ -845,10 +845,10 @@
         playercurrenthp=0
     }
         document.getElementById("enemygamehp").innerHTML = hp.repeat(enemycurrenthp)+losthp.repeat(enemymaxhp-enemycurrenthp)
-        document.getElementById("enemystats").innerHTML = "⚔️"+enemyatkstat+" | 🪙"+enemygoldstat+" | 🛡️"+enemyblkstat
+        document.getElementById("enemystats").innerHTML = "⚔️"+enemyatkstat+" | 💰"+enemygoldstat+" | 🛡️"+enemyblkstat
 
         document.getElementById("userhp").innerHTML = hp.repeat(playercurrenthp)+losthp.repeat(playermaxhp-playercurrenthp)
-        document.getElementById("userstats").innerHTML = "⚔️"+playeratkstat+" | 🪙"+playergoldstat+" | 🛡️"+playerblkstat
+        document.getElementById("userstats").innerHTML = "⚔️"+playeratkstat+" | 💰"+playergoldstat+" | 🛡️"+playerblkstat
 
     }
 
@@ -874,7 +874,7 @@
         if(enemycurrenthp<1){
         document.getElementById("enemygamehp").innerHTML = losthp.repeat(enemymaxhp)
         $("#afterlogs").before("<p  class='temp' style='color: red'>"+deadname+" died.</p>")
-        $("#afterlogs").before("<p  class='temp' style='color: gold'>"+"Looted Corpse, Gained "+enemygoldstat+"🪙!</p>")
+        $("#afterlogs").before("<p  class='temp' style='color: gold'>"+"Looted Corpse, Gained "+enemygoldstat+"💰!</p>")
         lootsfx()
         playerkills++
         scaling++
