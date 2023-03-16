@@ -626,7 +626,12 @@
     function levelatk(){
         if(playergoldstat>=levelatkcost){
             playergoldstat = playergoldstat - levelatkcost
-            levelatkcost=levelatkcost+2
+            if(levelatkcost<5){
+                levelatkcost++
+            }
+            else{
+                levelatkcost=levelatkcost+2
+            }
             playeratkstat++
             refreshstats()
             refreshshop()
@@ -637,7 +642,12 @@
     function levelblk(){
         if(playergoldstat>=levelblkcost){
             playergoldstat = playergoldstat - levelblkcost
-            levelblkcost=levelblkcost+2
+            if(levelblkcost<5){
+                levelblkcost++
+            }
+            else{
+                levelblkcost=levelblkcost+2
+            }
             playerblkstat++
             playermaxhp++
             playercurrenthp=playermaxhp
