@@ -636,7 +636,7 @@
 
     function openshop(){
         $(document).ready(function(){
-            refresh()
+            refreshshop()
             $("#shopwindow").show()
         document.getElementById("blklevelcost").innerHTML = "Cost: "+levelblkcost+"🪙"    
         document.getElementById("atklevelupcost").innerHTML = "Cost: "+levelatkcost+"🪙"
@@ -942,12 +942,14 @@
         }
         console.log(atkchance)
 
-            $(".abilites2").prop('disable', true)}
-
-        if(enemycurrenthp>0){
+            $(".abilites2").prop('disable', true)
+            if(enemycurrenthp>0){
             setTimeout(enemyturn, 2000)
         }
     
+        }
+
+        
     //BLOCK 1||||||||||||||||||||||||||||||||||||||||||||||||||||
     function playerdefend1(){
         blocksfx()
@@ -961,7 +963,8 @@
         else{
             misssfx()
             $("#afterlogs").before("<p class='temp'>"+localStorage.usernames  + " Tried to block, but failed! </p>")}
-            if(enemycurrenthp>0){
+
+        if(enemycurrenthp>0){
             setTimeout(enemyturn, 2000)
         }
         enemynextblk = 0
