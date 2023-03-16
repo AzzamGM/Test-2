@@ -702,7 +702,7 @@
     }
 
     function enemyturn(){
-        if(enemycurrenthp=enemymaxhp){
+        if(enemycurrenthp<enemymaxhp){
             let rndability = (Math.ceil(Math.random() * (4 - 0)))
         console.log(rndability)
         switch(rndability){
@@ -859,9 +859,14 @@
         if(scaling==3){
             scaling=0
             enemyatkmax++
+            enemyatkmin++
+
             enemyblkmax++
+            enemyblkmin++
+
             enemyhpmax++
             enemygoldmax++
+
         }
         playergoldstat = playergoldstat + enemygoldstat
         enemygoldstat = 0
