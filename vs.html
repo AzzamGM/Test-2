@@ -636,6 +636,7 @@
 
     function openshop(){
         $(document).ready(function(){
+            refresh()
             $("#shopwindow").show()
         document.getElementById("blklevelcost").innerHTML = "Cost: "+levelblkcost+"🪙"    
         document.getElementById("atklevelupcost").innerHTML = "Cost: "+levelatkcost+"🪙"
@@ -817,7 +818,7 @@
         lootsfx()
         playerkills++
         scaling++
-        if(scaling==2){
+        if(scaling==3){
             scaling=0
             enemyatkmax++
             enemyblkmax++
