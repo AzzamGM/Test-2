@@ -71,6 +71,7 @@
 
         }
         .grid-log{
+            flex-direction: column-reverse;
             background-color: rgb(36, 42, 45);
             color:rgb(181, 228, 255);
             font-size: 19px;
@@ -84,7 +85,7 @@
             top: 50%;
             left: 50%;
             z-index: 1;
-            overflow: scroll;}
+            overflow: auto;}
 
         .logs{
             margin: 3px;
@@ -265,8 +266,20 @@
             margin-left: 45px;
             margin-top: 100px;
             border: 3px solid black;
+            border-radius: 6px;}
+
+        #restartbutton{
+            font-size: 25px;
+            width: 250px;
+            height: 60px;
+            background-color: #4830ff;
+            margin-left: 45px;
+            margin-top: 100px;
+            border: 3px solid black;
             border-radius: 6px;
+            position: absolute;
         }
+
         #battlebutton:disabled{
             font-size: 25px;
             width: 250px;
@@ -382,7 +395,7 @@
             <img align="center" name="gamepfp" id="gamepfp" class="character" src="https://cdn.pixabay.com/photo/2017/02/20/18/03/cat-2083492__340.jpg" alt="r u dumb?">
         </div>  
         <div class="grid-empty"></div>
-        <div class="grid-log">
+        <div id="mylogs" class="grid-log">
             <p id="logs"></p>
             <p id="afterlogs"></p>
         </div>
@@ -400,9 +413,11 @@
             <button style="margin-top: 180px; margin-left: auto;" id="atk2" onclick="playerattack2()" name="gamebuttons" class="abilities" title="10% Chance To Deal 3x(⚔️) Damage | 20% Chance to Deal (⚔️) or Miss!">⚔️💥🎲</button>
             <button style="margin-top: 180px; margin-left: 210px" id="blk2" onclick="playerheal()" name="gamebuttons" class="abilities" title="Heal 1x(❤️) Health | 50% To Heal 2x(❤️) Health Instead!">❤️‍🩹</button>
         </div>
-        <div class="grid-empty">
+        <div class="grid-empty">    
+            <button onclick="location.reload()" id="restartbutton">Restart</button>
             <button onclick="generateenemy()" id="battlebutton">⚔️START BATTLE⚔️</button>
         </div>
+        
  <!--------------------------ENEMY INTREFACE---------------------->
         <div class="grid-empty">
             <button style="margin-top: 110px; margin-left:auto" id="eatk" onclick="" name="gamebuttons" class="abilities2" title="80% Chance To Deal (⚔️) Damage | 5% Chance To 2x(⚔️) Deal Damage!">⚔️</button>
@@ -458,6 +473,7 @@
 
 
 <script>
+    $("#restartbutton").hide()
     $(document).ready(function(){
         $("#gamesound").change(function(){
             sound = document.getElementById("gamesound").value/100
@@ -663,17 +679,20 @@
 
 
     function flip(){
+        $('#mylogs').stop().animate({
+         scrollTop: $('#mylogs')[0].scrollHeight
+        }, 800);
         if(onetwo<2){
             onetwo++
             $(".abilities").prop('disabled', true)
             $(".abilities2").prop('disabled', false)
-            console.log(onetwo)}
+            }
         else{
             onetwo--
             $(".abilities2").prop('disabled', true)
             if(playercurrenthp>0){
             $(".abilities").prop('disabled', false)}
-            console.log(onetwo)
+            
 }}
 
     function ogabilities(){
@@ -702,50 +721,53 @@
     }
 
     function enemyturn(){
+        $('#mylogs').stop().animate({
+        scrollTop: $('#mylogs')[0].scrollHeight
+        }, 800);
         if(enemycurrenthp<enemymaxhp){
-            let rndability = (Math.ceil(Math.random() * (4 - 0)))
-        console.log(rndability)
+        let rndability = (Math.ceil(Math.random() * (4 - 0)))
+        console.log(rndability+'rolled for 4')
         switch(rndability){
             case rndability = 1:
                 enemyattack1()
                 clickatk1()
-                setTimeout(ogabilities, 2000)
+                setTimeout(ogabilities, 1700)
                 break;
             case rndability = 2:
                 enemyattack2()
                 clickatk2()
-                setTimeout(ogabilities, 2000)
-                breakl
+                setTimeout(ogabilities, 1700)
+                break;
             case rndability = 3:
                 enemydefend1()
                 clickblk()
-                setTimeout(ogabilities, 2000)
+                setTimeout(ogabilities, 1700)
                 break;
             case rndability = 4:
                 enemyheal()
                 clickheal()
-                setTimeout(ogabilities, 2000)
+                setTimeout(ogabilities, 1700)
                 break;
             }
         }
-        else{
+        else if(enemycurrenthp=enemymaxhp){
         let rndability = (Math.ceil(Math.random() * (3 - 0)))
-        console.log(rndability)
+        console.log(rndability+'rolled for 3')
         switch(rndability){
             case rndability = 1:
                 enemyattack1()
                 clickatk1()
-                setTimeout(ogabilities, 2000)
+                setTimeout(ogabilities, 1700)
                 break;
             case rndability = 2:
                 enemyattack2()
                 clickatk2()
-                setTimeout(ogabilities, 2000)
+                setTimeout(ogabilities, 1700)
                 break;
             case rndability = 3:
                 enemydefend1()
                 clickblk()
-                setTimeout(ogabilities, 2000)
+                setTimeout(ogabilities, 1700)
                 break;}}
             
             }
@@ -813,7 +835,7 @@
         console.log("rndenemyhp "+rndenemyhp)
         $("#battlebutton").prop('disabled', true)
         flip()}
-
+        
 
 
     function refreshstats(){
@@ -837,7 +859,8 @@
         $("#afterlogs").before("<p class='temp' style='color: red'>"+localStorage.usernames+" died.</p>")
         refreshstats()
         $(".abilities").prop('disabled', true)
-        setTimeout(endgame, 6000)
+        $("#battlebutton").hide()
+        $("#restartbutton").show()
     }
         else{
         refreshstats()
@@ -859,14 +882,9 @@
         if(scaling==3){
             scaling=0
             enemyatkmax++
-            enemyatkmin++
-
             enemyblkmax++
-            enemyblkmin++
-
             enemyhpmax++
             enemygoldmax++
-
         }
         playergoldstat = playergoldstat + enemygoldstat
         enemygoldstat = 0
@@ -1036,7 +1054,7 @@
             }
             else{
                 playercurrenthp = playermaxhp
-                $("#afterlogs").before("<p class='temp'>"+localStorage.usernames  + " tried to heal, but is full hp???</p>")
+                console.log("what")
             }}
             refreshstats()
             if(enemycurrenthp>0){
@@ -1048,7 +1066,7 @@
 
     //ENEMY ATTACK 1||||||||||||||||||||||||||||||||||||||||||||||||||||
         function enemyattack1(){
-        setTimeout(flip, 3000)
+        setTimeout(flip , 1800)
         $("#afterlogs").before("<p class='temp'>"+deadname + " used Normal Attack.</p>")
         enemyatkchance = Math.ceil(Math.random() * (100 - 0))
         enemynextattack = 0
@@ -1085,7 +1103,7 @@
 
     //ENEMY ATTACK 2||||||||||||||||||||||||||||||||||||||||||||||||||||
     function enemyattack2(){
-        setTimeout(flip, 3000)
+        setTimeout(flip , 1800)
         enemyatkchance = Math.ceil(Math.random() * (100 - 0))
         $("#afterlogs").before("<p class='temp'>"+deadname + " used Lucky Attack. </p>")
         if(enemyatkchance<=10){
@@ -1121,7 +1139,7 @@
     //ENEMY BLOCK||||||||||||||||||||||||||||||||||||||||||||||||||||
     function enemydefend1(){
         blocksfx()
-        setTimeout(flip, 3000)
+        setTimeout(flip , 1800)
         blkchance = Math.ceil(Math.random() * (100 - 0))
         $("#afterlogs").before("<p class='temp'>"+deadname + " used Normal Defend.</p>")
         if(blkchance <=80){
@@ -1136,7 +1154,7 @@
     //ENEMY HEAL||||||||||||||||||||||||||||||||||||||||||||||||||||
     function enemyheal(){
         healsfx()
-        setTimeout(flip, 3000)
+        setTimeout(flip , 1800)
         dblhealchance = Math.ceil(Math.random() * (100 - 0))
         $("#afterlogs").before("<p class='temp'>"+deadname + " used heal.</p>")
         if(dblhealchance <=50){
