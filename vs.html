@@ -653,12 +653,11 @@
     function openshop(){
         $(document).ready(function(){
             refreshshop()
-            $("#battlebutton").prop("disable", true)
             $("#shopwindow").show()
         document.getElementById("blklevelcost").innerHTML = "Cost: "+levelblkcost+"💰"    
         document.getElementById("atklevelupcost").innerHTML = "Cost: "+levelatkcost+"💰"
         document.getElementById("shopplayergold").innerHTML = playergoldstat + "💰"
-        $("#battlestart").prop("disabled", true)
+        $("#battlebutton").prop("disabled", true)
         })
 
         
