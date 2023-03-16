@@ -653,6 +653,7 @@
     function openshop(){
         $(document).ready(function(){
             refreshshop()
+            $("#battlebutton").prop("disable", true)
             $("#shopwindow").show()
         document.getElementById("blklevelcost").innerHTML = "Cost: "+levelblkcost+"💰"    
         document.getElementById("atklevelupcost").innerHTML = "Cost: "+levelatkcost+"💰"
