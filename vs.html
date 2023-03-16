@@ -724,7 +724,7 @@
         scrollTop: $('#mylogs')[0].scrollHeight
         }, 800);
         if(enemycurrenthp<enemymaxhp){
-        let rndability = (Math.ceil(Math.random() * (4 - 0)))
+        let rndability = (Math.floor(Math.random() * (4 - 0)))
         console.log(rndability+'rolled for 4')
         switch(rndability){
             case rndability = 1:
@@ -811,7 +811,7 @@
         let rndenemyatk = (Math.ceil(Math.random() * (enemyatkmax - (enemyatkmin-1)) + (enemyatkmin-1))) 
         let rndenemyblk = (Math.ceil(Math.random() * (enemyblkmax - (enemyblkmin-1)) + (enemyblkmin-1)))
         let rndenemyhp = (Math.ceil(Math.random() * (enemyhpmax - (enemyhpmin-1)) + (enemyhpmin-1)))
-        let rndenemygold = (Math.ceil(Math.random() * (enemyhpmax - (enemygoldmin-1)) + (enemygoldmin-1)))
+        let rndenemygold = (Math.ceil(Math.random() * (enemygoldmax - (enemygoldmin-1)) + (enemygoldmin-1)))
 
         enemymaxhp = rndenemyhp
         enemycurrenthp = rndenemyhp
@@ -884,7 +884,15 @@
             enemyblkmax++
             enemyhpmax++
             enemygoldmax++
+            enemyatkmax++
+            enemyblkmax++
+            enemyhpmax++
+            enemygoldmax++
 
+            enemyatkmin++
+            enemyblkmin++
+            enemyhpmin++
+            enemygoldmin++
             enemyatkmin++
             enemyblkmin++
             enemyhpmin++
@@ -1162,7 +1170,7 @@
                 enemycurrenthp = enemymaxhp
             }
             
-                $("#afterlogs").before("<p class='temp'>"+deadname  + " tried to heal, but is full hp???</p>")
+     
             
             refreshstats()
         }
