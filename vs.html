@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>VS</title>
+
+  <!-- JQuery core -->
+  <script src="static/vendor/jquery/jquery.min.js"></script>
+
+  <!-- Bootstrap core -->
+  <link href="static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <script src="static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script> 
+
+  <link href="/bootstrap/css/bootstrap.css.map" rel="stylesheet">
+  <link href="/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
+  
+<!-- Custom fonts for this template -->
+
+  <link href="static/vendor/font-awesome/css/all.min.css" rel="stylesheet" type="text/css">
+
+</head>
+<body style="background-color: rgb(181, 228, 255)">
+    <style>
+        .loginbutton{
+            background-color: rgb(181, 228, 255, 0.5);
+            border: 2px solid black;
+            border-radius: 2px;
+        }
+        .loginbutton:disabled{
+            background: rgb(92, 92, 92, 0.5) ; 
+            }
+        .grid-container {
+            display: grid;
+            grid-template-columns: auto auto auto auto auto;
+            background-color: rgb(181, 228, 255);
+            width: auto;
+            height: auto;
+            align-items: center;
+            padding: auto;
+        }
+        .grid-item {
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 5px solid rgba(195, 155, 255, 0.8);
+            font-size: 30px;
+            text-align: center;
+            margin: auto;
+            width: 350px;
+            height: 350px;
+            display: flex;
+
+        }
+        .grid-empty{
+            background-color: rgb(181, 228, 255);
+
+            font-size: 30px;
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+            width: 350px;
+            height: 300px;  
+            display: flex;
+
+        }
+        .grid-log{
+            background-color: rgb(36, 42, 45);
+            color:rgb(181, 228, 255);
+            font-size: 19px;
+            text-align: center;
+            margin-left: -210px;
+            margin-top: -233px;
+            width: 420px;
+            height: 485px;  
+            overflow: hidden;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            z-index: 1;
+            overflow: scroll;}
+
+        .logs{
+            margin: 3px;
+            font-size: 20px;
+            color: red;
+        }
+
+        text{
+            text-align: left;
+        }
+        .charactername{
+            background-color: rgba(0, 0, 0, 0.5);
+            border: 1px;
+            border-color: black;
+            text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+            color: aliceblue;
+            text-align: center;
+            margin-top: auto;
+            margin-left: auto;
+            margin-right: auto;
+            width: 350px;
+        }
+        .characterhp{
+            background-color: rgba(195, 155, 255, 0.8);
+            margin-bottom: auto;
+            margin-left: auto;
+            margin-right: auto;
+            width: 350px;}
+
+        .characterstats{
+            background-color: rgba(195, 155, 255, 0.8);
+            margin-bottom: auto;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 45px;
+            width: 350px;
+            position: absolute;}
+    
+        .character{
+            width: auto;
+            height: auto;
+            max-width: 100%;
+            max-height: 100%;
+            margin: auto;
+            border-top: rgba(195, 155, 255, 0.8);
+            border-bottom: rgba(195, 155, 255, 0.8);;
+        }
+        .startwindow{
+            background-color: rgba(158, 94, 255, 0.8);
+            border: 5px solid black;
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            border-radius: 10px;
+            z-index: 2;
+        }
+        .progress{
+            margin: 18px auto;
+            width: 300px;
+            height: 40px;
+            position: relative;
+            border: 2px solid black;
+            background-color: #ddd;}
+        .bar{
+            background-color: #77ff00;
+            width: 340px;
+            height: 38px;
+
+            position: relative;}
+        .info{
+            margin-left: 10px;
+            width: 340px;}
+
+        .abilities{
+            background-color: #ffdddd;
+            position: absolute;
+            height: 55px;
+            width: 140px;font-size: 27px;
+            box-shadow: 0 5px #666;
+            border: 3px solid black;
+            border-radius: 4px;}
+
+        .pressedabilities{
+            background-color: #f600008d;
+            position: absolute;
+            height: 55px;
+            width: 140px;font-size: 27px;
+            box-shadow: 0 2px #666;
+            border: 3px solid black;
+            border-radius: 4px;
+            transform: translateY(3px)}
+        .pressedabilities:disabled{
+            background-color: #780000
+        }
+
+        .abilities2{
+            background-color: #f60000;
+            position: absolute;
+            height: 55px;
+            width: 140px;font-size: 27px;
+            box-shadow: 0 5px #666;
+            border: 3px solid black;
+            border-radius: 4px;}
+        .abilties2:disabled{
+            background-color: #780000;
+        }
+        .temp{
+            background-color: rgb(0,0,0,0);
+        }
+        button{
+            box-shadow: 0 5px gray;
+        }
+        button:active{
+            box-shadow: 0 1px gray;
+            background-color: rgb(99, 99, 99);
+            transform: translateY(5px);}
+
+        button:hover{
+            background-color: rgba(218, 218, 218);}
+        
+        button:disabled{
+            background-color: rgb(125, 125, 125);}
+        #atklevelup{
+            box-shadow: 0 5px gray;
+            border: 2px solid black;
+            vertical-align: middle;
+            font-weight: 400;
+            font-size: 24px;
+            line-height: 1.33;
+            padding-right: 10px;
+            line-height: 1em;
+            padding: 0px;
+            text-align: center;
+            position: absolute;
+            background-color: rgb(187, 57, 57);
+            width: 40px;
+            height: 40px;
+            margin-top: 45px;
+            margin-left: 344px;
+        }
+        #atklevelup:active{
+            box-shadow: 0 2px rgb(72, 72, 72);
+        }
+        .levelup{
+            position: absolute;
+            box-shadow: 0 5px gray;
+            border: 2px solid black;
+            line-height: 2px;
+            font-size: 24px;
+            text-align: center;
+            background-color: rgb(255, 255, 255);
+            width: 100px;
+            height: 40px;
+            margin-top: 45px;
+            margin-left: -34px;
+            border-radius: 8px;    
+        }
+
+        #blklevelup:active{
+            box-shadow: 0 2px rgb(72, 72, 72);
+            
+        }
+        .testbtn2{
+            position: absolute;
+        }
+        .testbtn1{
+            position: absolute;
+            margin-left: 500px;
+        }
+        #afterlogs{
+            position: absolute;
+        }
+        #battlebutton{
+            font-size: 25px;
+            width: 250px;
+            height: 60px;
+            background-color: #d30e00;
+            margin-left: 45px;
+            margin-top: 100px;
+            border: 3px solid black;
+            border-radius: 6px;
+        }
+        #battlebutton:disabled{
+            font-size: 25px;
+            width: 250px;
+            height: 60px;
+            background-color: #650700;
+            margin-left: 45px;
+            margin-top: 100px;
+            border: 3px solid black;
+            border-radius: 6px;
+            box-shadow: 0 2px gray;
+            transform: translateY(3px);
+        }
+        #shopbutton{
+
+            width: 150px;
+            height: 60px;
+            background-color: #9ce35e;
+            margin-left: 75px;
+            margin-top: 160px;
+            border: 3px solid black;
+            border-radius: 6px;
+        }
+        #shopbutton:disabled{
+            background-color: #2d4618;
+            box-shadow: 0 2px rgb(77, 77, 77);
+            transform: translateY(3px);
+        }
+        #shopwindow{
+            background-color: rgba(94, 255, 124, 0.861);
+            border: 5px solid black;
+            position: absolute;
+            height: 520px;
+            width: 700px;
+            margin-top: -255px;
+            margin-left: -350px;
+            border-radius: 10px;
+            top: 52%;
+            left: 50%;
+            z-index: 2;
+        }
+        .shopitems{
+            position: absolute;
+            border: 3px solid black;
+            font-size: 24px;
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.739);
+            color: gold;
+            width: 100px;
+            height: 40px;
+            border-radius: 5px;
+        }
+        .shopitems:hover{
+            background-color: rgba(0, 0, 0, 1);
+        }
+        .atkcost{
+            z-index: auto;
+        }
+
+    </style>
+          <!--  <img src="https://cdn.britannica.com/39/7139-050-A88818BB/Himalayan-chocolate-point.jpg"> -->
+
+ <!--------------------------SHOP WINDOW---------------------->
+    <div id="shopwindow">
+        <p style="background-color: black;margin-left: 302.5px;margin-top: -3px;width: 80px;height: 50px;" id="shopplayergold" class="shopitems">🪙</p>
+        <p style="color: black;border: none;background-color: rgba(47, 46, 46, 0);margin-left: 270px;margin-top: 60px;width: 150px;height: 45px" class="shopitems">Level Up (⚔️)</p>
+        <p style="border-radius:2px;background-color: rgb(47, 46, 46);margin-left: 270px;margin-top: 100px;width: 150px;height: 45px" id="shopatkcost" class="shopitems">Cost: 🪙</p>
+        <p  style="color: black;border: none;background-color: rgb(47, 46, 46, 0);margin-left: 270px;margin-top: 270px;width: 150px;height: 45px"  class="shopitems">Level Up (🛡️)</p> 
+        <p style="border-radius:2px;background-color: rgb(47, 46, 46);margin-left: 270px;margin-top: 310px;width: 150px;height: 45px" class="shopitems" id="shopblkcost">Cost: 🪙</p>
+        <button style="margin-top: 100px;margin-left: 100px" class="levelup">➖</button>
+        <button style="margin-top: 100px;margin-left: 490px" onclick="levelatk()" class="levelup">➕</button>
+        <button style="margin-top: 310px;margin-left: 100px" class="levelup">➖</button>
+        <button style="margin-top: 310px;margin-left: 490px" onclick="levelblk()" class="levelup">➕</button>
+        <button style="margin-top: 430px;margin-right: 170px;margin-left: 170px;width: 350px; height: 70px" id="leaveshop" onclick="leaveshop()" class="shopitems">Confirm & Leave Shop</button>
+    </div>
+<!--------------------------START WINDOW---------------------->
+    <div align="center" class="startwindow">
+        <br><br><br><br>
+        <label for="nametextbox">Character Name: </label>
+        <br>
+        <input type="text" class="info" id="nametextbox" name="nametextbox" required><br>
+        <br>
+        <label for="pfptextbox">Character Appearance: </label>
+        <br>
+        <input type="url" value="Enter a link that ends with .png or .jpg etc.." class="info" id="pfptextbox" name="pfptextbox" required><br>
+        <br>
+        <button class="loginbutton" id="deleteprofileb" onclick="clearprofile()">Delete profile</button>
+        <button class="loginbutton" id="loadprofileb" onclick="loadprofile()">Load profile</button>
+        <button class="loginbutton" id="confirmb" onclick="newchar()">Confirm</button>
+    </div>
+
+     
+    <div id="maind" class="grid-container">
+        <div class="grid-empty">
+           
+  
+        </div>
+        <div class="grid-empty">
+            <h class="charactername" id="gamename">...</h>
+        </div>
+        <div class="grid-empty">
+            <input style="position: absolute;margin-top: 0%;width: 350px;height: 100px;"  id="gamesound" type="range" min="0" max="100" value="50">
+            <label stlye="position: absolute;margin-left:3px"  class="nametextbox"> Sound </label>
+            <button onclick="$(document).ready(function(){openshop()})" id="shopbutton">|🛒|</button>
+        </div>  
+        <div class="grid-empty">
+            <div class="grid-empty">
+                <h class="charactername" id="enemygamename">...</h>
+            </div>
+        </div>
+        <div class="grid-empty">4</div>
+        <div class="grid-empty">5</div>
+        <div class="grid-item">
+            <img align="center" name="gamepfp" id="gamepfp" class="character" src="https://cdn.pixabay.com/photo/2017/02/20/18/03/cat-2083492__340.jpg" alt="r u dumb?">
+        </div>  
+        <div class="grid-empty"></div>
+        <div class="grid-log">
+            <p id="logs"></p>
+            <p id="afterlogs"></p>
+        </div>
+        <div class="grid-item">
+            <img align="center" name="enemygamepfp" id="enemygamepfp" class="character">
+        </div>
+        <div class="grid-empty">6</div>
+        <div class="grid-empty"></div>
+ <!--------------------------USER INTERFACE---------------------->
+        <div class="grid-empty"> 
+            <h class="characterhp"  id="userhp">. . .</h><br>
+            <h class="characterstats"  id="userstats">⚔️🛡️</h>
+            <button style="margin-top: 110px; margin-left:auto" id="atk" onclick="playerattack1()" name="gamebuttons" class="abilities" title="80% Chance To Deal (⚔️) Damage | 5% Chance To 2x(⚔️) Deal Damage!">⚔️</button>
+            <button style="margin-top: 110px; margin-left: 210px;" id="blk" onclick="playerdefend1()" name="gamebuttons" class="abilities" title="80% Chance To Block (🛡️) Damage! Stuns Enemy for (1) Turn If Succesfully Blocked damage">🛡️</button>
+            <button style="margin-top: 180px; margin-left: auto;" id="atk2" onclick="playerattack2()" name="gamebuttons" class="abilities" title="10% Chance To Deal 3x(⚔️) Damage | 20% Chance to Deal (⚔️) or Miss!">⚔️💥🎲</button>
+            <button style="margin-top: 180px; margin-left: 210px" id="blk2" onclick="playerheal()" name="gamebuttons" class="abilities" title="Heal 1x(❤️) Health | 50% To Heal 2x(❤️) Health Instead!">❤️‍🩹</button>
+        </div>
+        <div class="grid-empty">
+            <button onclick="generateenemy()" id="battlebutton">⚔️START BATTLE⚔️</button>
+        </div>
+ <!--------------------------ENEMY INTREFACE---------------------->
+        <div class="grid-empty">
+            <button style="margin-top: 110px; margin-left:auto" id="eatk" onclick="" name="gamebuttons" class="abilities2" title="80% Chance To Deal (⚔️) Damage | 5% Chance To 2x(⚔️) Deal Damage!">⚔️</button>
+            <button style="margin-top: 110px; margin-left: 210px;" id="eblk" onclick="" name="gamebuttons" class="abilities2" title="80% Chance To Block (🛡️) Damage! Stuns Enemy for (1) Turn If Succesfully Blocked damage">🛡️</button>
+            <button style="margin-top: 180px; margin-left: auto;" id="eatk2" onclick="" name="gamebuttons" class="abilities2" title="10% Chance To Deal 3x(⚔️) Damage | 20% Chance to Deal (⚔️) or Miss!">⚔️💥🎲</button>
+            <button style="margin-top: 180px; margin-left: 210px" id="eheal" onclick="" name="gamebuttons" class="abilities2" title="35% Chance To Block 2x(🛡️) Damage!">❤️‍🩹</button>
+            <h class="characterhp"  id="enemygamehp">. . .</h>
+            <h class="characterstats"  id="enemystats">. . .</h>
+        </div>
+        <div class="grid-empty"></div>
+    </div>
+
+
+
+
+
+    <audio id="attackmp3">
+        <source src="Audio/attack.mp3 ">
+    </audio>
+      
+    <audio id="attack2mp3">
+        <source src="Audio/attack2.mp3 ">
+    </audio>
+
+    <audio id="blockmp3">
+        <source src="Audio/block.mp3 ">
+    </audio>
+
+    <audio id="healmp3">
+        <source src="Audio/heal.mp3 ">
+    </audio>
+
+    <audio id="damagedmp3">
+        <source src="Audio/damaged.mp3 ">
+    </audio>
+
+    <audio id="buymp3">
+        <source src="Audio/buy.mp3 ">
+    </audio>
+
+    <audio id="lootmp3">
+        <source src="Audio/loot.mp3 ">
+    </audio>
+
+    <audio id="missmp3">
+        <source src="Audio/missed.mp3 ">
+    </audio>
+
+
+
+    
+
+
+
+<script>
+    $(document).ready(function(){
+        $("#gamesound").change(function(){
+            sound = document.getElementById("gamesound").value/100
+            console.log(sound)
+            })})
+
+
+    var attack1sound = document.getElementById("attackmp3")
+    var attack2sound = document.getElementById("attack2mp3")
+    var blocksound = document.getElementById("blockmp3")
+    var healsound = document.getElementById("healmp3")
+    var damagedsound = document.getElementById("damagedmp3")
+    var buysound = document.getElementById("buymp3")
+    var lootsound = document.getElementById("lootmp3")
+    var misssound = document.getElementById("missmp3")
+    sound = 0.4
+
+    function attack1sfx(){
+        attack1sound.volume = sound
+        attack1sound.play()
+    }
+
+    function attack2sfx(){
+        attack2sound.volume = sound
+        attack2sound.play()
+    }
+
+    function blocksfx(){
+        blocksound.volume = sound
+        blocksound.play()
+    }
+    
+    function healsfx(){
+        healsound.volume = sound
+        healsound.play()
+    }
+
+    function damagedsfx(){
+        damagedsound.volume = sound
+        damagedsound.play()
+    }
+
+    function buysfx(){
+        buysound.volume = sound
+        buysound.play()
+    }
+
+    function lootsfx(){
+        lootsound.volume = sound
+        lootsound.play()
+    }
+
+    function misssfx(){
+        misssound.volume = sound
+        misssound.play()
+    }
+
+
+
+    $("#shopwindow").hide()
+    $(".abilities").prop("disabled", true)
+        
+
+
+    $("#shopbutton").prop('disabled', true)
+    function refreshshop(){
+        $(document).ready(function() {
+        document.getElementById("shopatkcost").innerHTML = "Cost: "+levelatkcost+"🪙"
+        document.getElementById("shopblkcost").innerHTML = "Cost: "+levelblkcost+"🪙"    
+        document.getElementById("shopplayergold").innerHTML = playergoldstat + "🪙"})
+    }
+    let profile = {}
+    let hp = "❤️"
+    let losthp = "💔"
+
+    let onetwo = 2
+
+
+    let enemydead = 1
+
+    let levelatkcost = 5
+    let levelblkcost = 5
+
+
+    let playeratkstat = 1
+    let playerblkstat = 1
+    let playerhpstat = 0
+    let playercurrenthp = 3
+    let playermissinghp = 0
+    let playermaxhp = 3
+    let playergoldstat = 20
+
+    playerhp = hp.repeat(playermaxhp);
+
+
+    let skillpoints = 0
+
+    let enemyatkstat = 0
+    let enemyblkstat = 0
+    let enemycurrenthp = 0
+    let enemymissinghp = 0
+    let enemymaxhp = 0
+    let enemygoldstat = 0
+
+    let enemyatkmin = 1
+    let enemyatkmax = 2
+
+    let enemyblkmin = 1
+    let enemyblkmax = 3
+
+    let enemyhpmin = 2
+    let enemyhpmax = 3
+
+    let enemygoldmin = 1
+    let enemygoldmax = 3
+
+    let playernextattack = 0
+    let enemynextattack = 0
+
+    let enemynextblk = 0
+    let playernextblk = 0
+
+    let playerkills = 0
+    let scaling = 0
+    
+
+    enemychar = ["1.png", "2.png", "3.png", "4.png", "5.png", "6.png", "7.png", "8.png", "9.png", "10.png", "11.png", "12.png", "13.png", "14.png", "15.png", "16.png", "17.png", "18.png", "19.png", "20.png", "21.png", "22.png", "23.png", "24.png", "25.png", "26.png", "27.png", "28.png", "29.png", "30.png", "31.png", "32.png", "33.png", "34.png", "35.png", "36.png", "37.png", "38.png", "39.png", "40.png", "41.png", "42.png", "43.png", "44.png", "45.png", "46.png", "47.png", "48.png", "49.png", "50.png", "51.png", "52.png", "53.png", "54.png", "55.png", "56.png", "57.png", "58.png", "59.png", "60.png", "61.png", "62.png", "63.png", "64.png", "65.png", "66.png", "67.png", "68.png", "69.png", "70.png"]
+    enemyname = ["Cruz", "Espinoza", "Zubair", "Sutherland", "Zoe", "Krankry", "Husna","Easwith", "Ruthbald", "Claceol", "Rahe", "Fride", "Reginu", "Nethdic", "Pheradel", "Burred", "Isenwig", "Sonkim", "Viagorma", "Betca", "Lintom", "Nethtine", "Robcyn", "Ciane", "Riwig", "Dajack", "Thysa" ,"Brooks", "Isobel", "Mccormick", "Zackary", "Allen", "Oliver", "Keller", "Jago", "Rollins", "Ty", "Hart", "Gabriela", "Valencia", "Phillip", "Grant", "Aine", "Holder", "Edmund", "Gilmore", "Nevaeh", "zYashi", "Sultan", "Glass", "BluXice", "Levine", "Ella", "Chan", "Edwin", "Preston", "Stop3ndk", "Clark", "Albert", "Bates", "Azzam", "oShaRkz", "WhatIzLove", "Scar", "Cakelock", "Sharo", "Eddga", "West", "Handm", "7asoon", "Jack", "Sett", "MrM7md", "Crocodile", "7toom", "AMM", "AvengingPoro", "Ner0"]
+    enemysurname = ["the Omen", "the Loner", "the Titan", "the Illuminator", "the Valiant", "the Omen", "the Poet", "the Ghost", "the Reckless", "the Gentleman", "son of Ragnar", "the III", "the IV", "Tall", "Waterside", "Lordbreaker", "Flarethunder", "Breezemace", "Ironelvenarrow", "Gazeautumn", "Paladinspear", "Ramboar", "Runner", "Ramwater", "Red", "Lordpicker", "Spearshadow", "Wallside", "Bearhame", "Greenautumngaze", "Wyrmmagenta", "Tallwarg", "Greenelven","Lightgreen", "Starelven", "Breakerhunter", "Lipswalk", "Rageblood", "Bullblood", "Manehilt", "Eyeforce", "Cyanman", "Fullquiver", "Bloodman", "Breakstorm", "Gazewarrior","the Beast", "of the Light", "the Champion", "the Chaotic", "the Guard", "the Shield", "the Lionheart", "the Turbulent", "the Loyal", "the Reckless", "the Tarnished", "Bulwark of the Weak", "the Weakling", "the Strong", "the Masterbaiter", "Bronzeman", "AlShareef", "your Long Lost Brother", "your Stepmom", "your Stepdad", "Obama", "the Slayer", "the Destroyer", "the Pussy Magnet", "the Whore", "the Darksider", "the Musician", "the Pediatrician", "the Child Molester", "the Pedophile", "the Furry", "the Meta Slave", "of the Darkness", "the Firekeeper", "the Light Fixer", "the Imposter", "the Hardstuck", "the Math Teacher", "the Professor", "the Singer", "the Pianist", "the Doctor", "the Warrior", "the Barbarian", "the Lover", "the Horny", "the Beekeeper", "the Businessman", "the Rich", "the Poor", "the Dwarf", "the Goblin", "the Orc" ,"Breakhammer", "Forcetongue", "Wargdragonbreeze", "Hawkram", "Noseore", "Treesandbright", "Falconfall","the II", "the V", "son of Donald Trump", "Trump", "Twaim", "Scarlet", "the Frenchman", "the Challenger", "the Duelist", "the Escapist", "the Thief", "the Guardian", "the Malicious", "the Dominant", "the Submissive", "the Sexy", "the First", "the Jokester", "the Magnificent", "Baroum", "the Zoo Keeper", "the Pharmacist", "the Assassin", "the Monk", "the Rapist", "the Law Maker", "the Abandoned", "son of Sylvanas", "son of Ragnarok", "son of Vereth", "the Fucker"]
+
+    console.log(enemysurname.length)
+    document.getElementById("userstats").innerHTML = "⚔️"+playeratkstat+" | 🪙"+playergoldstat+" | 🛡️"+playerblkstat
+    document.getElementById("userhp").innerHTML = playerhp
+    $(document).ready(function(){
+        if(localStorage.username=undefined){
+            $("#deleteprofileb").prop('disabled', true)
+            $("#loadprofileb").prop('disabled', true)
+        }
+        else{
+            console.log("hello")}})
+
+    console.log(profile)
+        console.log(localStorage.usernames)
+        console.log(localStorage.userpfps)
+
+    $("#confirmb").click(function(){
+        $(".startwindow").hide()
+    })
+
+    function levelatk(){
+        if(playergoldstat>=levelatkcost){
+            playergoldstat = playergoldstat - levelatkcost
+            levelatkcost++
+            playeratkstat++
+            refreshstats()
+            refreshshop()
+        }
+        else{
+            alert("Not enough gold")}}
+
+    function levelblk(){
+        if(playergoldstat>=levelblkcost){
+            playergoldstat = playergoldstat - levelblkcost
+            levelblkcost++
+            playerblkstat++
+            playermaxhp++
+            playercurrenthp=playermaxhp
+            refreshstats()
+            refreshshop()
+            
+        }
+        else{
+            alert("Not enough gold")
+        }
+    }
+
+    function openshop(){
+        $(document).ready(function(){
+            $("#shopwindow").show()
+        document.getElementById("blklevelcost").innerHTML = "Cost: "+levelblkcost+"🪙"    
+        document.getElementById("atklevelupcost").innerHTML = "Cost: "+levelatkcost+"🪙"
+        document.getElementById("shopplayergold").innerHTML = playergoldstat + "🪙"
+        $("#battlestart").prop("disabled", true)
+        })
+
+        
+        resfreshshop()
+    }
+
+    function leaveshop(){
+        $("#battlebutton").prop('disabled', false)
+        $("#shopwindow").hide()
+        $("#shopbutton").prop('disabled', true)
+
+    }
+
+   
+
+
+
+
+
+    function flip(){
+        if(onetwo<2){
+            onetwo++
+            $(".abilities").prop('disabled', true)
+            $(".abilities2").prop('disabled', false)
+            console.log(onetwo)}
+        else{
+            onetwo--
+            $(".abilities2").prop('disabled', true)
+            $(".abilities").prop('disabled', false)
+            console.log(onetwo)
+}}
+
+    function ogabilities(){
+        $(document).ready(function(){
+        document.getElementById("eatk").setAttribute("class", "abilities2")
+        document.getElementById("eblk").setAttribute("class", "abilities2")
+        document.getElementById("eatk2").setAttribute("class", "abilities2")
+        document.getElementById("eheal").setAttribute("class", "abilities2")
+        })
+    }
+    function clickatk1(){
+        $(document).ready(function(){
+        document.getElementById("eatk").setAttribute("class", "pressedabilities")})
+    }
+    function clickatk2(){
+        $(document).ready(function(){
+        document.getElementById("eatk2").setAttribute("class", "pressedabilities")})
+    }
+    function clickblk(){
+        $(document).ready(function(){
+        document.getElementById("eblk").setAttribute("class", "pressedabilities")})
+    }
+    function clickheal(){
+        $(document).ready(function(){
+        document.getElementById("eheal").setAttribute("class", "pressedabilities")})
+    }
+
+    function enemyturn(){
+        if(enemycurrenthp> enemymaxhp){
+            let rndability = (Math.ceil(Math.random() * (4 - 0)))
+        console.log(rndability)
+        switch(rndability){
+            case rndability = 1:
+                enemyattack1()
+                clickatk1()
+                setTimeout(ogabilities, 2000)
+                break;
+            case rndability = 2:
+                enemyattack2()
+                clickatk2()
+                setTimeout(ogabilities, 2000)
+                breakl
+            case rndability = 3:
+                enemydefend1()
+                clickblk()
+                setTimeout(ogabilities, 2000)
+                break;
+            case rndability = 4:
+                enemyheal()
+                clickheal()
+                setTimeout(ogabilities, 2000)
+                break;
+            }
+        }
+        else{
+        let rndability = (Math.ceil(Math.random() * (3 - 0)))
+        console.log(rndability)
+        switch(rndability){
+            case rndability = 1:
+                enemyattack1()
+                clickatk1()
+                setTimeout(ogabilities, 2500)
+                break;
+            case rndability = 2:
+                enemyattack2()
+                clickatk2()
+                setTimeout(ogabilities, 2500)
+                break;
+            case rndability = 3:
+                enemydefend1()
+                clickblk()
+                setTimeout(ogabilities, 2500)
+                break;}}
+            
+            }
+
+    function generateenemy(){
+        $("#shopbutton").prop('disabled', true)
+        let rndchar = (Math.ceil(Math.random() * (enemychar.length - 0) + 0)) - 1
+        let rndname = (Math.ceil(Math.random() * (enemyname.length - 0) + 0)) - 1
+        let rndsurname = (Math.ceil(Math.random() * (enemysurname.length - 0) + 0)) - 1
+        let rndenemyatk = (Math.ceil(Math.random() * (enemyatkmax - (enemyatkmin-1)) + (enemyatkmin-1))) 
+        let rndenemyblk = (Math.ceil(Math.random() * (enemyblkmax - (enemyblkmin-1)) + (enemyblkmin-1)))
+        let rndenemyhp = (Math.ceil(Math.random() * (enemyhpmax - (enemyhpmin-1)) + (enemyhpmin-1)))
+        let rndenemygold = (Math.ceil(Math.random() * (enemyhpmax - (enemygoldmin-1)) + (enemygoldmin-1)))
+
+        enemymaxhp = rndenemyhp
+        enemycurrenthp = rndenemyhp
+        enemyatkstat = rndenemyatk
+        enemyblkstat = rndenemyblk
+        enemyhpstat = hp.repeat(enemycurrenthp)
+        enemygoldstat = rndenemygold
+
+        document.getElementById("enemygamename").innerHTML = enemyname[rndname] + " " + enemysurname[rndsurname]
+        deadname = document.getElementById("enemygamename").innerHTML
+        document.getElementById("enemygamepfp").setAttribute("src", "Pictures/"+enemychar[rndchar])
+        document.getElementById("enemystats").innerHTML = "⚔️"+enemyatkstat+" | 🪙"+enemygoldstat+" | 🛡️"+enemyblkstat
+        document.getElementById("enemygamehp").innerHTML = enemyhpstat
+
+        console.log("Pictures/"+enemychar[rndchar])
+        console.log("rndname "+rndname)
+        console.log("rndsurname "+rndsurname)
+        console.log("rndenemyatk "+rndenemyatk)
+        console.log("rndenemyblk "+rndenemyblk)
+        console.log("rndenemyhp "+rndenemyhp)
+        $("#battlebutton").prop('disabled', true)
+        flip()}
+
+
+    function refreshstats(){
+    if(enemycurrenthp<0){
+        enemycurrenthp=0
+    }
+    if(playercurrenthp<0){
+        playercurrenthp=0
+    }
+        document.getElementById("enemygamehp").innerHTML = hp.repeat(enemycurrenthp)+losthp.repeat(enemymaxhp-enemycurrenthp)
+        document.getElementById("enemystats").innerHTML = "⚔️"+enemyatkstat+" | 🪙"+enemygoldstat+" | 🛡️"+enemyblkstat
+
+        document.getElementById("userhp").innerHTML = hp.repeat(playercurrenthp)+losthp.repeat(playermaxhp-playercurrenthp)
+        document.getElementById("userstats").innerHTML = "⚔️"+playeratkstat+" | 🪙"+playergoldstat+" | 🛡️"+playerblkstat
+
+    }
+
+    function updateenemystats(){
+        if(playercurrenthp<1){
+        document.getElementById("userhp").innerHTML = losthp.repeat(playermaxhp)
+        $("#afterlogs").before("<p class='temp' style='color: red'>"+localStorage.usernames+" died.</p>")
+        refreshstats()
+        $(":button").prop('disabled', true)
+    }
+        else{
+        refreshstats()
+    }
+    }
+    
+
+    function updateplayerstats(){
+        
+        if(enemycurrenthp<1){
+        document.getElementById("enemygamehp").innerHTML = losthp.repeat(enemymaxhp)
+        $("#afterlogs").before("<p  class='temp' style='color: red'>"+deadname+" died.</p>")
+        $("#afterlogs").before("<p  class='temp' style='color: gold'>"+"Looted Corpse, Gained "+enemygoldstat+"🪙!</p>")
+        lootsfx()
+        playerkills++
+        scaling++
+        if(scaling==2){
+            scaling=0
+            enemyatkmax++
+            enemyblkmax++
+            enemyhpmax++
+            enemygoldmax++
+        }
+        playergoldstat = playergoldstat + enemygoldstat
+        enemygoldstat = 0
+        playercurrenthp = playermaxhp
+        refreshstats()
+        $("#battlebutton").prop("disabled", false)
+        $(".abilities.abilities2").prop('disabled', true)
+        $("#shopbutton").prop('disabled', false)
+    }
+        else{
+        refreshstats()
+    }}
+
+    function enableplayerb(){
+
+    }
+
+    function newchar(){
+        username = document.getElementById("nametextbox").value
+        document.getElementById("gamename").textContent = username
+        userpfp = document.getElementById("pfptextbox").value
+        document.getElementById("gamepfp").setAttribute("src", userpfp)
+
+        profile={
+        name: username,
+        picture: userpfp}
+
+        localStorage.usernames = profile.name
+        localStorage.userpfps = profile.picture}
+
+    function clearprofile(){
+        localStorage.clear()
+        $("#loadprofileb").prop('disabled', true)}
+
+    function loadprofile(){
+        profile.name = localStorage.usernames
+        profile.picture = localStorage.userpfps
+        document.getElementById("gamename").textContent = profile.name
+        document.getElementById("gamepfp").setAttribute("src", profile.picture)
+        $(".startwindow").hide()}
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+ //ATTACK 1||||||||||||||||||||||||||||||||||||||||||||||||||||
+ function playerattack1(){
+        flip()
+        $("#afterlogs").before("<p  class='temp'>"+localStorage.usernames + " used Normal Attack."+"</p")
+        atkchance = Math.ceil(Math.random() * (100 - 0))
+        playernextattack = 0
+        if(atkchance<=80){
+            attack1sfx()
+            playernextattack = playeratkstat*1-enemynextblk
+            if(playernextattack<0){
+                playernextattack = 0
+            }
+            $("#afterlogs").before("<p class='temp'>"+localStorage.usernames  + " Attacked for "+playernextattack+"x⚔️ Damage!"+"</p>")
+            $("#afterlogs").before("<p class='temp'>"+deadname  + " lost "+playernextattack+"x "+losthp+" Health!<br></p>")
+            enemycurrenthp = enemycurrenthp - playernextattack
+            enemymissinghp = enemymaxhp - enemycurrenthp
+            updateplayerstats()
+        }
+        else if(atkchance>80&&atkchance<85){
+            attack2sfx()
+            playernextattack = playeratkstat*2-enemynextblk
+            if(playernextattack<0){
+                playernextattack = 0
+            }
+            $("#afterlogs").before("<p class='temp'>"+localStorage.usernames  + " Attacked for "+playernextattack+"x⚔️ 💥Double Critical💥Damage!"+"</p>")
+            $("#afterlogs").before("<p class='temp'>"+deadname  + " lost "+playernextattack+"x "+losthp+" Health!<br></p>")
+            enemycurrenthp = enemycurrenthp - playernextattack
+            updateplayerstats()
+            }
+        else
+        {
+            misssfx()
+            $("#afterlogs").before("<p class='temp'>"+localStorage.usernames + " Missed the Attack!"+"</p>")
+        }
+            console.log(atkchance)
+
+        if(enemycurrenthp>0){
+            setTimeout(enemyturn, 2000)
+        }
+        enemynextblk = 0
+        }
+
+    //ATTACK 2||||||||||||||||||||||||||||||||||||||||||||||||||||
+    function playerattack2(){
+        flip()
+        atkchance = Math.ceil(Math.random() * (100 - 0))
+        $("#afterlogs").before("<p  class='temp'>"+localStorage.usernames + " used Lucky Attack."+"</p>")
+        if(atkchance<=10){
+            attack2sfx()
+            playernextattack = playeratkstat*3-enemynextblk
+            if(playernextattack<0){
+                playernextattack = 0
+            }
+            $("#afterlogs").before("<p class='temp'>"+localStorage.usernames  + " Attacked for "+playernextattack+"x⚔️ 💥Triple Critical💥 Damage!"+"</p>")
+            $("#afterlogs").before("<p class='temp'>"+deadname  + " lost "+playernextattack+"x "+losthp+" Health!<br></p>")
+            enemycurrenthp = enemycurrenthp - playernextattack
+            enemymissinghp = enemymaxhp - enemycurrenthp
+            updateplayerstats()
+        
+        }
+        else if(atkchance>10&&atkchance<=30){
+            attack1sfx()
+            playernextattack = playeratkstat*1-enemynextblk
+            if(playernextattack<0){
+                playernextattack = 0
+            }
+            $("#afterlogs").before("<p class='temp'>"+localStorage.usernames  + " Attacked for "+playernextattack+"x⚔️ Damage!</p>")
+            $("#afterlogs").before("<p class='temp'>"+deadname  + " lost "+playernextattack+"x "+losthp+" Health!<br></p>")
+            enemycurrenthp = enemycurrenthp - playernextattack
+            updateplayerstats()}
+        else
+        {
+            misssfx()
+            $("#afterlogs").before("<p class='temp'>"+localStorage.usernames + " Missed the Attack!</p>")
+        }
+        console.log(atkchance)
+
+            $(".abilites2").prop('disable', true)}
+
+        if(enemycurrenthp>0){
+            setTimeout(enemyturn, 2000)
+        }
+    
+    //BLOCK 1||||||||||||||||||||||||||||||||||||||||||||||||||||
+    function playerdefend1(){
+        blocksfx()
+        flip()
+        blkchance = Math.ceil(Math.random() * (100 - 0))
+        $("#afterlogs").before("<p class='temp'>"+localStorage.usernames + " used Normal Defend.</p>")
+        if(blkchance <=80){
+            playernextblk = playerblkstat
+            $("#afterlogs").before("<p class='temp'>"+localStorage.usernames  + " is Blocking the next "+playernextblk+"x🛡️ Damage!</p>")
+        }
+        else{
+            misssfx()
+            $("#afterlogs").before("<p class='temp'>"+localStorage.usernames  + " Tried to block, but failed! </p>")}
+            if(enemycurrenthp>0){
+            setTimeout(enemyturn, 2000)
+        }
+        enemynextblk = 0
+    }
+
+    //HEAL||||||||||||||||||||||||||||||||||||||||||||||||||||
+    function playerheal(){
+        healsfx()
+        flip()
+        dblhealchance = Math.ceil(Math.random() * (100 - 0))
+        $("#afterlogs").before("<p class='temp'>"+localStorage.usernames + " used heal.</p>")
+        if(dblhealchance <=50){
+            $("#afterlogs").before("<p class='temp'>"+localStorage.usernames  + " healed for 1x❤️ Health.</p>")
+            if((playercurrenthp+1)<=playermaxhp){
+                playercurrenthp++
+            }
+            else {
+                $("#afterlogs").before("<p class='temp'>"+localStorage.usernames  + " tried to heal, but is full hp???</p>")
+            }
+            refreshstats()
+        }
+        else{
+            $("#afterlogs").before("<p class='temp'>"+localStorage.usernames  + " got lucky and healed for 2x❤️ Health! </p>")
+            if((playercurrenthp+2)<=playermaxhp){
+                playercurrenthp = playercurrenthp+2
+            }
+            else{
+                playercurrenthp = playermaxhp
+                $("#afterlogs").before("<p class='temp'>"+localStorage.usernames  + " tried to heal, but is full hp???</p>")
+            }}
+            refreshstats()
+            if(enemycurrenthp>0){
+            setTimeout(enemyturn, 2000)
+        }
+        enemynextblk = 0}
+    
+
+
+    //ENEMY ATTACK 1||||||||||||||||||||||||||||||||||||||||||||||||||||
+        function enemyattack1(){
+        setTimeout(flip, 3000)
+        $("#afterlogs").before("<p class='temp'>"+deadname + " used Normal Attack.</p>")
+        enemyatkchance = Math.ceil(Math.random() * (100 - 0))
+        enemynextattack = 0
+        if(enemyatkchance<=80){
+            attack1sfx()
+            enemynextattack = enemyatkstat*1-playernextblk
+            if(enemynextattack<0){
+                enemynextattack = 0
+            }
+            $("#afterlogs").before("<p class='temp'>"+deadname  + " Attacked for "+enemynextattack+"x⚔️ Damage!</p>")
+            $("#afterlogs").before("<p class='temp'>"+localStorage.usernames  + " lost "+enemynextattack+"x "+losthp+" Health!<br></p>")
+            playercurrenthp = playercurrenthp - enemynextattack
+            playermissinghp = playermaxhp - playercurrenthp
+            updateenemystats()
+        }
+        else if(enemyatkchance>80&&enemyatkchance<85){
+            attack2sfx()
+            enemynextattack = enemyatkstat*2-playernextblk
+            if(enemynextattack<0){
+                enemynextattack = 0
+            }
+            $("#afterlogs").before("<p class='temp'>"+deadname  + " Attacked for "+enemynextattack+"x⚔️ 💥Double Critical💥 Damage!</p>")
+            $("#afterlogs").before("<p class='temp'>"+localStorage.usernames  + " lost "+enemynextattack+"x "+losthp+" Health!<br></p>")
+            playercurrenthp = playercurrenthp - enemynextattack
+            playermissing = playermaxhp - playercurrenthp
+            updateenemystats()}
+        else
+        {
+            misssfx()
+            $("#afterlogs").before("<p class='temp'>"+deadname + " Missed the Attack!</p>")
+        }
+        
+    playernextblk = 0}
+
+    //ENEMY ATTACK 2||||||||||||||||||||||||||||||||||||||||||||||||||||
+    function enemyattack2(){
+        setTimeout(flip, 3000)
+        enemyatkchance = Math.ceil(Math.random() * (100 - 0))
+        $("#afterlogs").before("<p class='temp'>"+deadname + " used Lucky Attack. </p>")
+        if(enemyatkchance<=10){
+            attack2sfx()
+            enemynextattack = enemyatkstat*3-playnextblk
+            if(enemynextattack<0){
+                enemynextattack = 0
+            }
+            $("#afterlogs").before("<p class='temp'>"+deadname  + " Attacked for "+enemynextattack+"x⚔️ 💥Triple Critical💥 Damage!</p>")
+            $("#afterlogs").before("<p class='temp'>"+deadname  + " lost "+enemynextattack+"x "+losthp+" Health!<br></p>")
+            playercurrenthp = playercurrenthp - enemynextattack
+            playermissinghp = playermaxhp - playercurrenthp
+            updateenemystats()
+        }
+        else if(enemyatkchance>10&&enemyatkchance<=30){
+            attack1sfx()
+            enemynextattack = enemyatkstat*1-playernextblk
+            if(enemynextattack<0){
+                enemynextattack = 0
+            }
+            $("#afterlogs").before("<p class='temp'>"+deadname  + " Attacked for "+enemynextattack+"x⚔️ Damage!</p>")
+            $("#afterlogs").before("<p class='temp'>"+localStorage.usernames  + " lost "+enemynextattack+"x "+losthp+" Health!<br></p>")
+            playercurrenthp = playercurrenthp - enemynextattack
+            updateenemystats()}
+        else
+        {
+            misssfx()
+            $("#afterlogs").before("<p class='temp'>"+deadname + " Missed the Attack!</p>")
+        }
+        console.log(enemyatkchance)
+        playernextblk = 0}
+    
+    //ENEMY BLOCK||||||||||||||||||||||||||||||||||||||||||||||||||||
+    function enemydefend1(){
+        blocksfx()
+        setTimeout(flip, 3000)
+        blkchance = Math.ceil(Math.random() * (100 - 0))
+        $("#afterlogs").before("<p class='temp'>"+deadname + " used Normal Defend.</p>")
+        if(blkchance <=80){
+            enemynextblk = enemyblkstat
+            $("#afterlogs").before("<p class='temp'>"+deadname  + " is Blocking the next "+enemynextblk+"x🛡️ Damage!</p>")
+        }
+        else{
+            misssfx()
+            $("#afterlogs").before("<p class='temp'>"+deadname  + " Tried to block, but failed! </p>")}
+            playernextblk = 0}
+
+    //ENEMY HEAL||||||||||||||||||||||||||||||||||||||||||||||||||||
+    function enemyheal(){
+        healsfx()
+        setTimeout(flip, 3000)
+        dblhealchance = Math.ceil(Math.random() * (100 - 0))
+        $("#afterlogs").before("<p class='temp'>"+deadname + " used heal.</p>")
+        if(dblhealchance <=50){
+            $("#afterlogs").before("<p class='temp'>"+deadname + " healed for 1x❤️ Health.</p>")
+            if((enemycurrenthp+1)<=enemymaxhp){
+                enemycurrenthp++
+            }
+            else {
+                $("#afterlogs").before("<p class='temp'>"+deadname  + " tried to heal, but is full hp???</p>")
+            }
+            refreshstats()
+        }
+        else{
+            $("#afterlogs").before("<p class='temp'>"+deadname  + " got lucky and healed for 2x❤️ Health! </p>")
+            if((enemycurrenthp+2)<=enemymaxhp){
+                enemycurrenthp = enemycurrenthp+2
+            }
+            else{
+                enemycurrenthp = enemymaxhp
+                $("#afterlogs").before("<p class='temp'>"+deadname  + " tried to heal, but is full hp???</p>")
+            }}
+            refreshstats()
+            playernextblk = 0}
+    
+        refreshshop()
+      </script>
+</body>
