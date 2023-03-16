@@ -553,8 +553,8 @@
 
     let enemydead = 1
 
-    let levelatkcost = 4
-    let levelblkcost = 3
+    let levelatkcost = 2
+    let levelblkcost = 2
 
 
     let playeratkstat = 1
@@ -626,7 +626,7 @@
     function levelatk(){
         if(playergoldstat>=levelatkcost){
             playergoldstat = playergoldstat - levelatkcost
-            levelatkcost++
+            levelatkcost=levelatkcost+2
             playeratkstat++
             refreshstats()
             refreshshop()
@@ -637,7 +637,7 @@
     function levelblk(){
         if(playergoldstat>=levelblkcost){
             playergoldstat = playergoldstat - levelblkcost
-            levelblkcost++
+            levelblkcost=levelblkcost+2
             playerblkstat++
             playermaxhp++
             playercurrenthp=playermaxhp
@@ -724,7 +724,7 @@
         scrollTop: $('#mylogs')[0].scrollHeight
         }, 800);
         if(enemycurrenthp<enemymaxhp){
-        let rndability = (Math.floor(Math.random() * (4 - 0)))
+        let rndability = (Math.ceil(Math.random() * (4 - 0)))
         console.log(rndability+'rolled for 4')
         switch(rndability){
             case rndability = 1:
@@ -889,10 +889,7 @@
             enemyhpmax++
             enemygoldmax++
 
-            enemyatkmin++
-            enemyblkmin++
-            enemyhpmin++
-            enemygoldmin++
+           
             enemyatkmin++
             enemyblkmin++
             enemyhpmin++
