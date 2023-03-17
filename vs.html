@@ -108,6 +108,7 @@
             width: 350px;
         }
         .characterhp{
+            font-size: 90%;
             background-color: rgba(195, 155, 255, 0.8);
             margin-bottom: auto;
             margin-left: auto;
@@ -1025,15 +1026,15 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////
  //ATTACK 1||||||||||||||||||||||||||||||||||||||||||||||||||||
  function playerattack1(){
-        if(enemynextblk>0){
-            blockedsfx()}
+        
         phealcd--       
         flip()
         $("#afterlogs").before("<p  class='temp'>"+localStorage.usernames + " used Normal Attack."+"</p")
         atkchance = Math.ceil(Math.random() * (100 - 0))
         playernextattack = 0
         if(atkchance<=80){
-            
+            if(enemynextblk>0){
+            blockedsfx()}
 
             attack1sfx()
            
@@ -1051,6 +1052,8 @@
             updateplayerstats()
         }
         else if(atkchance>80&&atkchance<85){
+            if(enemynextblk>0){
+            blockedsfx()}
             attack2sfx()
             playernextattack = playeratkstat*2-enemynextblk
             if(playernextattack<0){
@@ -1084,6 +1087,8 @@
         atkchance = Math.ceil(Math.random() * (100 - 0))
         $("#afterlogs").before("<p  class='temp'>"+localStorage.usernames + " used Lucky Attack."+"</p>")
         if(atkchance<=30){
+            if(enemynextblk>0){
+            blockedsfx()}
             attack2sfx()
             playernextattack = playeratkstat*2-enemynextblk
             if(playernextattack<0){
@@ -1097,6 +1102,8 @@
         
         }
         else if(atkchance>30&&atkchance<=5){
+            if(enemynextblk>0){
+                blockedsfx()}
             attack1sfx()
             playernextattack = playeratkstat*1-enemynextblk
             if(playernextattack<0){
@@ -1173,14 +1180,14 @@
 
     //ENEMY ATTACK 1||||||||||||||||||||||||||||||||||||||||||||||||||||
         function enemyattack1(){
-        if(playernextblk>0){
-            blockedsfx()}
         ehealcd--
         setTimeout(flip , 1800)
         $("#afterlogs").before("<p class='temp'>"+deadname + " used Normal Attack.</p>")
         enemyatkchance = Math.ceil(Math.random() * (100 - 0))
         enemynextattack = 0
         if(enemyatkchance<=80){
+            if(playernextblk>0){
+                blockedsfx()}
             attack1sfx()
             enemynextattack = enemyatkstat*1-playernextblk
             if(enemynextattack<0){
@@ -1193,6 +1200,8 @@
             updateenemystats()
         }
         else if(enemyatkchance>80&&enemyatkchance<85){
+            if(playernextblk>0){
+                blockedsfx()}
             attack2sfx()
             enemynextattack = enemyatkstat*2-playernextblk
             if(enemynextattack<0){
@@ -1213,13 +1222,13 @@
 
     //ENEMY ATTACK 2||||||||||||||||||||||||||||||||||||||||||||||||||||
     function enemyattack2(){
-        if(playernextblk>0){
-            blockedsfx()}
         ehealcd--
         setTimeout(flip , 1800)
         enemyatkchance = Math.ceil(Math.random() * (100 - 0))
         $("#afterlogs").before("<p class='temp'>"+deadname + " used Lucky Attack. </p>")
         if(enemyatkchance<=30){
+            if(playernextblk>0){
+              blockedsfx()}
             attack2sfx()
             enemynextattack = enemyatkstat*2-playernextblk
             if(enemynextattack<0){
@@ -1232,6 +1241,8 @@
             updateenemystats()
         }
         else if(enemyatkchance>30&&enemyatkchance<=35){
+            if(playernextblk>0){
+                blockedsfx()}
             attack1sfx()
             enemynextattack = enemyatkstat*1-playernextblk
             if(enemynextattack<0){
