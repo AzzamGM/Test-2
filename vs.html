@@ -748,9 +748,9 @@
         $('#mylogs').stop().animate({
         scrollTop: $('#mylogs')[0].scrollHeight
         }, 800);
-        if(enemycurrenthp<enemymaxhp&&ehealcd<1){
+        if(enemycurrenthp<enemymaxhp&&(ehealcd<=0)){
         let rndability = (Math.ceil(Math.random() * (4 - 0)))
-        console.log(rndability+'rolled for 4')
+        console.log(rndability+' (rolled for 4)')
         switch(rndability){
             case rndability = 1:
                 enemyattack1()
@@ -774,7 +774,7 @@
                 break;
             }
         }
-        else if(enemycurrenthp==enemymaxhp){
+        else {
         let rndability = (Math.ceil(Math.random() * (3 - 0)))
         console.log(rndability+'rolled for 3')
         switch(rndability){
