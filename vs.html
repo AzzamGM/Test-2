@@ -408,9 +408,9 @@
             <h class="characterhp"  id="userhp">. . .</h><br>
             <h class="characterstats"  id="userstats">⚔️🛡️</h>
             <button style="margin-top: 110px; margin-left:auto" id="atk" onclick="playerattack1()" name="gamebuttons" class="abilities" title="80% Chance To Deal (⚔️) Damage | 5% Chance To 2x(⚔️) Deal Damage!">⚔️</button>
-            <button style="margin-top: 110px; margin-left: 210px;" id="blk" onclick="playerdefend1()" name="gamebuttons" class="abilities" title="80% Chance To Block (🛡️) Damage! Stuns Enemy for (1) Turn If Succesfully Blocked damage">🛡️</button>
-            <button style="margin-top: 180px; margin-left: auto;" id="atk2" onclick="playerattack2()" name="gamebuttons" class="abilities" title="10% Chance To Deal 3x(⚔️) Damage | 20% Chance to Deal (⚔️) or Miss!">⚔️💥🎲</button>
-            <button style="margin-top: 180px; margin-left: 210px" id="blk2" onclick="playerheal()" name="gamebuttons" class="abilities" title="Heal 1x(❤️) Health | 50% To Heal 2x(❤️) Health Instead!">❤️‍🩹</button>
+            <button style="margin-top: 110px; margin-left: 210px;" id="blk" onclick="playerdefend1()" name="gamebuttons" class="abilities" title="80% Chance To Block (🛡️) Damage!">🛡️</button>
+            <button style="margin-top: 180px; margin-left: auto;" id="atk2" onclick="playerattack2()" name="gamebuttons" class="abilities" title="30% Chance To Deal 2x(⚔️) Damage | 5% Chance to Deal (⚔️)!">⚔️💥🎲</button>
+            <button style="margin-top: 180px; margin-left: 210px" id="blk2" onclick="playerheal()" name="gamebuttons" class="abilities" title="Heal 50%(❤️) Health | 30% Chance To Heal 100%(❤️) Health Instead!">❤️‍🩹</button>
         </div>
         <div class="grid-empty">    
             <button onclick="location.reload()" id="restartbutton">Restart</button>
@@ -420,9 +420,9 @@
  <!--------------------------ENEMY INTREFACE---------------------->
         <div class="grid-empty">
             <button style="margin-top: 110px; margin-left:auto" id="eatk" onclick="" name="gamebuttons" class="abilities2" title="80% Chance To Deal (⚔️) Damage | 5% Chance To 2x(⚔️) Deal Damage!">⚔️</button>
-            <button style="margin-top: 110px; margin-left: 210px;" id="eblk" onclick="" name="gamebuttons" class="abilities2" title="80% Chance To Block (🛡️) Damage! Stuns Enemy for (1) Turn If Succesfully Blocked damage">🛡️</button>
-            <button style="margin-top: 180px; margin-left: auto;" id="eatk2" onclick="" name="gamebuttons" class="abilities2" title="10% Chance To Deal 3x(⚔️) Damage | 20% Chance to Deal (⚔️) or Miss!">⚔️💥🎲</button>
-            <button style="margin-top: 180px; margin-left: 210px" id="eheal" onclick="" name="gamebuttons" class="abilities2" title="35% Chance To Block 2x(🛡️) Damage!">❤️‍🩹</button>
+            <button style="margin-top: 110px; margin-left: 210px;" id="eblk" onclick="" name="gamebuttons" class="abilities2" title="80% Chance To Block (🛡️) Damage!">🛡️</button>
+            <button style="margin-top: 180px; margin-left: auto;" id="eatk2" onclick="" name="gamebuttons" class="abilities2" title="30% Chance To Deal 2x(⚔️) Damage | 5% Chance to Deal (⚔️)!">⚔️💥🎲</button>
+            <button style="margin-top: 180px; margin-left: 210px" id="eheal" onclick="" name="gamebuttons" class="abilities2" title="Heal 50%(❤️) Health | 30% Chance To Heal 100%(❤️) Health Instead!">❤️‍🩹</button>
             <h class="characterhp"  id="enemygamehp">. . .</h>
             <h class="characterstats"  id="enemystats">. . .</h>
         </div>
@@ -904,7 +904,7 @@
             if(enemyatkmax>7){
                 enemyscale()
             }
-            else if(enemyatk>6&&enemeyatk<10){
+            else if(enemyatkmax>6&&enemeyatk<10){
                 nemygoldmax++
                 nemygoldmax++
                 nemygoldmax++
@@ -1142,7 +1142,7 @@
         $("#afterlogs").before("<p class='temp'>"+deadname + " used Lucky Attack. </p>")
         if(enemyatkchance<=30){
             attack2sfx()
-            enemynextattack = enemyatkstat*3-playernextblk
+            enemynextattack = enemyatkstat*2-playernextblk
             if(enemynextattack<0){
                 enemynextattack = 0
             }
