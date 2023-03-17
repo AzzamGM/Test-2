@@ -626,7 +626,7 @@
     function levelatk(){
         if(playergoldstat>=levelatkcost){
             playergoldstat = playergoldstat - levelatkcost
-            if(levelatkcost<5){
+            if(levelatkcost<4){
                 levelatkcost++
             }
             else{
@@ -642,7 +642,7 @@
     function levelblk(){
         if(playergoldstat>=levelblkcost){
             playergoldstat = playergoldstat - levelblkcost
-            if(levelblkcost<5){
+            if(levelblkcost<4){
                 levelblkcost++
             }
             else{
@@ -879,6 +879,17 @@
         $(".abilities").prop('disabled', true)
     }
 
+    function enemyscale(){
+        enemyatkmax++
+        enemyblkmax++
+        enemyhpmax++
+        enemygoldmax++
+
+        enemyatkmin++
+        enemyblkmin++
+        enemyhpmin++
+        enemygoldmin++
+    }
     function updateplayerstats(){
         
         if(enemycurrenthp<1){
@@ -890,20 +901,30 @@
         scaling++
         if(scaling==4){
             scaling=0
-            enemyatkmax++
-            enemyblkmax++
-            enemyhpmax++
-            enemygoldmax++
-            enemyatkmax++
-            enemyblkmax++
-            enemyhpmax++
-            enemygoldmax++
+            if(enemyatkmax>7){
+                enemyscale()
+            }
+            else if(enemyatk>6&&enemeyatk<10){
+                nemygoldmax++
+                nemygoldmax++
+                nemygoldmax++
+                enemyscale()
+                enemyscale()
+            }
+            else{
+                nemygoldmax++
+                nemygoldmax++
+                nemygoldmax++
+                enemyscale()
+                enemyscale()
+                enemyscale()
+            }
+            
+          
+            
+          
 
-           
-            enemyatkmin++
-            enemyblkmin++
-            enemyhpmin++
-            enemygoldmin++
+        
         }
         playergoldstat = playergoldstat + enemygoldstat
         enemygoldstat = 0
@@ -1058,7 +1079,7 @@
         $("#afterlogs").before("<p class='temp'>"+localStorage.usernames + " used heal.</p>")
         if(dblhealchance <=50){
             $("#afterlogs").before("<p class='temp'>"+localStorage.usernames  + " ❤️healed for half Health.❤️</p>")
-            playercurrenthp = playercurrenthp + Math.ceil(playermaxhp/2)
+            playercurrenthp = playercurrenthp + Math.floor(playermaxhp/2)
             if (playercurrenthp>playermaxhp){
                 playercurrenthp = playermaxhp
             }
@@ -1119,19 +1140,19 @@
         setTimeout(flip , 1800)
         enemyatkchance = Math.ceil(Math.random() * (100 - 0))
         $("#afterlogs").before("<p class='temp'>"+deadname + " used Lucky Attack. </p>")
-        if(enemyatkchance<=10){
+        if(enemyatkchance<=30){
             attack2sfx()
             enemynextattack = enemyatkstat*3-playernextblk
             if(enemynextattack<0){
                 enemynextattack = 0
             }
-            $("#afterlogs").before("<p class='temp'>"+deadname  + " Attacked for "+enemynextattack+"x⚔️ 💥Triple Critical💥 Damage!</p>")
+            $("#afterlogs").before("<p class='temp'>"+deadname  + " Attacked for "+enemynextattack+"x⚔️ 💥Double Critical💥 Damage!</p>")
             $("#afterlogs").before("<p class='temp'>"+deadname  + " lost "+enemynextattack+"x "+losthp+" Health!<br></p>")
             playercurrenthp = playercurrenthp - enemynextattack
             playermissinghp = playermaxhp - playercurrenthp
             updateenemystats()
         }
-        else if(enemyatkchance>10&&enemyatkchance<=30){
+        else if(enemyatkchance>30&&enemyatkchance<=35){
             attack1sfx()
             enemynextattack = enemyatkstat*1-playernextblk
             if(enemynextattack<0){
