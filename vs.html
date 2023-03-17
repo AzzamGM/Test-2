@@ -466,6 +466,13 @@
         <source src="Audio/missed.mp3 ">
     </audio>
 
+    <audio id="playerdeadmp3">
+        <source src="Audio/playerdead.mp3 ">
+    </audio>
+
+    <audio id="blockedmp3">
+        <source src="Audio/blocked.mp3 ">
+    </audio>
 
 
     
@@ -480,8 +487,8 @@
             sound = document.getElementById("gamesound").value/100
             console.log(sound)
             })})
-
-
+    var blocked = document.getElementById("blockedmp3")
+    var playerdead = document.getElementById("playerdeadmp3")
     var attack1sound = document.getElementById("attackmp3")
     var attack2sound = document.getElementById("attack2mp3")
     var blocksound = document.getElementById("blockmp3")
@@ -491,6 +498,11 @@
     var lootsound = document.getElementById("lootmp3")
     var misssound = document.getElementById("missmp3")
     sound = 0.4
+
+    function playerdeadsfx(){
+        playerdead.volume = sound
+        playerdead.play()
+    }
 
     function attack1sfx(){
         attack1sound.volume = sound
@@ -517,7 +529,12 @@
         damagedsound.play()
     }
 
-    function buysfx(){
+    function buyatksfx(){
+        buysound.volume = sound
+        buysound.play()
+    }
+
+    function buyblksfx(){
         buysound.volume = sound
         buysound.play()
     }
@@ -531,6 +548,12 @@
         misssound.volume = sound
         misssound.play()
     }
+
+    function blockedsfx(){
+        blocked.volume = sound
+        blocked.play()
+    }
+
 
 
 
@@ -624,6 +647,7 @@
     function levelatk(){
         if(playergoldstat>=levelatkcost){
             playergoldstat = playergoldstat - levelatkcost
+            buyatksfx()
             
                 levelatkcost++
                 levelatkcost=levelatkcost+2
@@ -636,6 +660,7 @@
 
     function levelblk(){
         if(playergoldstat>=levelblkcost){
+            buyblksfx()
             playergoldstat = playergoldstat - levelblkcost
             if(levelblkcost<3){
                 levelblkcost++
@@ -879,6 +904,7 @@
 
     function updateenemystats(){
         if(playercurrenthp<1){
+        playerdeadsfx()
         document.getElementById("userhp").innerHTML = losthp.repeat(playermaxhp)
         $("#afterlogs").before("<p class='temp' style='color: red'>"+localStorage.usernames+" died.</p>")
         $("#afterlogs").before("<p class='temp' style='color: red'>Total kills: "+playerkills+"!</p>")
@@ -929,7 +955,7 @@
                 
             }
                 
-            else if(enemyatkmax>6&&enemeyatkmax<10){
+            else if(enemyatkmax>6&&enemyatkmax<10){
                 
                 
                 enemyblkmax++
@@ -999,13 +1025,21 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////
  //ATTACK 1||||||||||||||||||||||||||||||||||||||||||||||||||||
  function playerattack1(){
+        if(enemynextblk>0){
+            blockedsfx()}
         phealcd--       
         flip()
         $("#afterlogs").before("<p  class='temp'>"+localStorage.usernames + " used Normal Attack."+"</p")
         atkchance = Math.ceil(Math.random() * (100 - 0))
         playernextattack = 0
         if(atkchance<=80){
+            
+
             attack1sfx()
+           
+
+            
+
             playernextattack = playeratkstat*1-enemynextblk
             if(playernextattack<0){
                 playernextattack = 0
@@ -1043,6 +1077,8 @@
 
     //ATTACK 2||||||||||||||||||||||||||||||||||||||||||||||||||||
     function playerattack2(){
+        if(enemynextblk>0){
+            blockedsfx()}
         phealcd--
         flip()
         atkchance = Math.ceil(Math.random() * (100 - 0))
@@ -1137,6 +1173,8 @@
 
     //ENEMY ATTACK 1||||||||||||||||||||||||||||||||||||||||||||||||||||
         function enemyattack1(){
+        if(playernextblk>0){
+            blockedsfx()}
         ehealcd--
         setTimeout(flip , 1800)
         $("#afterlogs").before("<p class='temp'>"+deadname + " used Normal Attack.</p>")
@@ -1175,6 +1213,8 @@
 
     //ENEMY ATTACK 2||||||||||||||||||||||||||||||||||||||||||||||||||||
     function enemyattack2(){
+        if(playernextblk>0){
+            blockedsfx()}
         ehealcd--
         setTimeout(flip , 1800)
         enemyatkchance = Math.ceil(Math.random() * (100 - 0))
