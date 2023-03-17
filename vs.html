@@ -626,12 +626,9 @@
     function levelatk(){
         if(playergoldstat>=levelatkcost){
             playergoldstat = playergoldstat - levelatkcost
-            if(levelatkcost<4){
+            
                 levelatkcost++
-            }
-            else{
                 levelatkcost=levelatkcost+2
-            }
             playeratkstat++
             refreshstats()
             refreshshop()
@@ -901,21 +898,32 @@
         scaling++
         if(scaling==4){
             scaling=0
-            if(enemyatkmax>7){
+            if(enemyatkmax<5){
                 enemyscale()
+                enemygoldmax++
+                
             }
-            else if(enemyatkmax>6&&enemeyatk<10){
+                
+            else if(enemyatkmax>6&&enemeyatkmax<10){
+                
+                
+                enemyblkmax++
+                enemyhpmax++
                 enemygoldmax++
-                enemygoldmax++
-                enemygoldmax++
+
+                
+                enemyblkmin++
+                enemyhpmin++
+                enemygoldmin++
                 enemyscale()
-                enemyscale()
+
+
             }
             else{
                 enemygoldmax++
                 enemygoldmax++
                 enemygoldmax++
-                enemyscale()
+
                 enemyscale()
                 enemyscale()
             }
