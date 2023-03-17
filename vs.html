@@ -78,7 +78,7 @@
             margin-left: -210px;
             margin-top: -233px;
             width: 420px;
-            height: 485px;  
+            height: 530px;  
             overflow: hidden;
             position: absolute;
             top: 50%;
@@ -264,7 +264,7 @@
             height: 60px;
             background-color: #d30e00;
             margin-left: 45px;
-            margin-top: 100px;
+            margin-top: 165px;
             border: 3px solid black;
             border-radius: 6px;}
 
@@ -274,7 +274,7 @@
             height: 60px;
             background-color: #4830ff;
             margin-left: 45px;
-            margin-top: 170px;
+            margin-top: 165px;
             border: 3px solid black;
             border-radius: 6px;
             position: absolute;
@@ -286,7 +286,7 @@
             height: 60px;
             background-color: #650700;
             margin-left: 45px;
-            margin-top: 170px;
+            margin-top: 165px;
             border: 3px solid black;
             border-radius: 6px;
             box-shadow: 0 2px gray;
@@ -389,8 +389,8 @@
                 <h class="charactername" id="enemygamename">...</h>
             </div>
         </div>
-        <div class="grid-empty">4</div>
-        <div class="grid-empty">5</div>
+        <div class="grid-empty"></div>
+        <div class="grid-empty"></div>
         <div class="grid-item">
             <img align="center" name="gamepfp" id="gamepfp" class="character" src="https://cdn.pixabay.com/photo/2017/02/20/18/03/cat-2083492__340.jpg" alt="r u dumb?">
         </div>  
@@ -402,7 +402,7 @@
         <div class="grid-item">
             <img align="center" name="enemygamepfp" id="enemygamepfp" class="character">
         </div>
-        <div class="grid-empty">6</div>
+        <div class="grid-empty"></div>
         <div class="grid-empty"></div>
  <!--------------------------USER INTERFACE---------------------->
         <div class="grid-empty"> 
@@ -411,7 +411,7 @@
             <button style="margin-top: 155px; margin-left:auto" id="atk" onclick="playerattack1()" name="gamebuttons" class="abilities" title="80% Chance To Deal (⚔️) Damage | 5% Chance To 2x(⚔️) Deal Damage!">⚔️</button>
             <button style="margin-top: 155px; margin-left: 210px;" id="blk" onclick="playerdefend1()" name="gamebuttons" class="abilities" title="80% Chance To Block (🛡️) Damage!">🛡️</button>
             <button style="margin-top: 225px; margin-left: auto;" id="atk2" onclick="playerattack2()" name="gamebuttons" class="abilities" title="30% Chance To Deal 2x(⚔️) Damage | 5% Chance to Deal (⚔️)!">⚔️💥🎲</button>
-            <button style="margin-top: 225px; margin-left: 210px" id="blk2" onclick="playerheal()" name="gamebuttons" class="abilities" title="Heal 50%(❤️) Health | 30% Chance To Heal 100%(❤️) Health Instead!">❤️‍🩹</button>
+            <button style="margin-top: 225px; margin-left: 210px" id="heal" onclick="playerheal()" name="gamebuttons" class="abilities" title="Heal 50%(❤️) Health | 30% Chance To Heal 100%(❤️) Health Instead!">❤️‍🩹</button>
         </div>
         <div class="grid-empty">    
             <button onclick="location.reload()" id="restartbutton">Restart</button>
@@ -549,7 +549,8 @@
     let profile = {}
     let hp = "❤️"
     let losthp = "💔"
-
+    let ehealcd = 0
+    let phealcd = 0
     let onetwo = 2
 
 
@@ -679,7 +680,24 @@
    
 
 
+    function checkhealcd(){
+        if(phealcd>0){
+            $("#heal").prop("disabled", true)
+            document.getElementById("heal").innerHTML = phealcd+"⌛"
+        }
+        else{
+            document.getElementById("heal").innerHTML = "❤️‍🩹"
+        }
 
+        if(ehealcd>0){
+            $("#eheal").prop("disabled", true)
+            document.getElementById("eheal").innerHTML = ehealcd+"⌛"
+        }
+        else{
+            document.getElementById("eheal").innerHTML = "❤️‍🩹"
+        }
+
+    }
 
 
     function flip(){
@@ -687,17 +705,17 @@
          scrollTop: $('#mylogs')[0].scrollHeight
         }, 800);
         if(onetwo<2){
-            ehealcd--
             onetwo++
             $(".abilities").prop('disabled', true)
             $(".abilities2").prop('disabled', false)
+            checkhealcd()
             }
         else{
-            phealcd--
             onetwo--
             $(".abilities2").prop('disabled', true)
             if(playercurrenthp>0){
-            $(".abilities").prop('disabled', false)}
+            $(".abilities").prop('disabled', false)
+            checkhealcd()}
             
 }}
 
@@ -730,7 +748,7 @@
         $('#mylogs').stop().animate({
         scrollTop: $('#mylogs')[0].scrollHeight
         }, 800);
-        if(enemycurrenthp<enemymaxhp){
+        if(enemycurrenthp<enemymaxhp&&ehealcd<1){
         let rndability = (Math.ceil(Math.random() * (4 - 0)))
         console.log(rndability+'rolled for 4')
         switch(rndability){
@@ -981,6 +999,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////
  //ATTACK 1||||||||||||||||||||||||||||||||||||||||||||||||||||
  function playerattack1(){
+        phealcd--       
         flip()
         $("#afterlogs").before("<p  class='temp'>"+localStorage.usernames + " used Normal Attack."+"</p")
         atkchance = Math.ceil(Math.random() * (100 - 0))
@@ -1024,6 +1043,7 @@
 
     //ATTACK 2||||||||||||||||||||||||||||||||||||||||||||||||||||
     function playerattack2(){
+        phealcd--
         flip()
         atkchance = Math.ceil(Math.random() * (100 - 0))
         $("#afterlogs").before("<p  class='temp'>"+localStorage.usernames + " used Lucky Attack."+"</p>")
@@ -1068,6 +1088,7 @@
         
     //BLOCK 1||||||||||||||||||||||||||||||||||||||||||||||||||||
     function playerdefend1(){
+        phealcd--
         blocksfx()
         flip()
         blkchance = Math.ceil(Math.random() * (100 - 0))
@@ -1109,12 +1130,14 @@
             
             if(enemycurrenthp>0){
                 setTimeout(enemyturn, 2000)}
-        enemynextblk = 0}
+        enemynextblk = 0
+        phealcd = 1}
     
 
 
     //ENEMY ATTACK 1||||||||||||||||||||||||||||||||||||||||||||||||||||
         function enemyattack1(){
+        ehealcd--
         setTimeout(flip , 1800)
         $("#afterlogs").before("<p class='temp'>"+deadname + " used Normal Attack.</p>")
         enemyatkchance = Math.ceil(Math.random() * (100 - 0))
@@ -1152,6 +1175,7 @@
 
     //ENEMY ATTACK 2||||||||||||||||||||||||||||||||||||||||||||||||||||
     function enemyattack2(){
+        ehealcd--
         setTimeout(flip , 1800)
         enemyatkchance = Math.ceil(Math.random() * (100 - 0))
         $("#afterlogs").before("<p class='temp'>"+deadname + " used Lucky Attack. </p>")
@@ -1188,6 +1212,7 @@
     
     //ENEMY BLOCK||||||||||||||||||||||||||||||||||||||||||||||||||||
     function enemydefend1(){
+        ehealcd--
         blocksfx()
         setTimeout(flip , 1800)
         blkchance = Math.ceil(Math.random() * (100 - 0))
@@ -1203,6 +1228,7 @@
 
     //ENEMY HEAL||||||||||||||||||||||||||||||||||||||||||||||||||||
     function enemyheal(){
+        
         healsfx()
         setTimeout(flip , 1800)
         dblhealchance = Math.ceil(Math.random() * (100 - 0))
@@ -1222,7 +1248,8 @@
             $("#afterlogs").before("<p class='temp'>"+deadname  + " ❤️got lucky and healed 100% Health!❤️ </p>")
             enemycurrenthp = enemymaxhp}
             refreshstats()
-            playernextblk = 0}
+            playernextblk = 0
+            ehealcd = 1}
     
         refreshshop()
       </script>
