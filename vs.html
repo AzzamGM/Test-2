@@ -1013,20 +1013,20 @@
         flip()
         atkchance = Math.ceil(Math.random() * (100 - 0))
         $("#afterlogs").before("<p  class='temp'>"+localStorage.usernames + " used Lucky Attack."+"</p>")
-        if(atkchance<=10){
+        if(atkchance<=30){
             attack2sfx()
-            playernextattack = playeratkstat*3-enemynextblk
+            playernextattack = playeratkstat*2-enemynextblk
             if(playernextattack<0){
                 playernextattack = 0
             }
-            $("#afterlogs").before("<p class='temp'>"+localStorage.usernames  + " Attacked for "+playernextattack+"x⚔️ 💥Triple Critical💥 Damage!"+"</p>")
+            $("#afterlogs").before("<p class='temp'>"+localStorage.usernames  + " Attacked for "+playernextattack+"x⚔️ 💥Double Critical💥 Damage!"+"</p>")
             $("#afterlogs").before("<p class='temp'>"+deadname  + " lost "+playernextattack+"x "+losthp+" Health!<br></p>")
             enemycurrenthp = enemycurrenthp - playernextattack
             enemymissinghp = enemymaxhp - enemycurrenthp
             updateplayerstats()
         
         }
-        else if(atkchance>10&&atkchance<=30){
+        else if(atkchance>30&&atkchance<=5){
             attack1sfx()
             playernextattack = playeratkstat*1-enemynextblk
             if(playernextattack<0){
