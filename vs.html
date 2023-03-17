@@ -112,14 +112,15 @@
             margin-bottom: auto;
             margin-left: auto;
             margin-right: auto;
-            width: 350px;}
+            width: 350px;
+            height: 90px;}
 
         .characterstats{
             background-color: rgba(195, 155, 255, 0.8);
             margin-bottom: auto;
             margin-left: auto;
             margin-right: auto;
-            margin-top: 45px;
+            margin-top: 90px;
             width: 350px;
             position: absolute;}
     
@@ -345,7 +346,7 @@
         <p style="background-color: black;margin-left: 302.5px;margin-top: -3px;width: 80px;height: 50px;" id="shopplayergold" class="shopitems">💰</p>
         <p style="color: black;border: none;background-color: rgba(47, 46, 46, 0);margin-left: 270px;margin-top: 60px;width: 150px;height: 45px" class="shopitems">Level Up (⚔️)</p>
         <p style="border-radius:2px;background-color: rgb(47, 46, 46);margin-left: 270px;margin-top: 100px;width: 150px;height: 45px" id="shopatkcost" class="shopitems">Cost: 💰</p>
-        <p  style="color: black;border: none;background-color: rgb(47, 46, 46, 0);margin-left: 270px;margin-top: 270px;width: 150px;height: 45px"  class="shopitems">Level Up (🛡️) And (💖)</p> 
+        <p  style="color: black;border: none;background-color: rgb(47, 46, 46, 0);margin-left: 220px;margin-top: 270px;width: 250px;height: 45px"  class="shopitems">Level Up (🛡️) & (💖)</p> 
         <p style="border-radius:2px;background-color: rgb(47, 46, 46);margin-left: 270px;margin-top: 310px;width: 150px;height: 45px" class="shopitems" id="shopblkcost">Cost: 💰</p>
         <button style="margin-top: 100px;margin-left: 100px" class="levelup">➖</button>
         <button style="margin-top: 100px;margin-left: 490px" onclick="levelatk()" class="levelup">➕</button>
@@ -407,10 +408,10 @@
         <div class="grid-empty"> 
             <h class="characterhp"  id="userhp">. . .</h><br>
             <h class="characterstats"  id="userstats">⚔️🛡️</h>
-            <button style="margin-top: 110px; margin-left:auto" id="atk" onclick="playerattack1()" name="gamebuttons" class="abilities" title="80% Chance To Deal (⚔️) Damage | 5% Chance To 2x(⚔️) Deal Damage!">⚔️</button>
-            <button style="margin-top: 110px; margin-left: 210px;" id="blk" onclick="playerdefend1()" name="gamebuttons" class="abilities" title="80% Chance To Block (🛡️) Damage!">🛡️</button>
-            <button style="margin-top: 180px; margin-left: auto;" id="atk2" onclick="playerattack2()" name="gamebuttons" class="abilities" title="30% Chance To Deal 2x(⚔️) Damage | 5% Chance to Deal (⚔️)!">⚔️💥🎲</button>
-            <button style="margin-top: 180px; margin-left: 210px" id="blk2" onclick="playerheal()" name="gamebuttons" class="abilities" title="Heal 50%(❤️) Health | 30% Chance To Heal 100%(❤️) Health Instead!">❤️‍🩹</button>
+            <button style="margin-top: 155px; margin-left:auto" id="atk" onclick="playerattack1()" name="gamebuttons" class="abilities" title="80% Chance To Deal (⚔️) Damage | 5% Chance To 2x(⚔️) Deal Damage!">⚔️</button>
+            <button style="margin-top: 155px; margin-left: 210px;" id="blk" onclick="playerdefend1()" name="gamebuttons" class="abilities" title="80% Chance To Block (🛡️) Damage!">🛡️</button>
+            <button style="margin-top: 225px; margin-left: auto;" id="atk2" onclick="playerattack2()" name="gamebuttons" class="abilities" title="30% Chance To Deal 2x(⚔️) Damage | 5% Chance to Deal (⚔️)!">⚔️💥🎲</button>
+            <button style="margin-top: 225px; margin-left: 210px" id="blk2" onclick="playerheal()" name="gamebuttons" class="abilities" title="Heal 50%(❤️) Health | 30% Chance To Heal 100%(❤️) Health Instead!">❤️‍🩹</button>
         </div>
         <div class="grid-empty">    
             <button onclick="location.reload()" id="restartbutton">Restart</button>
@@ -419,10 +420,10 @@
         
  <!--------------------------ENEMY INTREFACE---------------------->
         <div class="grid-empty">
-            <button style="margin-top: 110px; margin-left:auto" id="eatk" onclick="" name="gamebuttons" class="abilities2" title="80% Chance To Deal (⚔️) Damage | 5% Chance To 2x(⚔️) Deal Damage!">⚔️</button>
-            <button style="margin-top: 110px; margin-left: 210px;" id="eblk" onclick="" name="gamebuttons" class="abilities2" title="80% Chance To Block (🛡️) Damage!">🛡️</button>
-            <button style="margin-top: 180px; margin-left: auto;" id="eatk2" onclick="" name="gamebuttons" class="abilities2" title="30% Chance To Deal 2x(⚔️) Damage | 5% Chance to Deal (⚔️)!">⚔️💥🎲</button>
-            <button style="margin-top: 180px; margin-left: 210px" id="eheal" onclick="" name="gamebuttons" class="abilities2" title="Heal 50%(❤️) Health | 30% Chance To Heal 100%(❤️) Health Instead!">❤️‍🩹</button>
+            <button style="margin-top: 155px; margin-left:auto" id="eatk" onclick="" name="gamebuttons" class="abilities2" title="80% Chance To Deal (⚔️) Damage | 5% Chance To 2x(⚔️) Deal Damage!">⚔️</button>
+            <button style="margin-top: 155px; margin-left: 210px;" id="eblk" onclick="" name="gamebuttons" class="abilities2" title="80% Chance To Block (🛡️) Damage!">🛡️</button>
+            <button style="margin-top: 225px; margin-left: auto;" id="eatk2" onclick="" name="gamebuttons" class="abilities2" title="30% Chance To Deal 2x(⚔️) Damage | 5% Chance to Deal (⚔️)!">⚔️💥🎲</button>
+            <button style="margin-top: 225px; margin-left: 210px" id="eheal" onclick="" name="gamebuttons" class="abilities2" title="Heal 50%(❤️) Health | 30% Chance To Heal 100%(❤️) Health Instead!">❤️‍🩹</button>
             <h class="characterhp"  id="enemygamehp">. . .</h>
             <h class="characterstats"  id="enemystats">. . .</h>
         </div>
@@ -472,6 +473,7 @@
 
 
 <script>
+    $("#shopwindow").hide()
     $("#restartbutton").hide()
     $(document).ready(function(){
         $("#gamesound").change(function(){
@@ -532,7 +534,7 @@
 
 
 
-    $("#shopwindow").hide()
+    
     $(".abilities").prop("disabled", true)
         
 
@@ -611,13 +613,8 @@
         if(localStorage.username=undefined){
             $("#deleteprofileb").prop('disabled', true)
             $("#loadprofileb").prop('disabled', true)
-        }
-        else{
-            console.log("hello")}})
+        }})
 
-    console.log(profile)
-        console.log(localStorage.usernames)
-        console.log(localStorage.userpfps)
 
     $("#confirmb").click(function(){
         $(".startwindow").hide()
@@ -639,13 +636,14 @@
     function levelblk(){
         if(playergoldstat>=levelblkcost){
             playergoldstat = playergoldstat - levelblkcost
-            if(levelblkcost<4){
+            if(levelblkcost<3){
                 levelblkcost++
             }
             else{
                 levelblkcost=levelblkcost+2
             }
             playerblkstat++
+            playermaxhp++
             playermaxhp++
             playercurrenthp=playermaxhp
             refreshstats()
@@ -661,14 +659,14 @@
         $(document).ready(function(){
             refreshshop()
             $("#shopwindow").show()
-        document.getElementById("blklevelcost").innerHTML = "Cost: "+levelblkcost+"💰"    
-        document.getElementById("atklevelupcost").innerHTML = "Cost: "+levelatkcost+"💰"
+        document.getElementById("shopblkcost").innerHTML = "Cost: "+levelblkcost+"💰"    
+        document.getElementById("shopatkcost").innerHTML = "Cost: "+levelatkcost+"💰"
         document.getElementById("shopplayergold").innerHTML = playergoldstat + "💰"
-        $("#battlebutton").prop("disabled", true)
+        $("#battlebutton").prop('disabled', true)
         })
 
         
-        resfreshshop()
+        refreshshop()
     }
 
     function leaveshop(){
@@ -863,6 +861,7 @@
         if(playercurrenthp<1){
         document.getElementById("userhp").innerHTML = losthp.repeat(playermaxhp)
         $("#afterlogs").before("<p class='temp' style='color: red'>"+localStorage.usernames+" died.</p>")
+        $("#afterlogs").before("<p class='temp' style='color: red'>Total kills: "+playerkills+"!</p>")
         refreshstats()
         $(".abilities").prop('disabled', true)
         $("#battlebutton").hide()
@@ -880,10 +879,12 @@
         enemyatkmax++
         enemyblkmax++
         enemyhpmax++
+        enemyhpmax++
         enemygoldmax++
 
         enemyatkmin++
         enemyblkmin++
+        enemyhpmin++
         enemyhpmin++
         enemygoldmin++
     }
@@ -893,8 +894,12 @@
         document.getElementById("enemygamehp").innerHTML = losthp.repeat(enemymaxhp)
         $("#afterlogs").before("<p  class='temp' style='color: red'>"+deadname+" died.</p>")
         $("#afterlogs").before("<p  class='temp' style='color: gold'>"+"Looted Corpse, Gained "+enemygoldstat+"💰!</p>")
-        lootsfx()
         playerkills++
+        $("#afterlogs").before("<p class='temp' style='color: red'>Total kills: "+playerkills+"!</p>")
+        $("#battlebutton").prop("disabled", false)
+        lootsfx()
+
+        
         scaling++
         if(scaling==4){
             scaling=0
@@ -908,12 +913,10 @@
                 
                 
                 enemyblkmax++
-                enemyhpmax++
                 enemygoldmax++
 
                 
                 enemyblkmin++
-                enemyhpmin++
                 enemygoldmin++
                 enemyscale()
 
