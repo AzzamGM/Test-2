@@ -905,16 +905,16 @@
                 enemyscale()
             }
             else if(enemyatkmax>6&&enemeyatk<10){
-                nemygoldmax++
-                nemygoldmax++
-                nemygoldmax++
+                enemygoldmax++
+                enemygoldmax++
+                enemygoldmax++
                 enemyscale()
                 enemyscale()
             }
             else{
-                nemygoldmax++
-                nemygoldmax++
-                nemygoldmax++
+                enemygoldmax++
+                enemygoldmax++
+                enemygoldmax++
                 enemyscale()
                 enemyscale()
                 enemyscale()
@@ -1192,7 +1192,7 @@
         dblhealchance = Math.ceil(Math.random() * (100 - 0))
         $("#afterlogs").before("<p class='temp'>"+deadname + " used heal.</p>")
         if(dblhealchance <=50){
-            $("#afterlogs").before("<p class='temp'>"+deadname + " ❤️healed for to half Health.❤️</p>")
+            $("#afterlogs").before("<p class='temp'>"+deadname + " ❤️healed 50% Health.❤️</p>")
             enemycurrenthp = enemycurrenthp + Math.ceil(enemymaxhp/2)
             if (enemycurrenthp>enemymaxhp){
                 enemycurrenthp = enemymaxhp
@@ -1203,7 +1203,7 @@
             refreshstats()
         }
         else{
-            $("#afterlogs").before("<p class='temp'>"+deadname  + " ❤️got lucky and healed to full Health!❤️ </p>")
+            $("#afterlogs").before("<p class='temp'>"+deadname  + " ❤️got lucky and healed 100% Health!❤️ </p>")
             enemycurrenthp = enemymaxhp}
             refreshstats()
             playernextblk = 0}
