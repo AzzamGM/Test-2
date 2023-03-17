@@ -688,12 +688,14 @@
          scrollTop: $('#mylogs')[0].scrollHeight
         }, 800);
         if(onetwo<2){
+            ehealcd--
             onetwo++
             $(".abilities").prop('disabled', true)
             $(".abilities2").prop('disabled', false)
             checkhealcd()
             }
         else{
+            phealcd--
             onetwo--
             $(".abilities2").prop('disabled', true)
             if(playercurrenthp>0){
@@ -781,14 +783,13 @@
     function checkhealcd(){
         if(phealcd>0){
             $("#heal").prop("disabled", true)
-            phealcd--
             document.getElementById("heal").innerHTML = phealcd+"⌛"}
         else{
             document.getElementById("heal").innerHTML = "❤️‍🩹"}
         
         if(ehealcd>0){
-            $("#heal").prop("disabled", true)
-            ehealcd--
+            $("#eheal").prop("disabled", true)
+
             document.getElementById("eheal").innerHTML = ehealcd+"⌛"}
         else{
             document.getElementById("eheal").innerHTML = "❤️‍🩹"}
