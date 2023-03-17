@@ -777,21 +777,7 @@
                 break;}}
             
             }
-    function checkhealcd(){
-        if(phealcd>0){
-            $("#heal").prop("disabled", true)
-            document.getElementById("heal").innerHTML = phealcd+"⌛"}
-        else{
-            document.getElementById("heal").innerHTML = "❤️‍🩹"}
-        
-        if(ehealcd>0){
-            $("#eheal").prop("disabled", true)
 
-            document.getElementById("eheal").innerHTML = ehealcd+"⌛"}
-        else{
-            document.getElementById("eheal").innerHTML = "❤️‍🩹"}
-
-    }
     function generateenemy(){
         $("#shopbutton").prop('disabled', true)
         let rndchar = (Math.ceil(Math.random() * (enemychar.length - 0) + 0)) - 1
