@@ -760,7 +760,7 @@
                 break;
             }
         }
-        else if(enemycurrenthp=enemymaxhp){
+        else if(enemycurrenthp==enemymaxhp){
         let rndability = (Math.ceil(Math.random() * (3 - 0)))
         console.log(rndability+'rolled for 3')
         switch(rndability){
@@ -1026,6 +1026,7 @@
             $("#afterlogs").before("<p class='temp'>"+localStorage.usernames  + " Attacked for "+playernextattack+"x⚔️ 💥Double Critical💥Damage!"+"</p>")
             $("#afterlogs").before("<p class='temp'>"+deadname  + " lost "+playernextattack+"x "+losthp+" Health!<br></p>")
             enemycurrenthp = enemycurrenthp - playernextattack
+            enemymissinghp = enemymaxhp - enemycurrenthp
             updateplayerstats()
             }
         else
@@ -1068,6 +1069,7 @@
             $("#afterlogs").before("<p class='temp'>"+localStorage.usernames  + " Attacked for "+playernextattack+"x⚔️ Damage!</p>")
             $("#afterlogs").before("<p class='temp'>"+deadname  + " lost "+playernextattack+"x "+losthp+" Health!<br></p>")
             enemycurrenthp = enemycurrenthp - playernextattack
+            enemymissinghp = enemymaxhp - enemycurrenthp
             updateplayerstats()}
         else
         {
@@ -1195,6 +1197,7 @@
             $("#afterlogs").before("<p class='temp'>"+deadname  + " Attacked for "+enemynextattack+"x⚔️ Damage!</p>")
             $("#afterlogs").before("<p class='temp'>"+localStorage.usernames  + " lost "+enemynextattack+"x "+losthp+" Health!<br></p>")
             playercurrenthp = playercurrenthp - enemynextattack
+            playermissinghp = playermaxhp - playercurrenthp
             updateenemystats()}
         else
         {
