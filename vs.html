@@ -560,8 +560,15 @@
 
 
 
+let keysDown = {};
+window.onkeydown = function(e) {
+    keysDown[e.key] = true;}
 
 
+
+if (keysDown["1"]) {
+    alert("hi")
+    console.log("control + a");}
 
 
 
