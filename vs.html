@@ -70,6 +70,8 @@
 
         }
         .grid-log{
+            
+            resize: both;
             flex-direction: column-reverse;
             background-color: rgb(36, 42, 45);
             color:rgb(181, 228, 255);
@@ -107,7 +109,8 @@
             margin-right: auto;
             width: 350px;
         }
-        .characterhp{
+        .characterhp{ 
+            overflow:visible ;
             font-size: 90%;
             background-color: rgba(195, 155, 255, 0.8);
             margin-bottom: auto;
@@ -360,11 +363,11 @@
         <br><br><br><br>
         <label for="nametextbox">Character Name: </label>
         <br>
-        <input type="text" class="info" id="nametextbox" name="nametextbox" required><br>
+        <input type="text" class="info" id="nametextbox" placeholder="Enter your character's name." name="nametextbox" required><br>
         <br>
         <label for="pfptextbox">Character Appearance: </label>
         <br>
-        <input type="url" value="Enter a link that ends with .png or .jpg etc.." class="info" id="pfptextbox" name="pfptextbox" required><br>
+        <input type="url" placeholder="Enter a link that ends with .png or .jpg etc.." class="info" id="pfptextbox" name="pfptextbox" required><br>
         <br>
         <button class="loginbutton" id="deleteprofileb" onclick="clearprofile()">Delete profile</button>
         <button class="loginbutton" id="loadprofileb" onclick="loadprofile()">Load profile</button>
@@ -412,7 +415,7 @@
             <button style="margin-top: 155px; margin-left:auto" id="atk" onclick="playerattack1()" name="gamebuttons" class="abilities" title="80% Chance To Deal (⚔️) Damage | 5% Chance To 2x(⚔️) Deal Damage!">⚔️</button>
             <button style="margin-top: 155px; margin-left: 210px;" id="blk" onclick="playerdefend1()" name="gamebuttons" class="abilities" title="80% Chance To Block (🛡️) Damage!">🛡️</button>
             <button style="margin-top: 225px; margin-left: auto;" id="atk2" onclick="playerattack2()" name="gamebuttons" class="abilities" title="30% Chance To Deal 2x(⚔️) Damage | 5% Chance to Deal (⚔️)!">⚔️💥🎲</button>
-            <button style="margin-top: 225px; margin-left: 210px" id="heal" onclick="playerheal()" name="gamebuttons" class="abilities" title="Heal 50%(❤️) Health | 30% Chance To Heal 100%(❤️) Health Instead!">❤️‍🩹</button>
+            <button style="margin-top: 225px; margin-left: 210px" id="heal" onclick="playerheal()" name="gamebuttons" class="abilities" title="Heal 50%(❤️) Health | 30% Chance To Heal 100%(❤️) Health Instead! (1) Turn Cooldown">❤️‍🩹</button>
         </div>
         <div class="grid-empty">    
             <button onclick="location.reload()" id="restartbutton">Restart</button>
@@ -424,7 +427,7 @@
             <button style="margin-top: 155px; margin-left:auto" id="eatk" onclick="" name="gamebuttons" class="abilities2" title="80% Chance To Deal (⚔️) Damage | 5% Chance To 2x(⚔️) Deal Damage!">⚔️</button>
             <button style="margin-top: 155px; margin-left: 210px;" id="eblk" onclick="" name="gamebuttons" class="abilities2" title="80% Chance To Block (🛡️) Damage!">🛡️</button>
             <button style="margin-top: 225px; margin-left: auto;" id="eatk2" onclick="" name="gamebuttons" class="abilities2" title="30% Chance To Deal 2x(⚔️) Damage | 5% Chance to Deal (⚔️)!">⚔️💥🎲</button>
-            <button style="margin-top: 225px; margin-left: 210px" id="eheal" onclick="" name="gamebuttons" class="abilities2" title="Heal 50%(❤️) Health | 30% Chance To Heal 100%(❤️) Health Instead!">❤️‍🩹</button>
+            <button style="margin-top: 225px; margin-left: 210px" id="eheal" onclick="" name="gamebuttons" class="abilities2" title="Heal 50%(❤️) Health | 30% Chance To Heal 100%(❤️) Health Instead! (1) Turn Cooldown">❤️‍🩹</button>
             <h class="characterhp"  id="enemygamehp">. . .</h>
             <h class="characterstats"  id="enemystats">. . .</h>
         </div>
@@ -554,6 +557,13 @@
         blocked.volume = sound
         blocked.play()
     }
+
+
+
+
+
+
+
 
 
 
@@ -1154,7 +1164,7 @@
         flip()
         dblhealchance = Math.ceil(Math.random() * (100 - 0))
         $("#afterlogs").before("<p class='temp'>"+localStorage.usernames + " used heal.</p>")
-        if(dblhealchance <=50){
+        if(dblhealchance <=30){
             $("#afterlogs").before("<p class='temp'>"+localStorage.usernames  + " ❤️healed for half Health.❤️</p>")
             playercurrenthp = playercurrenthp + Math.floor(playermaxhp/2)
             if (playercurrenthp>playermaxhp){
@@ -1282,7 +1292,7 @@
         setTimeout(flip , 1800)
         dblhealchance = Math.ceil(Math.random() * (100 - 0))
         $("#afterlogs").before("<p class='temp'>"+deadname + " used heal.</p>")
-        if(dblhealchance <=50){
+        if(dblhealchance <=30){
             $("#afterlogs").before("<p class='temp'>"+deadname + " ❤️healed 50% Health.❤️</p>")
             enemycurrenthp = enemycurrenthp + Math.ceil(enemymaxhp/2)
             if (enemycurrenthp>enemymaxhp){
