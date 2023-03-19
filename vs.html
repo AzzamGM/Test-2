@@ -1250,7 +1250,7 @@ if (keysDown["1"]) {
                 enemynextattack = 0
             }
             $("#afterlogs").before("<p class='temp'>"+deadname  + " Attacked for "+enemynextattack+"x⚔️ 💥Double Critical💥 Damage!</p>")
-            $("#afterlogs").before("<p class='temp'>"+deadname  + " lost "+enemynextattack+"x "+losthp+" Health!<br></p>")
+            $("#afterlogs").before("<p class='temp'>"+localStorage.usernames  + " lost "+enemynextattack+"x "+losthp+" Health!<br></p>")
             playercurrenthp = playercurrenthp - enemynextattack
             playermissinghp = playermaxhp - playercurrenthp
             updateenemystats()
