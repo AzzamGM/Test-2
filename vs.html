@@ -78,9 +78,9 @@
             font-size: 19px;
             text-align: center;
             margin-left: -210px;
-            margin-top: -233px;
+            margin-top: -388px;
             width: 420px;
-            height: 530px;  
+            height: 575px;  
             overflow: hidden;
             position: absolute;
             top: 50%;
@@ -104,7 +104,7 @@
             text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
             color: aliceblue;
             text-align: center;
-            margin-top: auto;
+            margin-top: 50px;
             margin-left: auto;
             margin-right: auto;
             width: 350px;
@@ -116,15 +116,15 @@
             margin-bottom: auto;
             margin-left: auto;
             margin-right: auto;
+            margin-top: 45px;
             width: 350px;
-            height: 90px;}
+            height: 180px;}
 
         .characterstats{
             background-color: rgba(195, 155, 255, 0.8);
             margin-bottom: auto;
             margin-left: auto;
             margin-right: auto;
-            margin-top: 90px;
             width: 350px;
             position: absolute;}
     
@@ -268,7 +268,7 @@
             height: 60px;
             background-color: #d30e00;
             margin-left: 45px;
-            margin-top: 165px;
+            margin-top: 275px;
             border: 3px solid black;
             border-radius: 6px;}
 
@@ -278,7 +278,7 @@
             height: 60px;
             background-color: #4830ff;
             margin-left: 45px;
-            margin-top: 165px;
+            margin-top: 275px;
             border: 3px solid black;
             border-radius: 6px;
             position: absolute;
@@ -290,7 +290,7 @@
             height: 60px;
             background-color: #650700;
             margin-left: 45px;
-            margin-top: 165px;
+            margin-top: 275px;
             border: 3px solid black;
             border-radius: 6px;
             box-shadow: 0 2px gray;
@@ -301,13 +301,43 @@
             width: 150px;
             height: 60px;
             background-color: #9ce35e;
-            margin: auto;
-            margin-top: 160px;
+            margin-left: auto;
+            margin-right: 10px;
+            margin-top: 30px;
             border: 3px solid black;
             border-radius: 6px;
         }
+        
         #shopbutton:disabled{
             background-color: #2d4618;
+            box-shadow: 0 2px rgb(77, 77, 77);
+            transform: translateY(3px);
+        }
+        #skillbutton{
+            width: 80px;
+            height: 60px;
+            background-color: #770368;
+            margin-left: 10px;
+            margin-right: auto;
+            margin-top: 30px;
+            border: 3px solid black;
+            border-radius: 6px;
+        }
+        #skillwindow{
+            background-color: rgba(177, 94, 255, 0.861);
+            border: 5px solid black;
+            position: absolute;
+            height: 520px;
+            width: 700px;
+            margin-top: -255px;
+            margin-left: -350px;
+            border-radius: 10px;
+            top: 52%;
+            left: 50%;
+            z-index: 2;
+        }
+        #skillbutton:disabled{
+            background-color: #3f001d;
             box-shadow: 0 2px rgb(77, 77, 77);
             transform: translateY(3px);
         }
@@ -358,6 +388,10 @@
         <button style="margin-top: 310px;margin-left: 490px" onclick="levelblk()" class="levelup">➕</button>
         <button style="margin-top: 430px;margin-right: 170px;margin-left: 170px;width: 350px; height: 70px" id="leaveshop" onclick="leaveshop()" class="shopitems">Confirm & Leave Shop</button>
     </div>
+<!---------------------------SKILL WINDOW -------------------->
+<div id="skillwindow">
+
+</div>
 <!--------------------------START WINDOW---------------------->
     <div align="center" class="startwindow">
         <br><br><br><br>
@@ -369,32 +403,32 @@
         <br>
         <input type="url" placeholder="Enter a link that ends with .png or .jpg etc.." class="info" id="pfptextbox" name="pfptextbox" required><br>
         <br>
-        <button class="loginbutton" id="deleteprofileb" onclick="clearprofile()">Delete profile</button>
         <button class="loginbutton" id="loadprofileb" onclick="loadprofile()">Load profile</button>
         <button class="loginbutton" id="confirmb" onclick="newchar()">Confirm</button>
     </div>
 
      
     <div id="maind" class="grid-container">
-        <div class="grid-empty">
+        <div style="height: 100px" class="grid-empty">
            
   
         </div>
-        <div class="grid-empty">
+        <div style="height: 100px" class="grid-empty">
             <h class="charactername" id="gamename">...</h>
         </div>
         
-        <div class="grid-empty">
+        <div style="height: 100px" class="grid-empty">
            
-            <button onclick="$(document).ready(function(){openshop()})" id="shopbutton">|🛒|</button>
+            <button onclick="$(document).ready(function(){openshop()})" id="shopbutton">🛒</button>
+            <button id="skillbutton">📖</button>
         </div>  
-        <div class="grid-empty">
+        <div style="height: 100px" class="grid-empty">
             <div class="grid-empty">
                 <h class="charactername" id="enemygamename">...</h>
             </div>
         </div>
-        <div class="grid-empty"></div>
-        <div class="grid-empty"></div>
+        <div style="height: 100px" class="grid-empty"></div>
+        <div style="height: 100px" class="grid-empty"></div>
         <div class="grid-item">
             <img align="center" name="gamepfp" id="gamepfp" class="character" src="https://cdn.pixabay.com/photo/2017/02/20/18/03/cat-2083492__340.jpg" alt="r u dumb?">
         </div>  
@@ -412,22 +446,22 @@
         <div class="grid-empty"> 
             <h class="characterhp"  id="userhp">. . .</h><br>
             <h class="characterstats"  id="userstats">⚔️🛡️</h>
-            <button style="margin-top: 155px; margin-left:auto" id="atk" onclick="playerattack1()" name="gamebuttons" class="abilities" title="80% Chance To Deal (⚔️) Damage | 5% Chance To 2x(⚔️) Deal Damage!">⚔️</button>
-            <button style="margin-top: 155px; margin-left: 210px;" id="blk" onclick="playerdefend1()" name="gamebuttons" class="abilities" title="80% Chance To Block (🛡️) Damage!">🛡️</button>
-            <button style="margin-top: 225px; margin-left: auto;" id="atk2" onclick="playerattack2()" name="gamebuttons" class="abilities" title="30% Chance To Deal 2x(⚔️) Damage | 5% Chance to Deal (⚔️)!">⚔️💥🎲</button>
-            <button style="margin-top: 225px; margin-left: 210px" id="heal" onclick="playerheal()" name="gamebuttons" class="abilities" title="Heal 50%(❤️) Health | 30% Chance To Heal 100%(❤️) Health Instead! (1) Turn Cooldown">❤️‍🩹</button>
+            <button style="margin-top: 245px; margin-left:auto" id="atk" onclick="playerattack1()" name="gamebuttons" class="abilities" title="80% Chance To Deal (⚔️) Damage | 5% Chance To 2x(⚔️) Deal Damage!">⚔️</button>
+            <button style="margin-top: 245px; margin-left: 210px;" id="blk" onclick="playerdefend1()" name="gamebuttons" class="abilities" title="80% Chance To Block (🛡️) Damage!">🛡️</button>
+            <button style="margin-top: 315px; margin-left: auto;" id="atk2" onclick="playerattack2()" name="gamebuttons" class="abilities" title="30% Chance To Deal 2x(⚔️) Damage | 5% Chance to Deal (⚔️)!">⚔️💥🎲</button>
+            <button style="margin-top: 315px; margin-left: 210px" id="heal" onclick="playerheal()" name="gamebuttons" class="abilities" title="Heal 50%(❤️) Health | 30% Chance To Heal 100%(❤️) Health Instead! (1) Turn Cooldown">❤️‍🩹</button>
         </div>
         <div class="grid-empty">    
             <button onclick="location.reload()" id="restartbutton">Restart</button>
-            <button onclick="generateenemy()" id="battlebutton">⚔️START BATTLE⚔️</button>
+            <button onclick="battle()" id="battlebutton">⚔️START BATTLE⚔️</button>
         </div>
         
  <!--------------------------ENEMY INTREFACE---------------------->
         <div class="grid-empty">
-            <button style="margin-top: 155px; margin-left:auto" id="eatk" onclick="" name="gamebuttons" class="abilities2" title="80% Chance To Deal (⚔️) Damage | 5% Chance To 2x(⚔️) Deal Damage!">⚔️</button>
-            <button style="margin-top: 155px; margin-left: 210px;" id="eblk" onclick="" name="gamebuttons" class="abilities2" title="80% Chance To Block (🛡️) Damage!">🛡️</button>
-            <button style="margin-top: 225px; margin-left: auto;" id="eatk2" onclick="" name="gamebuttons" class="abilities2" title="30% Chance To Deal 2x(⚔️) Damage | 5% Chance to Deal (⚔️)!">⚔️💥🎲</button>
-            <button style="margin-top: 225px; margin-left: 210px" id="eheal" onclick="" name="gamebuttons" class="abilities2" title="Heal 50%(❤️) Health | 30% Chance To Heal 100%(❤️) Health Instead! (1) Turn Cooldown">❤️‍🩹</button>
+            <button style="margin-top: 245px; margin-left:auto" id="eatk" onclick="" name="gamebuttons" class="abilities2" title="80% Chance To Deal (⚔️) Damage | 5% Chance To 2x(⚔️) Deal Damage!">⚔️</button>
+            <button style="margin-top: 245px; margin-left: 210px;" id="eblk" onclick="" name="gamebuttons" class="abilities2" title="80% Chance To Block (🛡️) Damage!">🛡️</button>
+            <button style="margin-top: 315px; margin-left: auto;" id="eatk2" onclick="" name="gamebuttons" class="abilities2" title="30% Chance To Deal 2x(⚔️) Damage | 5% Chance to Deal (⚔️)!">⚔️💥🎲</button>
+            <button style="margin-top: 315px; margin-left: 210px" id="eheal" onclick="" name="gamebuttons" class="abilities2" title="Heal 50%(❤️) Health | 30% Chance To Heal 100%(❤️) Health Instead! (1) Turn Cooldown">❤️‍🩹</button>
             <h class="characterhp"  id="enemygamehp">. . .</h>
             <h class="characterstats"  id="enemystats">. . .</h>
         </div>
@@ -484,8 +518,6 @@
 
 
 <script>
-    $("#shopwindow").hide()
-    $("#restartbutton").hide()
     $(document).ready(function(){
         $("#gamesound").change(function(){
             sound = document.getElementById("gamesound").value/100
@@ -560,27 +592,18 @@
 
 
 
-let keysDown = {};
-window.onkeydown = function(e) {
-    keysDown[e.key] = true;}
 
 
 
-if (keysDown["1"]) {
-    alert("hi")
-    console.log("control + a");}
-
-
-
-
-
-
-    
+    $("#shopwindow").hide()
+    $("#restartbutton").hide()
     $(".abilities").prop("disabled", true)
-        
-
-
+    $("#skillwindow").hide()
+    $("#shopwindow").hide()
+    $("#skillbutton").prop('disabled', true)
     $("#shopbutton").prop('disabled', true)
+
+
     function refreshshop(){
         $(document).ready(function() {
         document.getElementById("shopatkcost").innerHTML = "Cost: "+levelatkcost+"💰"
@@ -595,6 +618,8 @@ if (keysDown["1"]) {
     let onetwo = 2
 
 
+
+    let enemynpc = false
     let enemydead = 1
 
     let levelatkcost = 2
@@ -641,7 +666,11 @@ if (keysDown["1"]) {
 
     let playerkills = 0
     let scaling = 0
+    let stage = 1
+
+    $("#afterlogs").before("<p style='background: gray; color: black' class='temp' style='color: red'>Stage: "+stage+"!</p>")
     
+    treasurepics = ["treasure1.png", "treasure2.png", "treasure3.png"]
     enemybosschar = ["1b.png", "2b.png", "3b.png", "4b.png", "5b.png"]
     enemybossname = ["WHATizLOVE", "Azzam", "Scarlet", "oSHaRKz", "Handm", "7asoon", "Cakelock"]
     enemychar = ["1.png", "2.png", "3.png", "4.png", "5.png", "6.png", "7.png", "8.png", "9.png", "10.png", "11.png", "12.png", "13.png", "14.png", "15.png", "16.png", "17.png", "18.png", "19.png", "20.png", "21.png", "22.png", "23.png", "24.png", "25.png", "26.png", "27.png", "28.png", "29.png", "30.png", "31.png", "32.png", "33.png"]
@@ -676,6 +705,7 @@ if (keysDown["1"]) {
         else{
             alert("Not enough gold")}}
 
+
     function levelblk(){
         if(playergoldstat>=levelblkcost){
             buyblksfx()
@@ -701,8 +731,8 @@ if (keysDown["1"]) {
 
     function openshop(){
         $(document).ready(function(){
-            refreshshop()
-            $("#shopwindow").show()
+        refreshshop()
+        $("#shopwindow").show()
         document.getElementById("shopblkcost").innerHTML = "Cost: "+levelblkcost+"💰"    
         document.getElementById("shopatkcost").innerHTML = "Cost: "+levelatkcost+"💰"
         document.getElementById("shopplayergold").innerHTML = playergoldstat + "💰"
@@ -716,10 +746,27 @@ if (keysDown["1"]) {
     function leaveshop(){
         $("#battlebutton").prop('disabled', false)
         $("#shopwindow").hide()
-        $("#shopbutton").prop('disabled', true)
 
     }
 
+    function openskills(){
+        $(document).ready(function(){
+            refreshshop()
+            $("#skillwindow").show()
+        document.getElementById("shopblkcost").innerHTML = "Cost: "+levelblkcost+"💰"    
+        document.getElementById("shopatkcost").innerHTML = "Cost: "+levelatkcost+"💰"
+        document.getElementById("shopplayergold").innerHTML = playergoldstat + "💰"
+        $("#battlebutton").prop('disabled', true)
+        })
+
+        
+        refreshshop()
+    }
+    function battle(){
+        rndgenerate()
+        $("#shopbutton").prop('disabled', true)
+        $("#windowbutton").prop('disabled', true)
+    }
    
 
 
@@ -791,6 +838,7 @@ if (keysDown["1"]) {
         $('#mylogs').stop().animate({
         scrollTop: $('#mylogs')[0].scrollHeight
         }, 800);
+        if(enemynpc==false){
         if(enemycurrenthp<enemymaxhp&&(ehealcd<=0)){
         let rndability = (Math.ceil(Math.random() * (4 - 0)))
         console.log(rndability+' (rolled for 4)')
@@ -838,7 +886,19 @@ if (keysDown["1"]) {
                 break;}}
             
             }
+            else{
+                flip()
+            }}
 
+    function rndgenerate(){
+        rndgenerate = Math.ceil(Math.random() * (100 - 0) + 0)
+        if(rndgenerate>10)
+        {generateenemy()}
+        else{generatetreasure()
+        }
+    }
+
+    
     function generateenemy(){
         $("#shopbutton").prop('disabled', true)
         let rndchar = (Math.ceil(Math.random() * (enemychar.length - 0) + 0)) - 1
@@ -847,7 +907,7 @@ if (keysDown["1"]) {
         let rndenemyatk = (Math.ceil(Math.random() * (enemyatkmax - (enemyatkmin-1)) + (enemyatkmin-1))) 
         let rndenemyblk = (Math.ceil(Math.random() * (enemyblkmax - (enemyblkmin-1)) + (enemyblkmin-1)))
         let rndenemyhp = (Math.ceil(Math.random() * (enemyhpmax - (enemyhpmin-1)) + (enemyhpmin-1)))
-        let rndenemygold = (Math.ceil(Math.random() * (enemyhpmax - (enemygoldmin-1)) + (enemygoldmin-1)))
+        let rndenemygold = (Math.ceil(Math.random() * (enemygoldmax - (enemygoldmin-1)) + (enemygoldmin-1)))
 
         enemymaxhp = rndenemyhp
         enemycurrenthp = rndenemyhp
@@ -919,12 +979,13 @@ if (keysDown["1"]) {
         document.getElementById("userstats").innerHTML = "⚔️"+playeratkstat+" | 💰"+playergoldstat+" | 🛡️"+playerblkstat
 
     }
-
+    
     function updateenemystats(){
         if(playercurrenthp<1){
         playerdeadsfx()
         document.getElementById("userhp").innerHTML = losthp.repeat(playermaxhp)
         $("#afterlogs").before("<p class='temp' style='color: red'>"+localStorage.usernames+" died.</p>")
+        enemynpc = false
         $("#afterlogs").before("<p class='temp' style='color: red'>Total kills: "+playerkills+"!</p>")
         refreshstats()
         $(".abilities").prop('disabled', true)
@@ -967,6 +1028,8 @@ if (keysDown["1"]) {
         scaling++
         if(scaling==4){
             scaling=0
+            stage++
+            $("#afterlogs").before("<p style='background: gray; color: black' class='temp' style='color: red'>Stage: "+stage+"!</p>")
             if(enemyatkmax<5){
                 enemyscale()
                 enemygoldmax++
@@ -1197,7 +1260,7 @@ if (keysDown["1"]) {
         function enemyattack1(){
         ehealcd--
         setTimeout(flip , 1800)
-        $("#afterlogs").before("<p class='temp'>"+deadname + " used Normal Attack.</p>")
+        $("#afterlogs").before("<p style='color: orange' class='temp'>"+deadname + " used Normal Attack.</p>")
         enemyatkchance = Math.ceil(Math.random() * (100 - 0))
         enemynextattack = 0
         if(enemyatkchance<=80){
@@ -1208,8 +1271,8 @@ if (keysDown["1"]) {
             if(enemynextattack<0){
                 enemynextattack = 0
             }
-            $("#afterlogs").before("<p class='temp'>"+deadname  + " Attacked for "+enemynextattack+"x⚔️ Damage!</p>")
-            $("#afterlogs").before("<p class='temp'>"+localStorage.usernames  + " lost "+enemynextattack+"x "+losthp+" Health!<br></p>")
+            $("#afterlogs").before("<p style='color: orange' class='temp'>"+deadname  + " Attacked for "+enemynextattack+"x⚔️ Damage!</p>")
+            $("#afterlogs").before("<p style='color: orange' class='temp'>"+localStorage.usernames  + " lost "+enemynextattack+"x "+losthp+" Health!<br></p>")
             playercurrenthp = playercurrenthp - enemynextattack
             playermissinghp = playermaxhp - playercurrenthp
             updateenemystats()
@@ -1222,15 +1285,15 @@ if (keysDown["1"]) {
             if(enemynextattack<0){
                 enemynextattack = 0
             }
-            $("#afterlogs").before("<p class='temp'>"+deadname  + " Attacked for "+enemynextattack+"x⚔️ 💥Double Critical💥 Damage!</p>")
-            $("#afterlogs").before("<p class='temp'>"+localStorage.usernames  + " lost "+enemynextattack+"x "+losthp+" Health!<br></p>")
+            $("#afterlogs").before("<p style='color: orange' class='temp'>"+deadname  + " Attacked for "+enemynextattack+"x⚔️ 💥Double Critical💥 Damage!</p>")
+            $("#afterlogs").before("<p style='color: orange' class='temp'>"+localStorage.usernames  + " lost "+enemynextattack+"x "+losthp+" Health!<br></p>")
             playercurrenthp = playercurrenthp - enemynextattack
             playermissing = playermaxhp - playercurrenthp
             updateenemystats()}
         else
         {
             misssfx()
-            $("#afterlogs").before("<p class='temp'>"+deadname + " Missed the Attack!</p>")
+            $("#afterlogs").before("<p style='color: orange' class='temp'>"+deadname + " Missed the Attack!</p>")
         }
         
     playernextblk = 0}
@@ -1240,7 +1303,7 @@ if (keysDown["1"]) {
         ehealcd--
         setTimeout(flip , 1800)
         enemyatkchance = Math.ceil(Math.random() * (100 - 0))
-        $("#afterlogs").before("<p class='temp'>"+deadname + " used Lucky Attack. </p>")
+        $("#afterlogs").before("<p style='color: orange' class='temp'>"+deadname + " used Lucky Attack. </p>")
         if(enemyatkchance<=30){
             if(playernextblk>0){
               blockedsfx()}
@@ -1249,8 +1312,8 @@ if (keysDown["1"]) {
             if(enemynextattack<0){
                 enemynextattack = 0
             }
-            $("#afterlogs").before("<p class='temp'>"+deadname  + " Attacked for "+enemynextattack+"x⚔️ 💥Double Critical💥 Damage!</p>")
-            $("#afterlogs").before("<p class='temp'>"+localStorage.usernames  + " lost "+enemynextattack+"x "+losthp+" Health!<br></p>")
+            $("#afterlogs").before("<p style='color: orange' class='temp'>"+deadname  + " Attacked for "+enemynextattack+"x⚔️ 💥Double Critical💥 Damage!</p>")
+            $("#afterlogs").before("<p style='color: orange' class='temp'>"+localStorage.usernames  + " lost "+enemynextattack+"x "+losthp+" Health!<br></p>")
             playercurrenthp = playercurrenthp - enemynextattack
             playermissinghp = playermaxhp - playercurrenthp
             updateenemystats()
@@ -1263,15 +1326,15 @@ if (keysDown["1"]) {
             if(enemynextattack<0){
                 enemynextattack = 0
             }
-            $("#afterlogs").before("<p class='temp'>"+deadname  + " Attacked for "+enemynextattack+"x⚔️ Damage!</p>")
-            $("#afterlogs").before("<p class='temp'>"+localStorage.usernames  + " lost "+enemynextattack+"x "+losthp+" Health!<br></p>")
+            $("#afterlogs").before("<p style='color: orange' class='temp'>"+deadname  + " Attacked for "+enemynextattack+"x⚔️ Damage!</p>")
+            $("#afterlogs").before("<p style='color: orange' class='temp'>"+localStorage.usernames  + " lost "+enemynextattack+"x "+losthp+" Health!<br></p>")
             playercurrenthp = playercurrenthp - enemynextattack
             playermissinghp = playermaxhp - playercurrenthp
             updateenemystats()}
         else
         {
             misssfx()
-            $("#afterlogs").before("<p class='temp'>"+deadname + " Missed the Attack!</p>")
+            $("#afterlogs").before("<p style='color: orange' class='temp'>"+deadname + " Missed the Attack!</p>")
         }
         console.log(enemyatkchance)
         playernextblk = 0}
@@ -1282,14 +1345,14 @@ if (keysDown["1"]) {
         blocksfx()
         setTimeout(flip , 1800)
         blkchance = Math.ceil(Math.random() * (100 - 0))
-        $("#afterlogs").before("<p class='temp'>"+deadname + " used Normal Defend.</p>")
+        $("#afterlogs").before("<p style='color: orange' class='temp'>"+deadname + " used Normal Defend.</p>")
         if(blkchance <=80){
             enemynextblk = enemyblkstat
-            $("#afterlogs").before("<p class='temp'>"+deadname  + " is Blocking the next "+enemynextblk+"x🛡️ Damage!</p>")
+            $("#afterlogs").before("<p style='color: orange' class='temp'>"+deadname  + " is Blocking the next "+enemynextblk+"x🛡️ Damage!</p>")
         }
         else{
             misssfx()
-            $("#afterlogs").before("<p class='temp'>"+deadname  + " Tried to block, but failed! </p>")}
+            $("#afterlogs").before("<p style='color: orange' class='temp'>"+deadname  + " Tried to block, but failed! </p>")}
             playernextblk = 0}
 
     //ENEMY HEAL||||||||||||||||||||||||||||||||||||||||||||||||||||
@@ -1298,9 +1361,9 @@ if (keysDown["1"]) {
         healsfx()
         setTimeout(flip , 1800)
         dblhealchance = Math.ceil(Math.random() * (100 - 0))
-        $("#afterlogs").before("<p class='temp'>"+deadname + " used heal.</p>")
+        $("#afterlogs").before("<p style='color: orange' class='temp'>"+deadname + " used heal.</p>")
         if(dblhealchance <=30){
-            $("#afterlogs").before("<p class='temp'>"+deadname + " ❤️healed 50% Health.❤️</p>")
+            $("#afterlogs").before("<p style='color: orange' class='temp'>"+deadname + " ❤️healed 50% Health.❤️</p>")
             enemycurrenthp = enemycurrenthp + Math.ceil(enemymaxhp/2)
             if (enemycurrenthp>enemymaxhp){
                 enemycurrenthp = enemymaxhp
@@ -1311,12 +1374,60 @@ if (keysDown["1"]) {
             refreshstats()
         }
         else{
-            $("#afterlogs").before("<p class='temp'>"+deadname  + " ❤️got lucky and healed 100% Health!❤️ </p>")
+            $("#afterlogs").before("<p style='color: orange' class='temp'>"+deadname  + " ❤️got lucky and healed 100% Health!❤️ </p>")
             enemycurrenthp = enemymaxhp}
             refreshstats()
             playernextblk = 0
             ehealcd = 1}
-    
-        refreshshop()
+
+   
+///////////////////// NEW PATCH //////////////////////
+
+
+function updateweapon(){
+    $("#shopbutton").prop('disabled', true)
+    if(pbleedsword==true){
+        newatk+= "🩸"
+        document.getElementById("atk").innerHTML = "⚔️" + newatk}
+    if(pfiresword==true){
+        newatk+= "🔥"
+        document.getElementById("atk").innerHTML = "⚔️" + newatk}
+    if(ppoisonsword==true){
+        newatk+= "🧪"
+        document.getElementById("atk").innerHTML = "⚔️" + newatk}
+    if(picesword==true){
+        newatk+= "❄️"
+        document.getElementById("atk").innerHTML = "⚔️" + newatk}
+    $("#battlebutton").prop('disabled', true)
+}
+newatk = ""
+let pbleedsword = false
+let pfiresword = true
+let ppoisonsword = false
+let picesword = false
+
+
+
+
+function generatetreasure(){
+    enemynpc = true
+    deadname = "Treasure Chest"
+    let rndtreasure = (Math.ceil(Math.random() * (treasurepics.length - 0) + 0)) - 1
+    let treasurepic = treasurepics[rndtreasure]
+    enemyatkstat = 0
+    enemyblkstat = 0
+    enemymaxhp = enemyhpmax*2
+    enemycurrenthp = enemymaxhp
+    enemygoldstat = (Math.ceil(Math.random() * (enemygoldmax*2 - (enemygoldmin*2-1)) + (enemygoldmin*2-1)))
+    document.getElementById("enemygamename").innerHTML = "Treasure Chest"
+    document.getElementById("enemygamepfp").setAttribute("src", "Pictures/"+treasurepics[rndtreasure])
+    document.getElementById("enemystats").innerHTML = "⚔️"+enemyatkstat+" | 💰"+enemygoldstat+" | 🛡️"+enemyblkstat
+    document.getElementById("enemygamehp").innerHTML = hp.repeat(enemymaxhp)
+    flip()
+}
+////////////////////////////////////////////////////////////
+
+    refreshshop()
+
       </script>
 </body>
