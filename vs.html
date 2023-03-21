@@ -730,9 +730,10 @@
     }
 
     function openshop(){
+        
         $(document).ready(function(){
-        refreshshop()
-        $("#shopwindow").show()
+            refreshshop()
+            $("#shopwindow").show()
         document.getElementById("shopblkcost").innerHTML = "Cost: "+levelblkcost+"💰"    
         document.getElementById("shopatkcost").innerHTML = "Cost: "+levelatkcost+"💰"
         document.getElementById("shopplayergold").innerHTML = playergoldstat + "💰"
@@ -762,11 +763,8 @@
         
         refreshshop()
     }
-    function battle(){
-        rndgenerate()
-        $("#shopbutton").prop('disabled', true)
-        $("#windowbutton").prop('disabled', true)
-    }
+    
+  
    
 
 
@@ -891,11 +889,16 @@
             }}
 
     function rndgenerate(){
-        rndgenerate = Math.ceil(Math.random() * (100 - 0) + 0)
-        if(rndgenerate>10)
+        rndenemy = Math.ceil(Math.random() * (100 - 0) + 0)
+        if(rndenemy>10)
         {generateenemy()}
         else{generatetreasure()
         }
+    }
+    function battle(){
+        rndgenerate()
+        $("#shopbutton").prop('disabled', true)
+        $("#windowbutton").prop('disabled', true)
     }
 
     
@@ -1427,7 +1430,6 @@ function generatetreasure(){
 }
 ////////////////////////////////////////////////////////////
 
-    refreshshop()
 
       </script>
 </body>
