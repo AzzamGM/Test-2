@@ -619,7 +619,8 @@
 
 
 
-    let enemynpc = false
+
+
     let enemydead = 1
 
     let levelatkcost = 2
@@ -836,7 +837,10 @@
         $('#mylogs').stop().animate({
         scrollTop: $('#mylogs')[0].scrollHeight
         }, 800);
-        if(enemynpc==false){
+        if(deadname=="Treasure Chest"){
+            flip()
+        }
+        else{
         if(enemycurrenthp<enemymaxhp&&(ehealcd<=0)){
         let rndability = (Math.ceil(Math.random() * (4 - 0)))
         console.log(rndability+' (rolled for 4)')
@@ -883,9 +887,6 @@
                 setTimeout(ogabilities, 1700)
                 break;}}
             
-            }
-            else{
-                flip()
             }}
 
     function rndgenerate(){
@@ -988,7 +989,6 @@
         playerdeadsfx()
         document.getElementById("userhp").innerHTML = losthp.repeat(playermaxhp)
         $("#afterlogs").before("<p class='temp' style='color: red'>"+localStorage.usernames+" died.</p>")
-        enemynpc = false
         $("#afterlogs").before("<p class='temp' style='color: red'>Total kills: "+playerkills+"!</p>")
         refreshstats()
         $(".abilities").prop('disabled', true)
@@ -1413,7 +1413,8 @@ let picesword = false
 
 
 function generatetreasure(){
-    enemynpc = true
+    $("#battlebutton").prop("disabled", true)
+
     deadname = "Treasure Chest"
     let rndtreasure = (Math.ceil(Math.random() * (treasurepics.length - 0) + 0)) - 1
     let treasurepic = treasurepics[rndtreasure]
@@ -1421,7 +1422,7 @@ function generatetreasure(){
     enemyblkstat = 0
     enemymaxhp = enemyhpmax*2
     enemycurrenthp = enemymaxhp
-    enemygoldstat = (Math.ceil(Math.random() * (enemygoldmax*2 - (enemygoldmin*2-1)) + (enemygoldmin*2-1)))
+    enemygoldstat = enemygoldmax*2
     document.getElementById("enemygamename").innerHTML = "Treasure Chest"
     document.getElementById("enemygamepfp").setAttribute("src", "Pictures/"+treasurepics[rndtreasure])
     document.getElementById("enemystats").innerHTML = "⚔️"+enemyatkstat+" | 💰"+enemygoldstat+" | 🛡️"+enemyblkstat
