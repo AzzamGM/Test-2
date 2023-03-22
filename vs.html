@@ -450,6 +450,7 @@
             <button style="margin-top: 245px; margin-left: 210px;" id="blk" onclick="playerdefend1()" name="gamebuttons" class="abilities" title="80% Chance To Block (🛡️) Damage!">🛡️</button>
             <button style="margin-top: 315px; margin-left: auto;" id="atk2" onclick="playerattack2()" name="gamebuttons" class="abilities" title="30% Chance To Deal 2x(⚔️) Damage | 5% Chance to Deal (⚔️)!">⚔️💥🎲</button>
             <button style="margin-top: 315px; margin-left: 210px" id="heal" onclick="playerheal()" name="gamebuttons" class="abilities" title="Heal 50%(❤️) Health | 30% Chance To Heal 100%(❤️) Health Instead! (1) Turn Cooldown">❤️‍🩹</button>
+            <button style="margin-top: 395px; margin-left: 105px" id="atk3" onclick="" name="gamebuttons" class="abilities" title="">📖</button>
         </div>
         <div class="grid-empty">    
             <button onclick="location.reload()" id="restartbutton">Restart</button>
@@ -462,6 +463,7 @@
             <button style="margin-top: 245px; margin-left: 210px;" id="eblk" onclick="" name="gamebuttons" class="abilities2" title="80% Chance To Block (🛡️) Damage!">🛡️</button>
             <button style="margin-top: 315px; margin-left: auto;" id="eatk2" onclick="" name="gamebuttons" class="abilities2" title="30% Chance To Deal 2x(⚔️) Damage | 5% Chance to Deal (⚔️)!">⚔️💥🎲</button>
             <button style="margin-top: 315px; margin-left: 210px" id="eheal" onclick="" name="gamebuttons" class="abilities2" title="Heal 50%(❤️) Health | 30% Chance To Heal 100%(❤️) Health Instead! (1) Turn Cooldown">❤️‍🩹</button>
+            <button style="margin-top: 395px; margin-left: 105px" id="eatk3" onclick="" name="gamebuttons" class="abilities2" title="">📖</button>
             <h class="characterhp"  id="enemygamehp">. . .</h>
             <h class="characterstats"  id="enemystats">. . .</h>
         </div>
@@ -512,6 +514,14 @@
         <source src="Audio/blocked.mp3 ">
     </audio>
 
+    <audio id="fireattackmp3">
+        <source src="Audio/fireattack.mp3 ">
+    </audio>
+
+    <audio id="iceattackmp3">
+        <source src="Audio/iceattack3.mp3 ">
+    </audio>
+
 
     
 
@@ -523,6 +533,8 @@
             sound = document.getElementById("gamesound").value/100
             console.log(sound)
             })})
+    var firespell = document.getElementById("fireattackmp3")
+    var icespell = document.getElementById("iceattackmp3")
     var blocked = document.getElementById("blockedmp3")
     var playerdead = document.getElementById("playerdeadmp3")
     var attack1sound = document.getElementById("attackmp3")
@@ -534,6 +546,16 @@
     var lootsound = document.getElementById("lootmp3")
     var misssound = document.getElementById("missmp3")
     sound = 0.4
+
+    function icesfx(){
+        icespell.volume = sound
+        icespell.play()
+    }
+
+    function firesfx(){
+        firespell.volume = sound
+        firespell.play()
+    }
 
     function playerdeadsfx(){
         playerdead.volume = sound
@@ -613,12 +635,17 @@
     let profile = {}
     let hp = "❤️"
     let losthp = "💔"
+    spell = "📖"
     let ehealcd = 0
     let phealcd = 0
+    let pspellcd = 0
     let onetwo = 2
 
 
-
+    let pfirespell = false
+    let picespell = false
+    let ppoisonspell = false
+    let pbleedspell = false
 
 
     let enemydead = 1
@@ -675,7 +702,7 @@
     enemybosschar = ["1b.png", "2b.png", "3b.png", "4b.png", "5b.png"]
     enemybossname = ["WHATizLOVE", "Azzam", "Scarlet", "oSHaRKz", "Handm", "7asoon", "Cakelock"]
     enemychar = ["1.png", "2.png", "3.png", "4.png", "5.png", "6.png", "7.png", "8.png", "9.png", "10.png", "11.png", "12.png", "13.png", "14.png", "15.png", "16.png", "17.png", "18.png", "19.png", "20.png", "21.png", "22.png", "23.png", "24.png", "25.png", "26.png", "27.png", "28.png", "29.png", "30.png", "31.png", "32.png", "33.png"]
-    enemyname = ["Cruz", "Espinoza", "Zubair", "Sutherland", "Zoe", "Krankry", "Husna","Easwith", "Ruthbald", "Claceol", "Rahe", "Fride", "Reginu", "Nethdic", "Pheradel", "Burred", "Isenwig", "Sonkim", "Viagorma", "Betca", "Lintom", "Nethtine", "Robcyn", "Ciane", "Riwig", "Dajack", "Thysa" ,"Brooks", "Isobel", "Mccormick", "Zackary", "Allen", "Oliver", "Keller", "Jago", "Rollins", "Ty", "Hart", "Gabriela", "Valencia", "Phillip", "Grant", "Aine", "Holder", "Edmund", "Gilmore", "Nevaeh", "zYashi", "Sultan", "Glass", "BluXice", "Levine", "Ella", "Chan", "Edwin", "Preston", "Stop3ndk", "Clark", "Albert", "Bates", "Azzam", "oShaRkz", "WhatIzLove", "Scar", "Cakelock", "Sharo", "Eddga", "West", "Handm", "7asoon", "Jack", "Sett", "MrM7md", "Crocodile", "7toom", "AMM", "AvengingPoro", "Ner0"]
+    enemyname = ["Cruz", "Espinoza", "Zubair", "Sutherland", "Zoe", "Krankry", "Husna","Easwith", "Ruthbald", "Claceol", "Rahe", "Fride", "Reginu", "Nethdic", "Pheradel", "Burred", "Isenwig", "Sonkim", "Viagorma", "Betca", "Lintom", "Nethtine", "Robcyn", "xbdory", "Ciane", "Riwig", "Dajack", "Thysa" ,"Brooks", "Isobel", "Mccormick", "Zackary", "Allen", "Oliver", "Keller", "Jago", "Rollins", "Ty", "Hart", "Gabriela", "Valencia", "Phillip", "Grant", "Aine", "Holder", "Edmund", "Gilmore", "Nevaeh", "zYashi", "Sultan", "Glass", "BluXice", "Levine", "Ella", "Chan", "Edwin", "Preston", "Stop3ndk", "Clark", "Albert", "Bates", "Azzam", "oShaRkz", "WhatIzLove", "Scar", "Cakelock", "Sharo", "Eddga", "West", "Handm", "7asoon", "Jack", "Sett", "MrM7md", "Crocodile", "7toom", "AMM", "AvengingPoro", "Ner0"]
     enemysurname = ["the Omen", "the Loner", "the Titan", "the Illuminator", "the Valiant", "the Omen", "the Poet", "the Ghost", "the Reckless", "the Gentleman", "son of Ragnar", "the III", "the IV", "Tall", "Waterside", "Lordbreaker", "Flarethunder", "Breezemace", "Ironelvenarrow", "Gazeautumn", "Paladinspear", "Ramboar", "Runner", "Ramwater", "Red", "Lordpicker", "Spearshadow", "Wallside", "Bearhame", "Greenautumngaze", "Wyrmmagenta", "Tallwarg", "Greenelven","Lightgreen", "Starelven", "Breakerhunter", "Lipswalk", "Rageblood", "Bullblood", "Manehilt", "Eyeforce", "Cyanman", "Fullquiver", "Bloodman", "Breakstorm", "Gazewarrior","the Beast", "of the Light", "the Champion", "the Chaotic", "the Guard", "the Shield", "the Lionheart", "the Turbulent", "the Loyal", "the Reckless", "the Tarnished", "Bulwark of the Weak", "the Weakling", "the Strong", "the Masterbaiter", "Bronzeman", "AlShareef", "your Long Lost Brother", "your Stepmom", "your Stepdad", "Obama", "the Slayer", "the Destroyer", "the Pussy Magnet", "the Whore", "the Darksider", "the Musician", "the Pediatrician", "the Child Molester", "the Pedophile", "the Furry", "the Meta Slave", "of the Darkness", "the Firekeeper", "the Light Fixer", "the Imposter", "the Hardstuck", "the Math Teacher", "the Professor", "the Singer", "the Pianist", "the Doctor", "the Warrior", "the Barbarian", "the Lover", "the Horny", "the Beekeeper", "the Businessman", "the Rich", "the Poor", "the Dwarf", "the Goblin", "the Orc" ,"Breakhammer", "Forcetongue", "Wargdragonbreeze", "Hawkram", "Noseore", "Treesandbright", "Falconfall","the II", "the V", "son of Donald Trump", "Trump", "Twaim", "Scarlet", "the Frenchman", "the Challenger", "the Duelist", "the Escapist", "the Thief", "the Guardian", "the Malicious", "the Dominant", "the Submissive", "the Sexy", "the First", "the Jokester", "the Magnificent", "Baroum", "the Zoo Keeper", "the Pharmacist", "the Assassin", "the Monk", "the Rapist", "the Law Maker", "the Abandoned", "son of Sylvanas", "son of Ragnarok", "son of Vereth", "the Fucker"]
 
     console.log(enemysurname.length)
@@ -777,6 +804,31 @@
         else{
             document.getElementById("heal").innerHTML = "❤️‍🩹"
         }
+
+        if(pspellcd>0){
+            $("#atk3").prop("disabled", true)
+            document.getElementById("atk3").innerHTML = pspellcd+"⌛"
+        }
+        else{
+            document.getElementById("atk3").innerHTML = spell
+            console.log("cooldown "+pspellcd)
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         if(ehealcd>0){
             $("#eheal").prop("disabled", true)
@@ -891,7 +943,7 @@
 
     function rndgenerate(){
         rndenemy = Math.ceil(Math.random() * (100 - 0) + 0)
-        if(rndenemy>5)
+        if(rndenemy>8)
         {generateenemy()}
         else{generatetreasure()
         }
@@ -1021,6 +1073,7 @@
         if(enemycurrenthp<1){
         document.getElementById("enemygamehp").innerHTML = losthp.repeat(enemymaxhp)
         $("#afterlogs").before("<p  class='temp' style='color: red'>"+deadname+" died.</p>")
+        droprandomspell()
         $("#afterlogs").before("<p  class='temp' style='color: gold'>"+"Looted Corpse, Gained "+enemygoldstat+"💰!</p>")
         playerkills++
         $("#afterlogs").before("<p class='temp' style='color: red'>Total kills: "+playerkills+"!</p>")
@@ -1032,6 +1085,10 @@
         if(scaling==4){
             scaling=0
             stage++
+            if(stage=4){
+                giverndspell()
+            }
+
             $("#afterlogs").before("<p style='background: gray; color: black' class='temp' style='color: red'>Stage: "+stage+"!</p>")
             if(enemyatkmax<5){
                 enemyscale()
@@ -1109,7 +1166,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////
  //ATTACK 1||||||||||||||||||||||||||||||||||||||||||||||||||||
  function playerattack1(){
-        
+        pspellcd--
         phealcd--       
         flip()
         $("#afterlogs").before("<p  class='temp'>"+localStorage.usernames + " used Normal Attack."+"</p")
@@ -1142,7 +1199,7 @@
             if(playernextattack<0){
                 playernextattack = 0
             }
-            $("#afterlogs").before("<p class='temp'>"+localStorage.usernames  + " Attacked for "+playernextattack+"x⚔️ 💥Double Critical💥Damage!"+"</p>")
+            $("#afterlogs").before("<p class='temp'>"+localStorage.usernames  + " Attacked for "+playernextattack+"x⚔️ 💥Double Critical💥 Damage!"+"</p>")
             $("#afterlogs").before("<p class='temp'>"+deadname  + " lost "+playernextattack+"x "+losthp+" Health!<br></p>")
             enemycurrenthp = enemycurrenthp - playernextattack
             enemymissinghp = enemymaxhp - enemycurrenthp
@@ -1163,6 +1220,7 @@
 
     //ATTACK 2||||||||||||||||||||||||||||||||||||||||||||||||||||
     function playerattack2(){
+        pspellcd--
         phealcd--
         flip()
         atkchance = Math.ceil(Math.random() * (100 - 0))
@@ -1212,6 +1270,7 @@
         
     //BLOCK 1||||||||||||||||||||||||||||||||||||||||||||||||||||
     function playerdefend1(){
+        pspellcd--
         phealcd--
         blocksfx()
         flip()
@@ -1233,6 +1292,7 @@
 
     //HEAL||||||||||||||||||||||||||||||||||||||||||||||||||||
     function playerheal(){
+        pspellcd--
         healsfx()
         flip()
         dblhealchance = Math.ceil(Math.random() * (100 - 0))
@@ -1256,6 +1316,82 @@
                 setTimeout(enemyturn, 2000)}
         enemynextblk = 0
         phealcd = 1}
+/////////////////////////////////// PLAYER FIRE SPELL ///////////////////////////////////////////////////
+function fireattack(){
+    phealcd--    
+    flip()
+    $("#afterlogs").before("<p  class='temp'>"+localStorage.usernames + " used 🔥Fire Attack🔥."+"</p")
+    atkchance = Math.ceil(Math.random() * (100 - 0))
+    playernextattack = 0
+    if(enemynextblk>0){
+        blockedsfx()}
+
+    firesfx()   
+    playernextattack = playeratkstat*1
+    if(playernextattack<0){
+        playernextattack = 0}
+
+    $("#afterlogs").before("<p class='temp'>"+localStorage.usernames  + " Attacked for "+playernextattack+"x🔥Fire Damage!🔥"+"</p>")
+    $("#afterlogs").before("<p class='temp'>"+deadname  + " lost "+playernextattack+"x "+losthp+" Health!<br></p>")
+    enemycurrenthp = enemycurrenthp - playernextattack
+    enemymissinghp = enemymaxhp - enemycurrenthp
+    updateplayerstats()
+
+    if(enemycurrenthp>0){
+        setTimeout(enemyturn, 2000)}
+    enemynextblk = 0
+    pspellcd = 2
+    }
+////////////////////////////////////////// PLAYER ICE SPELL
+function iceattack(){
+        phealcd--       
+        flip()
+        $("#afterlogs").before("<p  class='temp'>"+localStorage.usernames + " used ❄️Ice Attack❄️."+"</p")
+        atkchance = Math.ceil(Math.random() * (100 - 0))
+        playernextattack = 0
+        if(atkchance<=55){
+            if(enemynextblk>0){
+            blockedsfx()}
+
+            icesfx()
+           
+
+            
+
+            playernextattack = playeratkstat*1-enemynextblk
+            if(playernextattack<0){
+                playernextattack = 0
+            }
+            $("#afterlogs").before("<p class='temp'>"+localStorage.usernames  + " Attacked for "+playernextattack+"x❄️IceDamage!❄️"+"</p>")
+            $("#afterlogs").before("<p class='temp'>"+deadname  + " lost "+playernextattack+"x "+losthp+" Health!<br></p>")
+            enemycurrenthp = enemycurrenthp - playernextattack
+            enemymissinghp = enemymaxhp - enemycurrenthp
+            updateplayerstats()
+        }
+        else{
+            if(enemynextblk>0){
+            blockedsfx()}
+            icesfx()
+            attack2sfx()
+            playernextattack = playeratkstat*2-enemynextblk
+            if(playernextattack<0){
+                playernextattack = 0
+            }
+            $("#afterlogs").before("<p class='temp'>"+localStorage.usernames  + " Attacked for "+playernextattack+"❄️💥Double Critical💥 Ice Damage!❄️"+"</p>")
+            $("#afterlogs").before("<p class='temp'>"+deadname  + " lost "+playernextattack+"x "+losthp+" Health!<br></p>")
+            enemycurrenthp = enemycurrenthp - playernextattack
+            enemymissinghp = enemymaxhp - enemycurrenthp
+            updateplayerstats()
+            }
+            console.log(atkchance)
+
+        if(enemycurrenthp>0){
+            setTimeout(enemyturn, 2000)
+        }
+        pspellcd = 4
+        enemynextblk = 0
+        }
+
     
 
 
@@ -1385,36 +1521,149 @@
 
    
 ///////////////////// NEW PATCH //////////////////////
+function droprandomspell(){
+    if(deadname=="Treasure Chest"){
+        rndspell = Math.ceil(Math.random() * 2)
+        console.log("RANDOM SPELL: "+rndspell)
+        switch(rndspell){
+            case rndspell = 1:
+                pfirespell = true   
+                picespell = false
+                pbleedspell = false
+                ppoisonspell = false
+                spell = "🔥"
+                break;
+            case rndspell = 2:
+                pfirespell = false   
+                picespell = true
+                pbleedspell = false
+                ppoisonspell = false
+                spell = "❄️"
+                break;
+            case rndspell = 3:
+                pfirespell = false   
+                picespell = false
+                pbleedspell = true
+                ppoisonspell = false
+                spell = "🩸"
+                break;
+            case rndspell = 4:
+                pfirespell = false   
+                picespell = false
+                pbleedspell = false
+                ppoisonspell = true
+                spell = "🧪"
+                break;               
+            
+        }
+        $("#afterlogs").before("<p style='color: purple; background-color: black' class='temp'>You found a unique scroll, it contains unfamiliar ancient enrgavings and a "+spell +" symbol..</p>")
+        $("#atk3").show()
+        deadname="Nothing"
+        console.log("RANDOM SPELL: "+spell)
+        updateweapon()
+        pspellcd = 0
+    }
+    else{
+        console.log(" not a treasure ")
+    }
+}
 
+function giverndspell(){
+    rndspell = Math.ceil(Math.random() * 2)
+        console.log("RANDOM SPELL: "+rndspell)
+        switch(rndspell){
+            case rndspell = 1:
+                pfirespell = true   
+                picespell = false
+                pbleedspell = false
+                ppoisonspell = false
+                spell = "🔥"
+                break;
+            case rndspell = 2:
+                pfirespell = false   
+                picespell = true
+                pbleedspell = false
+                ppoisonspell = false
+                spell = "❄️"
+                break;
+            case rndspell = 3:
+                pfirespell = false   
+                picespell = false
+                pbleedspell = true
+                ppoisonspell = false
+                spell = "🩸"
+                break;
+            case rndspell = 4:
+                pfirespell = false   
+                picespell = false
+                pbleedspell = false
+                ppoisonspell = true
+                spell = "🧪"
+                break;               
+            
+        }
+        $("#afterlogs").before("<p style='color: purple; background-color: black' class='temp'>You found a unique scroll, it contains unfamiliar ancient enrgavings and a "+spell +" symbol..</p>")
+        $("#atk3").show()
+        deadname="Nothing"
+        console.log("RANDOM SPELL: "+spell)
+        updateweapon()
+        
+}
 
 function updateweapon(){
     $("#shopbutton").prop('disabled', true)
-    if(pbleedsword==true){
-        newatk+= "🩸"
-        document.getElementById("atk").innerHTML = "⚔️" + newatk}
-    if(pfiresword==true){
-        newatk+= "🔥"
-        document.getElementById("atk").innerHTML = "⚔️" + newatk}
-    if(ppoisonsword==true){
-        newatk+= "🧪"
-        document.getElementById("atk").innerHTML = "⚔️" + newatk}
-    if(picesword==true){
-        newatk+= "❄️"
-        document.getElementById("atk").innerHTML = "⚔️" + newatk}
+    if(pfirespell==true){
+        document.getElementById("atk3").innerHTML = "🔥"
+        document.getElementById("atk3").setAttribute("title", "100% Chance To Deal (⚔️) 🔥Fire Damage🔥 (2) Turn Cooldown!")
+    }
+
+    if(picespell==true){
+        document.getElementById("atk3").innerHTML = "❄️"
+        document.getElementById("atk3").setAttribute("title", "55% Chance To Deal (⚔️) ❄️Ice Damage❄️ | 45% Chance To Deal 2x(⚔️)  ❄️Ice Damage❄️ (2) Turn Cooldown!")
+    }
+
+    if(pbleedspell==true){
+        document.getElementById("atk3").innerHTML = "🩸" 
+        document.getElementById("atk3").setAttribute("title", "100% Chance To Deal (⚔️) 🔥Fire Damage🔥 (2) Turn Cooldown!")
+    }
+        
+    if(ppoisonspell==true){
+        document.getElementById("atk3").innerHTML = "🧪"
+        document.getElementById("atk3").setAttribute("title", "55% Chance To Deal (⚔️) ❄️Ice Damage❄️ | 45% Chance To Deal 2x(⚔️)  ❄️Ice Damage❄️ (2) Turn Cooldown!")
+    }
+
     $("#battlebutton").prop('disabled', true)
 }
-newatk = ""
-let pbleedsword = false
-let pfiresword = true
-let ppoisonsword = false
-let picesword = false
+
+$(document).ready(function(){
+    $("#atk3").on("click", function(){
+    
+    if(pfirespell==true){
+        fireattack()
+    }
+
+    if(picespell==true){
+        iceattack()
+    }
+
+    if(pbleedspell==true){
+        fireattack()
+    }
+        
+    if(ppoisonspell==true){
+        iceattack()
+    }
+    })
+})
+
+$("#atk3").hide()
+$("#eatk3").hide()
 
 
 
 
 function generatetreasure(){
     $("#battlebutton").prop("disabled", true)
-
     deadname = "Treasure Chest"
     let rndtreasure = (Math.ceil(Math.random() * (treasurepics.length - 0) + 0)) - 1
     let treasurepic = treasurepics[rndtreasure]
