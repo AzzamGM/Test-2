@@ -522,6 +522,11 @@
         <source src="Audio/iceattack3.mp3 ">
     </audio>
 
+    <audio id="deathattackmp3">
+        <source src="Audio/deathattack3.mp3 ">
+    </audio>
+
+
 
     
 
@@ -533,6 +538,7 @@
             sound = document.getElementById("gamesound").value/100
             console.log(sound)
             })})
+    var deathspell = document.getElementById("deathattackmp3")
     var firespell = document.getElementById("fireattackmp3")
     var icespell = document.getElementById("iceattackmp3")
     var blocked = document.getElementById("blockedmp3")
@@ -546,6 +552,11 @@
     var lootsound = document.getElementById("lootmp3")
     var misssound = document.getElementById("missmp3")
     sound = 0.4
+
+    function deathsfx(){
+        deathspell.volume = sound
+        deathspell.play()
+    }
 
     function icesfx(){
         icespell.volume = sound
@@ -645,7 +656,7 @@
     let pfirespell = false
     let picespell = false
     let ppoisonspell = false
-    let pbleedspell = false
+    let pdeathspell = false
     let treasurechance = 8
 
 
@@ -944,8 +955,9 @@
 
     function rndgenerate(){
         rndenemy = Math.ceil(Math.random() * (100 - 0) + 0)
-        if(rndenemy>8)
-        {generateenemy()}
+        if(rndenemy>treasurechance)
+        {generateenemy()
+        treasurechance--}
         else{generatetreasure()
         }
     }
@@ -1339,7 +1351,7 @@ function fireattack(){
     if(enemycurrenthp>0){
         setTimeout(enemyturn, 2000)}
     enemynextblk = 0
-    pspellcd = 2
+    pspellcd = 3
     }
 ////////////////////////////////////////// PLAYER ICE SPELL
 function iceattack(){
@@ -1391,7 +1403,31 @@ function iceattack(){
         enemynextblk = 0
         }
 
-    
+
+///////////////////////////////////////////////////// PLAYER DEATH SPELL
+function deathattack(){
+    phealcd--    
+    flip()
+    $("#afterlogs").before("<p  class='temp'>"+localStorage.usernames + " ☠️used Touch Of Death☠️."+"</p")
+    atkchance = Math.ceil(Math.random() * (100 - 0))
+    playernextattack = 0
+    if(enemynextblk>0){
+        blockedsfx()}
+
+    deathsfx()   
+    playernextattack = enemycurrenthp
+    if(playernextattack<0){
+        playernextattack = 0}
+    $("#afterlogs").before("<p color='purple' class='temp'>"+ deadname  + " Disappeared from existence...<br></p>")
+    enemycurrenthp = enemycurrenthp - playernextattack
+    enemymissinghp = enemymaxhp - enemycurrenthp
+    updateplayerstats()
+
+    if(enemycurrenthp>0){
+        setTimeout(enemyturn, 2000)}
+    enemynextblk = 0
+    pspellcd = 7
+    }
 
 
     //ENEMY ATTACK 1||||||||||||||||||||||||||||||||||||||||||||||||||||
@@ -1522,34 +1558,34 @@ function iceattack(){
 ///////////////////// NEW PATCH //////////////////////
 function droprandomspell(){
     if(deadname=="Treasure Chest"){
-        rndspell = Math.ceil(Math.random() * 2)
+        rndspell = Math.ceil(Math.random() * 3)
         console.log("RANDOM SPELL: "+rndspell)
         switch(rndspell){
             case rndspell = 1:
                 pfirespell = true   
                 picespell = false
-                pbleedspell = false
+                pdeathspell = false
                 ppoisonspell = false
                 spell = "🔥"
                 break;
             case rndspell = 2:
                 pfirespell = false   
                 picespell = true
-                pbleedspell = false
+                pdeathspell = false
                 ppoisonspell = false
                 spell = "❄️"
                 break;
             case rndspell = 3:
                 pfirespell = false   
                 picespell = false
-                pbleedspell = true
+                pdeathspell = true
                 ppoisonspell = false
-                spell = "🩸"
+                spell = "☠️"
                 break;
             case rndspell = 4:
                 pfirespell = false   
                 picespell = false
-                pbleedspell = false
+                pdeathspell = false
                 ppoisonspell = true
                 spell = "🧪"
                 break;               
@@ -1574,28 +1610,28 @@ function giverndspell(){
             case rndspell = 1:
                 pfirespell = true   
                 picespell = false
-                pbleedspell = false
+                pdeathspell = false
                 ppoisonspell = false
                 spell = "🔥"
                 break;
             case rndspell = 2:
                 pfirespell = false   
                 picespell = true
-                pbleedspell = false
+                pdeathspell = false
                 ppoisonspell = false
                 spell = "❄️"
                 break;
             case rndspell = 3:
                 pfirespell = false   
                 picespell = false
-                pbleedspell = true
+                pdeathspell = true
                 ppoisonspell = false
-                spell = "🩸"
+                spell = "☠️"
                 break;
             case rndspell = 4:
                 pfirespell = false   
                 picespell = false
-                pbleedspell = false
+                pdeathspell = false
                 ppoisonspell = true
                 spell = "🧪"
                 break;               
@@ -1620,9 +1656,9 @@ function updateweapon(){
         document.getElementById("atk3").setAttribute("title", "55% Chance To Deal (⚔️) ❄️Ice Damage❄️ | 45% Chance To Deal 2x(⚔️)  ❄️Ice Damage❄️ (4) Turn Cooldown!")
     }
 
-    if(pbleedspell==true){
-        document.getElementById("atk3").innerHTML = "🩸" 
-        document.getElementById("atk3").setAttribute("title", "100% Chance To Deal (⚔️) 🔥Fire Damage🔥 (2) Turn Cooldown! (UNBLOCKABLE)")
+    if(pdeathspell==true){
+        document.getElementById("atk3").innerHTML = "☠️" 
+        document.getElementById("atk3").setAttribute("title", "DEATH (7) Turn Cooldown!")
     }
         
     if(ppoisonspell==true){
@@ -1644,8 +1680,8 @@ $(document).ready(function(){
         iceattack()
     }
 
-    if(pbleedspell==true){
-        fireattack()
+    if(pdeathspell==true){
+        deathattack()
     }
         
     if(ppoisonspell==true){
