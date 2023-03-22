@@ -1085,19 +1085,17 @@
         if(scaling==4){
             scaling=0
             stage++
-            if(stage=4){
-                giverndspell()
-            }
+            
 
             $("#afterlogs").before("<p style='background: gray; color: black' class='temp' style='color: red'>Stage: "+stage+"!</p>")
-            if(enemyatkmax<5){
+            if(enemyatkmax<4){
                 enemyscale()
                 enemygoldmax++
                 
             }
                 
             else if(enemyatkmax>6&&enemyatkmax<10){
-                
+                giverndspell()
                 
                 enemyblkmax++
                 enemygoldmax++
@@ -1561,7 +1559,6 @@ function droprandomspell(){
         deadname="Nothing"
         console.log("RANDOM SPELL: "+spell)
         updateweapon()
-        pspellcd = 0
     }
     else{
         console.log(" not a treasure ")
@@ -1607,19 +1604,18 @@ function giverndspell(){
         deadname="Nothing"
         console.log("RANDOM SPELL: "+spell)
         updateweapon()
-        
 }
 
 function updateweapon(){
     $("#shopbutton").prop('disabled', true)
     if(pfirespell==true){
         document.getElementById("atk3").innerHTML = "🔥"
-        document.getElementById("atk3").setAttribute("title", "100% Chance To Deal (⚔️) 🔥Fire Damage🔥 (2) Turn Cooldown!")
+        document.getElementById("atk3").setAttribute("title", "100% Chance To Deal (⚔️) 🔥Fire Damage🔥 (2) Turn Cooldown! (UNBLOCKABLE)")
     }
 
     if(picespell==true){
         document.getElementById("atk3").innerHTML = "❄️"
-        document.getElementById("atk3").setAttribute("title", "55% Chance To Deal (⚔️) ❄️Ice Damage❄️ | 45% Chance To Deal 2x(⚔️)  ❄️Ice Damage❄️ (2) Turn Cooldown!")
+        document.getElementById("atk3").setAttribute("title", "55% Chance To Deal (⚔️) ❄️Ice Damage❄️ | 45% Chance To Deal 2x(⚔️)  ❄️Ice Damage❄️ (4) Turn Cooldown!")
     }
 
     if(pbleedspell==true){
@@ -1629,7 +1625,7 @@ function updateweapon(){
         
     if(ppoisonspell==true){
         document.getElementById("atk3").innerHTML = "🧪"
-        document.getElementById("atk3").setAttribute("title", "55% Chance To Deal (⚔️) ❄️Ice Damage❄️ | 45% Chance To Deal 2x(⚔️)  ❄️Ice Damage❄️ (2) Turn Cooldown!")
+        document.getElementById("atk3").setAttribute("title", "55% Chance To Deal (⚔️) ❄️Ice Damage❄️ | 45% Chance To Deal 2x(⚔️)  ❄️Ice Damage❄️ (4) Turn Cooldown!")
     }
 
     $("#battlebutton").prop('disabled', true)
