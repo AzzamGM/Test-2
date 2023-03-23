@@ -957,8 +957,9 @@
         rndenemy = Math.ceil(Math.random() * (100 - 0) + 0)
         if(rndenemy>treasurechance)
         {generateenemy()
-        treasurechance--}
+        }
         else{generatetreasure()
+             treasurechance--
         }
     }
     function battle(){
