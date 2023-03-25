@@ -526,6 +526,14 @@
         <source src="Audio/deathattack.mp3 ">
     </audio>
 
+    <audio id="poisonattackmp3">
+        <source src="Audio/poisonattack.mp3 ">
+    </audio>
+
+    <audio id="antihealedkmp3">
+        <source src="Audio/antihealed.mp3 ">
+    </audio>
+
 
 
     
@@ -538,6 +546,8 @@
             sound = document.getElementById("gamesound").value/100
             console.log(sound)
             })})
+    var antihealedsound = document.getElementById("antihealedattackmp3")
+    var poisonspell = document.getElementById("poisonattackmp3")
     var deathspell = document.getElementById("deathattackmp3")
     var firespell = document.getElementById("fireattackmp3")
     var icespell = document.getElementById("iceattackmp3")
@@ -553,6 +563,11 @@
     var misssound = document.getElementById("missmp3")
     sound = 0.4
 
+    function antihealedsfx(){
+        antihealedsound.volume = sound
+        antihealedsound.play()
+    }
+
     function deathsfx(){
         deathspell.volume = sound
         deathspell.play()
@@ -566,6 +581,11 @@
     function firesfx(){
         firespell.volume = sound
         firespell.play()
+    }
+
+    function poisonsfx(){
+        poisonspell.volume = sound
+        poisonspell.play()
     }
 
     function playerdeadsfx(){
@@ -645,19 +665,24 @@
     }
     let profile = {}
     let hp = "❤️"
+    let ehp = "❤️"
     let losthp = "💔"
     spell = "📖"
     let ehealcd = 0
     let phealcd = 0
     let pspellcd = 0
+    let spellusage = 0
+
     let onetwo = 2
 
+
+    let antihealed = false
 
     let pfirespell = false
     let picespell = false
     let ppoisonspell = false
     let pdeathspell = false
-    let treasurechance = 8
+    let treasurechance = 9
 
 
     let enemydead = 1
@@ -707,6 +732,30 @@
     let playerkills = 0
     let scaling = 0
     let stage = 1
+
+
+
+
+    $(document).ready(function(){
+    $("#atk3").on("click", function(){
+    
+    if(pfirespell==true){
+        fireattack()
+    }
+
+    if(picespell==true){
+        iceattack()
+    }
+
+    if(pdeathspell==true){
+        deathattack()
+    }
+        
+    if(ppoisonspell==true){
+        poisonattack()
+    }
+    })
+})
 
     $("#afterlogs").before("<p style='background: gray; color: black' class='temp' style='color: red'>Stage: "+stage+"!</p>")
     
@@ -808,7 +857,7 @@
    
 
 
-    function checkhealcd(){
+    function checkcds(){
         if(phealcd>0){
             $("#heal").prop("disabled", true)
             document.getElementById("heal").innerHTML = phealcd+"⌛"
@@ -842,6 +891,7 @@
 
 
 
+
         if(ehealcd>0){
             $("#eheal").prop("disabled", true)
             document.getElementById("eheal").innerHTML = ehealcd+"⌛"
@@ -852,7 +902,6 @@
 
     }
 
-
     function flip(){
         $('#mylogs').stop().animate({
          scrollTop: $('#mylogs')[0].scrollHeight
@@ -861,14 +910,14 @@
             onetwo++
             $(".abilities").prop('disabled', true)
             $(".abilities2").prop('disabled', false)
-            checkhealcd()
+            checkcds()
             }
         else{
             onetwo--
             $(".abilities2").prop('disabled', true)
             if(playercurrenthp>0){
             $(".abilities").prop('disabled', false)
-            checkhealcd()}
+            checkcds()}
             
 }}
 
@@ -954,52 +1003,25 @@
             }}
 
     function rndgenerate(){
+        antihealed = false
+        ehp = "❤️"
         rndenemy = Math.ceil(Math.random() * (100 - 0) + 0)
         if(rndenemy>treasurechance)
-        {generateenemy()
-        }
-        else{generatetreasure()
-             treasurechance--
+        {generateenemy()}
+        else{
+            generatetreasure()
+            treasurechance--
         }
     }
     function battle(){
+        updateweapon()
         rndgenerate()
         $("#shopbutton").prop('disabled', true)
         $("#windowbutton").prop('disabled', true)
     }
 
     
-    function generateenemy(){
-        $("#shopbutton").prop('disabled', true)
-        let rndchar = (Math.ceil(Math.random() * (enemychar.length - 0) + 0)) - 1
-        let rndname = (Math.ceil(Math.random() * (enemyname.length - 0) + 0)) - 1
-        let rndsurname = (Math.ceil(Math.random() * (enemysurname.length - 0) + 0)) - 1
-        let rndenemyatk = (Math.ceil(Math.random() * (enemyatkmax - (enemyatkmin-1)) + (enemyatkmin-1))) 
-        let rndenemyblk = (Math.ceil(Math.random() * (enemyblkmax - (enemyblkmin-1)) + (enemyblkmin-1)))
-        let rndenemyhp = (Math.ceil(Math.random() * (enemyhpmax - (enemyhpmin-1)) + (enemyhpmin-1)))
-        let rndenemygold = (Math.ceil(Math.random() * (enemygoldmax - (enemygoldmin-1)) + (enemygoldmin-1)))
-
-        enemymaxhp = rndenemyhp
-        enemycurrenthp = rndenemyhp
-        enemyatkstat = rndenemyatk
-        enemyblkstat = rndenemyblk
-        enemyhpstat = hp.repeat(enemycurrenthp)
-        enemygoldstat = rndenemygold
-
-        document.getElementById("enemygamename").innerHTML = enemyname[rndname] + " " + enemysurname[rndsurname]
-        deadname = document.getElementById("enemygamename").innerHTML
-        document.getElementById("enemygamepfp").setAttribute("src", "Pictures/"+enemychar[rndchar])
-        document.getElementById("enemystats").innerHTML = "⚔️"+enemyatkstat+" | 💰"+enemygoldstat+" | 🛡️"+enemyblkstat
-        document.getElementById("enemygamehp").innerHTML = enemyhpstat
-
-        console.log("Pictures/"+enemychar[rndchar])
-        console.log("rndname "+rndname)
-        console.log("rndsurname "+rndsurname)
-        console.log("rndenemyatk "+rndenemyatk)
-        console.log("rndenemyblk "+rndenemyblk)
-        console.log("rndenemyhp "+rndenemyhp)
-        $("#battlebutton").prop('disabled', true)
-        flip()}
+  
 
     function generateenemy(){
         $("#shopbutton").prop('disabled', true)
@@ -1015,7 +1037,7 @@
         enemycurrenthp = rndenemyhp
         enemyatkstat = rndenemyatk
         enemyblkstat = rndenemyblk
-        enemyhpstat = hp.repeat(enemycurrenthp)
+        enemyhpstat = ehp.repeat(enemycurrenthp)
         enemygoldstat = rndenemygold
 
         document.getElementById("enemygamename").innerHTML = enemyname[rndname] + " " + enemysurname[rndsurname]
@@ -1042,7 +1064,7 @@
     if(playercurrenthp<0){
         playercurrenthp=0
     }
-        document.getElementById("enemygamehp").innerHTML = hp.repeat(enemycurrenthp)+losthp.repeat(enemymaxhp-enemycurrenthp)
+        document.getElementById("enemygamehp").innerHTML = ehp.repeat(enemycurrenthp)+losthp.repeat(enemymaxhp-enemycurrenthp)
         document.getElementById("enemystats").innerHTML = "⚔️"+enemyatkstat+" | 💰"+enemygoldstat+" | 🛡️"+enemyblkstat
 
         document.getElementById("userhp").innerHTML = hp.repeat(playercurrenthp)+losthp.repeat(playermaxhp-playercurrenthp)
@@ -1065,9 +1087,7 @@
         refreshstats()
     }
     }
-    function endgame(){
-        $(".abilities").prop('disabled', true)
-    }
+  
 
     function enemyscale(){
         enemyatkmax++
@@ -1148,9 +1168,7 @@
         refreshstats()
     }}
 
-    function enableplayerb(){
-
-    }
+  
 
     function newchar(){
         username = document.getElementById("nametextbox").value
@@ -1330,7 +1348,8 @@
         phealcd = 1}
 /////////////////////////////////// PLAYER FIRE SPELL ///////////////////////////////////////////////////
 function fireattack(){
-    phealcd--    
+    checkspellusage() 
+    phealcd--
     flip()
     $("#afterlogs").before("<p  class='temp'>"+localStorage.usernames + " used 🔥Fire Attack🔥."+"</p")
     atkchance = Math.ceil(Math.random() * (100 - 0))
@@ -1354,8 +1373,9 @@ function fireattack(){
     enemynextblk = 0
     pspellcd = 3
     }
-////////////////////////////////////////// PLAYER ICE SPELL
+////////////////////////////////////////// PLAYER ICE SPELL ////////////////////////////////////////////////
 function iceattack(){
+        checkspellusage() 
         phealcd--       
         flip()
         $("#afterlogs").before("<p  class='temp'>"+localStorage.usernames + " used ❄️Ice Attack❄️."+"</p")
@@ -1407,6 +1427,7 @@ function iceattack(){
 
 ///////////////////////////////////////////////////// PLAYER DEATH SPELL
 function deathattack(){
+    checkspellusage()
     phealcd--    
     flip()
     $("#afterlogs").before("<p  class='temp'>"+localStorage.usernames + " ☠️used Touch Of Death☠️."+"</p")
@@ -1428,8 +1449,40 @@ function deathattack(){
         setTimeout(enemyturn, 2000)}
     enemynextblk = 0
     pspellcd = 7
+    
     }
 
+
+/////////////////// PLAYER POISON SPELL ///////////////
+    function poisonattack(){
+    antihealed = true
+    ehp = "💚"
+    checkspellusage() 
+    phealcd--
+    flip()
+    $("#afterlogs").before("<p  class='temp'>"+localStorage.usernames + " used Poison Attack🧪.."+"</p")
+    atkchance = Math.ceil(Math.random() * (100 - 0))
+    playernextattack = 0
+    if(enemynextblk>0){
+        blockedsfx()}
+    attack1sfx()
+    poisonsfx()   
+    playernextattack = playeratkstat - enemynextblk
+    if(playernextattack<0){
+        playernextattack = 0}
+
+    $("#afterlogs").before("<p class='temp'>"+localStorage.usernames  + " Attacked for "+playernextattack+"x🧪Poison Damage!🧪"+"</p>")
+    $("#afterlogs").before("<p class='temp'>"+deadname  + " lost "+playernextattack+"x "+losthp+" Health, and is Infected.<br></p>")
+    enemycurrenthp = enemycurrenthp - playernextattack
+    enemymissinghp = enemymaxhp - enemycurrenthp
+    updateplayerstats()
+
+    if(enemycurrenthp>0){
+        setTimeout(enemyturn, 2000)}
+    enemynextblk = 0
+    pspellcd = 3
+      
+    }
 
     //ENEMY ATTACK 1||||||||||||||||||||||||||||||||||||||||||||||||||||
         function enemyattack1(){
@@ -1532,34 +1585,42 @@ function deathattack(){
 
     //ENEMY HEAL||||||||||||||||||||||||||||||||||||||||||||||||||||
     function enemyheal(){
+        if(antihealed==false){
+            healsfx()
+            setTimeout(flip , 1800)
+            dblhealchance = Math.ceil(Math.random() * (100 - 0))
+            $("#afterlogs").before("<p style='color: orange' class='temp'>"+deadname + " used heal.</p>")
+            if(dblhealchance <=30){
+                $("#afterlogs").before("<p style='color: orange' class='temp'>"+deadname + " ❤️healed 50% Health.❤️</p>")
+                enemycurrenthp = enemycurrenthp + Math.ceil(enemymaxhp/2)
+                if (enemycurrenthp>enemymaxhp){
+                    enemycurrenthp = enemymaxhp
+                }
+                
         
-        healsfx()
-        setTimeout(flip , 1800)
-        dblhealchance = Math.ceil(Math.random() * (100 - 0))
-        $("#afterlogs").before("<p style='color: orange' class='temp'>"+deadname + " used heal.</p>")
-        if(dblhealchance <=30){
-            $("#afterlogs").before("<p style='color: orange' class='temp'>"+deadname + " ❤️healed 50% Health.❤️</p>")
-            enemycurrenthp = enemycurrenthp + Math.ceil(enemymaxhp/2)
-            if (enemycurrenthp>enemymaxhp){
-                enemycurrenthp = enemymaxhp
+                
+                refreshstats()
             }
-            
-     
-            
+            else{
+                $("#afterlogs").before("<p style='color: orange' class='temp'>"+deadname  + " ❤️got lucky and healed 100% Health!❤️ </p>")
+                enemycurrenthp = enemymaxhp}
+                refreshstats()
+                playernextblk = 0
+                ehealcd = 1}
+        else if(antihealed==true){
+            $("#afterlogs").before("<p style='color: green' class='temp'>"+deadname  + " tried to heal while Infected.. </p>")
+            antihealedsfx()
+            antihealed = false
+            ehp = "❤️"
             refreshstats()
         }
-        else{
-            $("#afterlogs").before("<p style='color: orange' class='temp'>"+deadname  + " ❤️got lucky and healed 100% Health!❤️ </p>")
-            enemycurrenthp = enemymaxhp}
-            refreshstats()
-            playernextblk = 0
-            ehealcd = 1}
+        }
 
    
 ///////////////////// NEW PATCH //////////////////////
 function droprandomspell(){
     if(deadname=="Treasure Chest"){
-        rndspell = Math.ceil(Math.random() * 3)
+        rndspell = Math.ceil(Math.random() * 4)
         console.log("RANDOM SPELL: "+rndspell)
         switch(rndspell){
             case rndspell = 1:
@@ -1568,6 +1629,7 @@ function droprandomspell(){
                 pdeathspell = false
                 ppoisonspell = false
                 spell = "🔥"
+                spellusage = 5
                 break;
             case rndspell = 2:
                 pfirespell = false   
@@ -1575,6 +1637,7 @@ function droprandomspell(){
                 pdeathspell = false
                 ppoisonspell = false
                 spell = "❄️"
+                spellusage = 5
                 break;
             case rndspell = 3:
                 pfirespell = false   
@@ -1582,6 +1645,7 @@ function droprandomspell(){
                 pdeathspell = true
                 ppoisonspell = false
                 spell = "☠️"
+                spellusage = 3
                 break;
             case rndspell = 4:
                 pfirespell = false   
@@ -1589,6 +1653,7 @@ function droprandomspell(){
                 pdeathspell = false
                 ppoisonspell = true
                 spell = "🧪"
+                spellusage = 4
                 break;               
             
         }
@@ -1597,53 +1662,14 @@ function droprandomspell(){
         $("#battlebutton").prop("disabled", false)
         deadname="Nothing"
         console.log("RANDOM SPELL: "+spell)
-        updateweapon()
+        
     }
     else{
         console.log(" not a treasure ")
     }
 }
 
-function giverndspell(){
-    rndspell = Math.ceil(Math.random() * 2)
-        console.log("RANDOM SPELL: "+rndspell)
-        switch(rndspell){
-            case rndspell = 1:
-                pfirespell = true   
-                picespell = false
-                pdeathspell = false
-                ppoisonspell = false
-                spell = "🔥"
-                break;
-            case rndspell = 2:
-                pfirespell = false   
-                picespell = true
-                pdeathspell = false
-                ppoisonspell = false
-                spell = "❄️"
-                break;
-            case rndspell = 3:
-                pfirespell = false   
-                picespell = false
-                pdeathspell = true
-                ppoisonspell = false
-                spell = "☠️"
-                break;
-            case rndspell = 4:
-                pfirespell = false   
-                picespell = false
-                pdeathspell = false
-                ppoisonspell = true
-                spell = "🧪"
-                break;               
-            
-        }
-        $("#afterlogs").before("<p style='color: purple; background-color: black' class='temp'>You found a unique scroll, it contains unfamiliar ancient enrgavings and a "+spell +" symbol..</p>")
-        $("#atk3").show()
-        deadname="Nothing"
-        console.log("RANDOM SPELL: "+spell)
-        updateweapon()
-}
+
 
 function updateweapon(){
     $("#shopbutton").prop('disabled', true)
@@ -1670,34 +1696,25 @@ function updateweapon(){
     $("#battlebutton").prop('disabled', true)
 }
 
-$(document).ready(function(){
-    $("#atk3").on("click", function(){
-    
-    if(pfirespell==true){
-        fireattack()
-    }
 
-    if(picespell==true){
-        iceattack()
-    }
-
-    if(pdeathspell==true){
-        deathattack()
-    }
-        
-    if(ppoisonspell==true){
-        iceattack()
-    }
-    })
-})
 
 $("#atk3").hide()
 $("#eatk3").hide()
 
+function checkspellusage(){
+    spellusage--
+    if(spellusage>0){
+        $("#afterlogs").before("<p style='color: purple; background-color: black' class='temp'>Your scroll's magic weakens, and has "+spellusage+".. use(s) remaining</p>")
+        }
+    else{
+        $("#afterlogs").before("<p style='color: purple; background-color: black' class='temp'>Your scroll's has reached its limits..") 
+        }
+}
 
 
 
 function generatetreasure(){
+    $("#atk3").hide()
     $("#battlebutton").prop("disabled", true)
     deadname = "Treasure Chest"
     let rndtreasure = (Math.ceil(Math.random() * (treasurepics.length - 0) + 0)) - 1
@@ -1710,7 +1727,7 @@ function generatetreasure(){
     document.getElementById("enemygamename").innerHTML = "Treasure Chest"
     document.getElementById("enemygamepfp").setAttribute("src", "Pictures/"+treasurepics[rndtreasure])
     document.getElementById("enemystats").innerHTML = "⚔️"+enemyatkstat+" | 💰"+enemygoldstat+" | 🛡️"+enemyblkstat
-    document.getElementById("enemygamehp").innerHTML = hp.repeat(enemymaxhp)
+    document.getElementById("enemygamehp").innerHTML = ehp.repeat(enemymaxhp)
     flip()
 }
 ////////////////////////////////////////////////////////////
