@@ -1587,7 +1587,6 @@ function deathattack(){
     function enemyheal(){
         if(antihealed==false){
             healsfx()
-            setTimeout(flip , 1800)
             dblhealchance = Math.ceil(Math.random() * (100 - 0))
             $("#afterlogs").before("<p style='color: orange' class='temp'>"+deadname + " used heal.</p>")
             if(dblhealchance <=30){
@@ -1614,6 +1613,7 @@ function deathattack(){
             ehp = "❤️"
             refreshstats()
         }
+        setTimeout(flip , 1800)
         }
 
    
